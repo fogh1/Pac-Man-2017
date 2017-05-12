@@ -4,16 +4,28 @@ import javax.swing.*;
 
 import java.awt.event.*;
 
+import javax.swing.event.*;
+
 public class UI implements ActionListener, KeyListener
 {
-	private Jframe frame;
-	private Jpanel gamePanel;
+	private JFrame frame;
+	private Container window;
+	private JPanel gamePanel;
 	private JButton pauseButton;
 	private JButton resetButton;
 	private JLabel scoreLabel;
 	private JLabel highScoreLabel;
 	private JLabel scoreTitleLabel;
 	private JLabel highScoreTitleLabel;
+	
+	public UI()
+	{
+		frame = new JFrame();
+		frame.setVisible(true);
+		window = frame.getContentPane();
+		window.setLayout(new BorderLayout());
+		 
+	}
 	
 	public void keyPressed(KeyEvent arg0)
 	{
@@ -37,5 +49,12 @@ public class UI implements ActionListener, KeyListener
 	public void remove(Object obj)
 	{
 		//...
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
