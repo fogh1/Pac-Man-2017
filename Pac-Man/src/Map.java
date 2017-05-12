@@ -34,5 +34,55 @@ public class Map {
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
 	}
+	
+	public PacMan getPacMan()
+	{
+		for (Object o : map)
+		{
+			if (o instanceof PacMan)
+				return (PacMan)o;
+		}
+		return null;
+	}
+	
+	public Shadow getShadow()
+	{
+		for (Object o : map)
+		{
+			if (o instanceof Shadow)
+				return (Shadow)o;
+		}
+		return null;
+	}
+	
+	public Pokey getPokey()
+	{
+		for (Object o : map)
+		{
+			if (o instanceof Pokey)
+				return (Pokey)o;
+		}
+		return null;
+	}
+	
+	public Speedy getSpeedy()
+	{
+		for (Object o : map)
+		{
+			if (o instanceof Speedy)
+				return (Speedy)o;
+		}
+		return null;
+	}
+	
+	public Bashful getBashful()
+	{
+		for (Object o : map)
+		{
+			if (o instanceof Bashful)
+				return (Bashful)o;
+		}
+		return null;
+	}
 
 }
