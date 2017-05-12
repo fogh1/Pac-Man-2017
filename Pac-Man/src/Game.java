@@ -1,26 +1,39 @@
 import java.util.Timer;
 
+public class Game {
 
-public class Game 
-{
 	private Timer timer;
 	private Map map;
+	private UI ui;
+	private PacMan pacMan;
+	private Shadow shadow;
+	private Speedy speedy;
+	private Bashful bashful;
+	private Pokey pokey;
 	private boolean paused;
-	private int[] highscores;
+	private int[] highScores;
 	private String[] highScorers;
-	
-	public void start()
-	{
-		//...
+
+	public Game() {
+		// ...
 	}
-	
-	public void pause()
-	{
-		//...
+
+	public void start() {
+		// starts or restarts the game
 	}
-	
-	public boolean isPaused()
-	{
-		//...
+
+	public boolean togglePause() {
+		isPaused = !isPaused;
+		return isPaused;
+		// pauses or unpauses the game
 	}
+
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+	public void gameLoop() {
+		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
+	}
+
 }
