@@ -3,6 +3,7 @@ import java.util.*;
 public class Game {
 
 	private Timer timer;
+	private final int TICK_LENGHT = 1000;
 	private Map map;
 	private UI ui;
 	private PacMan pacMan;
@@ -14,15 +15,39 @@ public class Game {
 	private int[] highScores;
 	private String[] highScorers;
 
-	public Game() {
-		// ...
+	public Game()
+	{
+		isPaused = true;//pauses game to prevent any grid action during grid setup
+		timer = new Timer();
+		timer.schedule(gameLoop(), TICK_LENGHT);
+		map = new Map();//the map class constructer is repsonsible for constructing all objects present on the map (ie. pacman, pacdots, walls, ghosts)
+		ui = new UI();//UI is reponsible for displaying a JFrame and interpreting the map to dipslay the game properly
+		pacMan = map.getPacMan();//TODO write get Pac Man method in map class to return contrusted Pac Man
+		shadow = map.getShadow();//TODO write get Shadow method like the get Pac Man method
+		speedy = map.getSpeedy();//TODO write get Speedy method like the get Pac Man method
+		bashful = map.getBashful();//TODO write get Bashful method like the get Pac Man method
+		pokey = map.getPokey();//TODO write get Pokey method like the get Pac Man method
+		highScores = new int[100];
+		highScorers = new String[100];
+		togglePause();
+		start();
 	}
 
-	public void start() {
+	public void start()
+	{
 		// starts or restarts the game
+		togglePause();//pauses game to prevent any grid action during grid setup
+		map = new Map();//reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+		pacMan = map.getPacMan();
+		shadow = map.getShadow();
+		speedy = map.getSpeedy();
+		bashful = map.getBashful();
+		pokey = map.getPokey();
+		togglePause();
 	}
 
-	public boolean togglePause() {
+	public boolean togglePause()
+	{
 		isPaused = !isPaused;
 		return isPaused;
 		// pauses or unpauses the game
@@ -32,8 +57,22 @@ public class Game {
 		return isPaused;
 	}
 
-	public void gameLoop() {
+	public TimerTask gameLoop() 
+	{
 		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
+		return new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					//input all periodic tasks per tick
+					if (isPaused)
+					{
+						ui.displayPaused();//TODO write method in UI class to display a paused screen if the method is called
+						return;
+					}
+				}
+			};
 	}
 
 }
