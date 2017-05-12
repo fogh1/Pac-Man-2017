@@ -1,48 +1,48 @@
-
 public abstract class MoveableObject {
-int x;
-int y;
-Direction currentDirection;
 
-public MoveableObject()
-{
-	this.x=0;
-	this.y=0;
-	this.currentDirection=UP;
-}
+	private int x;
+	private int y;
+	private Direction currentDirection;
+	private Image image;
 
-public int getX()
-{
-	return x;
-}
+	public MoveableObject(int x, int y, Direction direction, Image image) {
+		this.x = x;
+		this.y = y;
+		currentDirection = direction;
+		this.image = image;
+	}
 
-public int getY()
-{
-	return y;
-}
+	public int getX() {
+		return x;
+	}
 
-public Direction getDirection()
-{
-	return currentDirection;
-}
+	public int getY() {
+		return y;
+	}
 
-public Direction setDirection(Direction newDirection)
-{
-	currentDirection = newDirection;
-	return currentDirection;
-}
+	public Direction getDirection() {
+		return currentDirection;
+	}
 
-private boolean canMove()
-{
-	
-}
+	public Direction setDirection(Direction newDirection) {
+		currentDirection = newDirection;
+		return currentDirection;
+	}
 
-public void move()
-{
-	if(canMove())
-	{
-		
+	public Image getImage() {
+		return image;
+	}
+
+	private boolean canMove() {
+		// 
+	}
+
+	public boolean move() {
+		if (canMove()) {
+			// ...
+		}
+		else {
+			return false;
+		}
 	}
 }
-}
-
