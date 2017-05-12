@@ -1,4 +1,4 @@
-import java.util.Timer;
+import java.util.*;
 
 public class Game {
 
@@ -10,7 +10,7 @@ public class Game {
 	private Speedy speedy;
 	private Bashful bashful;
 	private Pokey pokey;
-	private boolean paused;
+	private boolean isPaused;
 	private int[] highScores;
 	private String[] highScorers;
 

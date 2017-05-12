@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class UI implements ActionListener, KeyListener {
+public class UI implements ActionListener {
 
 	private Game game;
 	private JFrame frame;
