@@ -1,45 +1,34 @@
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.awt.event.*;
-public class UI implements ActionListener, KeyListener
-{
-	protected JFrame frame;     //we might not want these as instance variables; construct in main instead
-	protected JPanel gamePanel; //we might not want these as instance variables; construct in main instead
+
+public class UI implements ActionListener, KeyListener {
+
+	private Game game;
+	private JFrame frame;
+	private GamePanel gamePanel;  // the GamePanel class is not in the project now, but it has been created already
 	private JButton pauseButton;
 	private JButton resetButton;
-	private JLabel scoreLabel;
-	private JLabel highScoreLabel;
 	private JLabel scoreTitleLabel;
+	private JLabel scoreLabel;
 	private JLabel highScoreTitleLabel;
-	
-	public void keyPressed(KeyEvent arg0)
-	{
-		// TODO Auto-generated method stub
-		
+	private JLabel highScoreLabel;
+	private KeyInputHandler keyInputHandler;
+
+	public UI() {
+		// ...
+	}
+
+	public void setUpFrame() {
+		// creates the frame and fills it with components
+	}
+
+	public void actionPerformed(ActionEvent event) {
+		// handles clicks from the two buttons
 	}
 	
-	
-	public void keyTyped(KeyEvent arg0)
-	{
-		// TODO Auto-generated method stub
-		
+	public void remove(Object object) {
+		// removes an object (like a PacDot) from the UI
 	}
-	
-	public void keyReleased(KeyEvent arg0)
-	{
-		// TODO Auto-generated method stub
-	}
-	
-	public void actionPerformed(ActionEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void remove(Object obj)
-	{
-		//...
-	}
+
 }
