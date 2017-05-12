@@ -14,7 +14,7 @@ public class Speedy extends Ghost {
 		int projectedX = 0;
 		int projectedY = 0;
 		//get Pac-Man location in terms of x and y
-		//get Pac-Man direction in Direction Enum
+		//get Pac-Man direction in terms of Direction Enum
 		//switch(Pac-man direction) {
 		//case UP: projectedY-=4; if(projectedY <= 0){projectedY = 1;} check if projectedX and projectedY is valid location, or add 1 to projectedY (need some subsitute)
 		//case DOWN: projectedY+=4; if(projectedY >= max map y){projectedY = max map y-1;} check if projectedX and projectedY is valid location, or add 1 to projectedY (need some subsitute)
