@@ -33,17 +33,13 @@ public abstract class MoveableObject {
 		return image;
 	}
 
-	private boolean canMove() {
-		// 
+	public boolean canMove() {
+		return false;
+		// this should be overridden by each individual subclass
 	}
 
-	public boolean move() {
-		if (canMove()) {
-			// ...
-		}
-		else {
-			return false;
-		}
+	public void move() {
+		// this should be overridden by each individual subclass
 	}
 
 }
