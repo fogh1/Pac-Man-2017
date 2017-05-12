@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public abstract class MoveableObject {
 
 	private int x;

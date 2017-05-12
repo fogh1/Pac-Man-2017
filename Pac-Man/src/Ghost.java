@@ -1,8 +1,10 @@
+import java.awt.*;
+
 public abstract class Ghost extends MoveableObject {
 
 	private static GhostMode currentMode;
 
-	public Ghost() {
+	public Ghost(int x, int y, Direction direction, Image image) {
 		// ...
 	}
 

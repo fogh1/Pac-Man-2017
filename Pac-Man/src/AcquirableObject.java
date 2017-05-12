@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 public abstract class AcquirableObject {
 
 	private int x;

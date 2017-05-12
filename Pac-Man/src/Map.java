@@ -10,6 +10,11 @@ public class Map {
 		return map[x][y];
 	}
 
+	public int acquirableObjectCount() {
+		return 0;  // temporary
+		// returns the number of un-acquired AcquirableObjects in the map
+	}
+
 	public Object set(Object object, int x, int y) {
 		Object oldOccupant = map[x][y];
 		map[x][y] = object;
@@ -17,10 +22,12 @@ public class Map {
 	}
 
 	public Object move(Object object, int x, int y) {
+		return null;  // temporary
 		// moves the specified object to the specified new coordinates
 	}
 
 	public Object remove(Object object) {
+		return null;  // temporary
 		// removes the specified object from the map model
 	}
 
