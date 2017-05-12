@@ -45,4 +45,5 @@ public abstract class MoveableObject {
 			return false;
 		}
 	}
+
 }
