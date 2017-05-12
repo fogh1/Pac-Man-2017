@@ -1,9 +1,18 @@
+import java.awt.Image;
+
 public abstract class Ghost extends MoveableObject {
+	
+	public enum GhostMode 
+	{
+		CHASE, SCATTER, FRIGHTENED
+	}
 
 	private static GhostMode currentMode;
 
-	public Ghost() {
-		// ...
+	public Ghost(int x, int y, Direction currentDirection, Image ghostImage) 
+	{
+		super(x, y, currentDirection, ghostImage);
+		currentMode = CHASE;
 	}
 
 	public static GhostMode getMode() {

@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 public abstract class MoveableObject {
 
 	private int x;
