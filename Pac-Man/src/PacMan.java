@@ -1,14 +1,14 @@
 public class PacMan extends MoveableObject {
 
-	protected int score;
-	protected int lives;
-	protected Direction queuedDirection;
+	private int score;
+	private int lives;
+	private Direction queuedDirection;
 
 	public PacMan() {
 		score = 0;
 		lives = 3;
-		Direction = UP;
-	};
+		Direction = RIGHT;
+	}
 
 	public Direction getQueuedDirection() {
 		return queuedDirection;    // we could use final constants rather than enums if we can't get this to compile
