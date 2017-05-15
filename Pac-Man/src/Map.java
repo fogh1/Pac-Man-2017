@@ -21,10 +21,10 @@ public class Map {
 		map[x][y] = object;
 		return oldOccupant;
 	}
-	
-	// moves the specified object to the specified new coordinates
+
 	public Object move(Object object, int x, int y) {
 		return null;  // temporary
+		// moves the specified object to the specified new coordinates
 	}
 
 	public Object remove(Object object) {
