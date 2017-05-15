@@ -3,8 +3,8 @@ public class Map {
 	private Object[][] map;
 
 	public Map() {
-		map = new Object[28][31];
-		// create objects to populate map
+		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
+		// ...
 	}
 
 	public Object getObjectAt(int x, int y) {
@@ -30,6 +30,10 @@ public class Map {
 	public Object remove(Object object) {
 		return null;  // temporary
 		// removes the specified object from the map model
+	}
+
+	public void reset() {
+		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
 	}
 
 	public PacMan getPacMan() {
@@ -86,5 +90,62 @@ public class Map {
 		}
 		return null;
 	}
+	
+	
+	public int findXCoordinate(Object z) 
+	{ //Precondition: Moveable Object must actually be in grid
+	for (int rlcv = 0; rlcv < map.length; rlcv++)
+	{
+		for (int clcv = 0; clcv < map.length; clcv++)
+		{
+			Object check = map[rlcv][clcv];
+			if (check instanceof present)      //is object at location equal to what we want?
+			{
+				return rlcv;
+			}
+		}
+	}	
+	}
+	
+	public int findYCoordinate(Object z) 
+	{ //Precondition: Moveable Object must actually be in grid
+		for (int rlcv = 0; rlcv < map.length; rlcv++)
+		{
+			for (int clcv = 0; clcv < map.length; clcv++)
+			{
+				Object check = map[rlcv][clcv];
+				if (check instanceof present)  //is object at location equal to what we want?
+				{
+					return clcv;
+				}
+			}
+		}
+	 }
 
-}
+	public Object getAdjacentObject(MoveableObject present){ 
+		Object adjacentObject = null;
+		Direction presentDirection = present.getDirection();
+		int x = findXCoordinate(present);
+		int y = findYCoordinate(present);
+		if (presentDirection == Direction.UP)   //Shouldn't return nullpointer, if moveable object ain't on border walls
+		{
+			adjacentObject = getObjectAt(x, y+1);
+		}
+		else if (presentDirection == Direction.DOWN)
+		{
+			adjacentObject = getObjectAt(x, y-1);
+		} 
+		else if (presentDirection == Direction.LEFT)
+		{
+			adjacentObject = getObjectAt(x-1, y);
+		} 
+		else
+		{
+			adjacentObject = getObjectAt(x+1, y);
+		}
+		return adjacentObject;
+		}
+		
+
+	}
+

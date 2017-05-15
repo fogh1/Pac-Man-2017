@@ -5,9 +5,10 @@ public class PacMan extends MoveableObject {
 	private Direction queuedDirection;
 
 	public PacMan() {
+		super();
 		score = 0;
 		lives = 3;
-		setDirection(Direction.LEFT);
+		setDirection(Direction.RIGHT);
 	}
 
 	public Direction getQueuedDirection() {
@@ -35,7 +36,7 @@ public class PacMan extends MoveableObject {
 	}
 	
 	public boolean canMove() {
-		if()
+		
 	}
 
 	public void move() {

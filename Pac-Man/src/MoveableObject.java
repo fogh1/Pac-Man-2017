@@ -8,6 +8,7 @@ public abstract class MoveableObject {
 	private int y;
 	private Direction currentDirection;
 	private Image image;
+	protected map
 
 	public MoveableObject(int x, int y, Direction direction, Image image) {
 		this.x = x;
