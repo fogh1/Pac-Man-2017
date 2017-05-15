@@ -15,31 +15,27 @@ public class Game {
 	private String[] highScorers;
 
 	public Game() {
-		isPaused = true;//pauses game to prevent any grid action during grid setup
 		timer = new Timer();
 		timer.schedule(gameLoop(), 1000);
-		map = new Map();  // the map class constructor is responsible for constructing all objects present on the map (ie. pacman, pacdots, walls, ghosts)
-		ui = new UI();  // UI is responsible for displaying a JFrame and interpreting the map to dipslay the game properly
-		pacMan = map.getPacMan();  // TODO write get Pac Man method in map class to return constructed Pac Man
-		shadow = map.getShadow();  // TODO write get Shadow method like the getPacMan method
-		speedy = map.getSpeedy();  // TODO write get Speedy method like the getPacMan method
-		bashful = map.getBashful();  // TODO write get Bashful method like the getPacMan method
-		pokey = map.getPokey();  // TODO write getPokey method like the getPacMan method
-		highScores = new int[100];
-		highScorers = new String[100];
-		togglePause();
-		start();
+		ui = new UI(this);  // UI is responsible for displaying a JFrame and interpreting the map to display the game properly
+		resetMap();  // constructs map and initializes related instance variables
+		highScores = new int[3];
+		highScorers = new String[3];
 	}
 
-	public void start() {
-		// starts or restarts the game
-		togglePause();//pauses game to prevent any grid action during grid setup
-		map = new Map();//reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+	private void resetMap() {
+		map = new Map();  // the Map class constructor is responsible for constructing all objects present on the map (ie. pacman, pacdots, walls, ghosts)
 		pacMan = map.getPacMan();
 		shadow = map.getShadow();
 		speedy = map.getSpeedy();
 		bashful = map.getBashful();
 		pokey = map.getPokey();
+	}
+
+	public void start() {
+		togglePause();
+		resetMap();
+		// ...
 		togglePause();
 	}
 
@@ -59,7 +55,7 @@ public class Game {
 			public void run() {
 				// input all periodic tasks per tick
 				if (isPaused) {
-					ui.displayPaused();  // TODO write method in UI class to display a "paused" screen if the method is called
+					// ui.displayPaused();  // TODO write method in UI class to display a "paused" screen if the method is called
 					return;
 				}
 			}

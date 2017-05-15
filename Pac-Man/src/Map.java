@@ -3,7 +3,8 @@ public class Map {
 	private Object[][] map;
 
 	public Map() {
-		// ...
+		map = new Object[28][31];
+		// create objects to populate map
 	}
 
 	public Object getObjectAt(int x, int y) {

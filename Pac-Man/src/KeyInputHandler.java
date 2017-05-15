@@ -12,7 +12,7 @@ public class KeyInputHandler implements KeyListener {
 
 	public void keyPressed(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.VK_D) {
-			System.out.println("Key pressed");
+			// ...
 		}
 	}
 
