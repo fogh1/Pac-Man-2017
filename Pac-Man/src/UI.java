@@ -17,17 +17,17 @@ public class UI implements ActionListener {
 
 	public UI() {
 		gamePanel = new GamePanel();
-        frame = new JFrame("Pac-Man 2017");
-        setUpFrame();
+		frame = new JFrame("Pac-Man 2017");
+		setUpFrame();
 	}
 
 	private void setUpFrame() {
 		Container contentPane = frame.getContentPane();
-        contentPane.setLayout(new BorderLayout(15, 15));
-        contentPane.add(gamePanel, BorderLayout.CENTER);
-        frame.pack();
-        frame.setResizable(false);
-        frame.setVisible(true);
+		contentPane.setLayout(new BorderLayout(15, 15));
+		contentPane.add(gamePanel, BorderLayout.CENTER);
+		frame.pack();
+		frame.setResizable(false);
+		frame.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent event) {

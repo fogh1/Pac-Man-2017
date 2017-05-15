@@ -3,6 +3,7 @@ public class Map {
 	private Object[][] map;
 
 	public Map() {
+		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
 		// ...
 	}
 
@@ -34,53 +35,58 @@ public class Map {
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
 	}
-	
-	public PacMan getPacMan()
-	{
-		for (Object o : map)
-		{
-			if (o instanceof PacMan)
-				return (PacMan)o;
+
+	public PacMan getPacMan() {
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object instanceof PacMan) {
+					return ((PacMan) object);
+				}
+			}
 		}
 		return null;
 	}
-	
-	public Shadow getShadow()
-	{
-		for (Object o : map)
-		{
-			if (o instanceof Shadow)
-				return (Shadow)o;
+
+	public Shadow getShadow() {
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object instanceof Shadow) {
+					return ((Shadow) object);
+				}
+			}
 		}
 		return null;
 	}
-	
-	public Pokey getPokey()
-	{
-		for (Object o : map)
-		{
-			if (o instanceof Pokey)
-				return (Pokey)o;
+
+	public Speedy getSpeedy() {
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object instanceof Speedy) {
+					return ((Speedy) object);
+				}
+			}
 		}
 		return null;
 	}
-	
-	public Speedy getSpeedy()
-	{
-		for (Object o : map)
-		{
-			if (o instanceof Speedy)
-				return (Speedy)o;
+
+	public Bashful getBashful() {
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object instanceof Bashful) {
+					return ((Bashful) object);
+				}
+			}
 		}
 		return null;
 	}
-	
-	public Bashful getBashful()
-	{
-		for (Object o : map)
-		{
-			if (o instanceof Bashful)
-				return (Bashful)o;
+
+	public Pokey getPokey() {
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object instanceof Pokey) {
+					return ((Pokey) object);
+				}
+			}
 		}
 		return null;
 	}
