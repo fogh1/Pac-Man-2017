@@ -29,5 +29,17 @@ public class PacMan extends MoveableObject {
 	public void decreaseScore(int points) {
 		score -= points;
 	}
+	
+	public int getLives() {
+		return lives;
+	}
+	
+	public boolean canMove() {
+		if()
+	}
+
+	public void move() {
+		// this should be overridden by each individual subclass
+	}
 
 }
