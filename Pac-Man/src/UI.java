@@ -17,8 +17,8 @@ public class UI implements ActionListener {
 
 	public UI() {
 		gamePanel = new GamePanel();
-        	frame = new JFrame("Pac-Man 2017");
-        	setUpFrame();
+		frame = new JFrame("Pac-Man 2017");
+		setUpFrame();
 	}
 
 	private void setUpFrame() {

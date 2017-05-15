@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Main {
+
 	private static JFrame frame;
 	private static GamePanel gamePanel;
 
