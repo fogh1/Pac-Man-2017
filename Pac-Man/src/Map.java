@@ -3,7 +3,6 @@ public class Map {
 	private Object[][] map;
 
 	public Map() {
-		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
 		// ...
 	}
 
@@ -30,10 +29,6 @@ public class Map {
 	public Object remove(Object object) {
 		return null;  // temporary
 		// removes the specified object from the map model
-	}
-
-	public void reset() {
-		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
 	}
 
 	public PacMan getPacMan() {
