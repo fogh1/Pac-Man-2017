@@ -3,6 +3,7 @@ public class Map {
 	private Object[][] map;
 
 	public Map() {
+		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
 		// ...
 	}
 
