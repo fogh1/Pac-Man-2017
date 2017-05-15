@@ -1,5 +1,7 @@
 import java.awt.Image;
 
+import java.awt.*;
+
 public abstract class Ghost extends MoveableObject {
 	
 	public enum GhostMode 
@@ -13,6 +15,8 @@ public abstract class Ghost extends MoveableObject {
 	{
 		super(x, y, currentDirection, ghostImage);
 		currentMode = CHASE;
+	public Ghost(int x, int y, Direction direction, Image image) {
+		// ...
 	}
 
 	public static GhostMode getMode() {

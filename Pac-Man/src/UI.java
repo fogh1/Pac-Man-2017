@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class UI implements ActionListener, KeyListener {
+public class UI implements ActionListener {
 
 	private Game game;
 	private JFrame frame;
@@ -16,11 +16,18 @@ public class UI implements ActionListener, KeyListener {
 	private KeyInputHandler keyInputHandler;
 
 	public UI() {
-		// ...
+		gamePanel = new GamePanel();
+        frame = new JFrame("Pac-Man 2017");
+        setUpFrame();
 	}
 
-	public void setUpFrame() {
-		// creates the frame and fills it with components
+	private void setUpFrame() {
+		Container contentPane = frame.getContentPane();
+        contentPane.setLayout(new BorderLayout(15, 15));
+        contentPane.add(gamePanel, BorderLayout.CENTER);
+        frame.pack();
+        frame.setResizable(false);
+        frame.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent event) {
