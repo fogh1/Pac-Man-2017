@@ -1,7 +1,11 @@
 public class Fruit extends AcquirableObject {
 
-	public Fruit() {
-		// ...
+	public Fruit()
+	{
+		private Timer timer;
+		
+		
+		
 	}
 
 }
