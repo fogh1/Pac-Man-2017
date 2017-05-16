@@ -27,7 +27,6 @@ public class Map {
 		else {
 			return getObjectAt(x+1, y);
 		}
-		return null;
 	}
 
 	public int acquirableObjectCount() {
@@ -79,6 +78,7 @@ public class Map {
 
 	public Speedy getSpeedy() {
 		for (Object[] row : map) {
+
 			for (Object object : row) {
 				if (object instanceof Speedy) {
 					return ((Speedy) object);
@@ -109,5 +109,4 @@ public class Map {
 		}
 		return null;
 	}	
-
 }
