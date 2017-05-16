@@ -11,6 +11,24 @@ public class Map {
 		return map[x][y];
 	}
 
+	public Object getAdjacentObject(MovableObject object) {
+		Direction direction = object.getDirection();
+		int x = object.getX();
+		int y = object.getY();
+		if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+			return getObjectAt(x, y + 1);
+		}
+		else if (direction == Direction.DOWN) {
+			return getObjectAt(x, y - 1);
+		} 
+		else if (direction == Direction.LEFT) {
+			return getObjectAt(x - 1, y);
+		} 
+		else {
+			return getObjectAt(x+1, y);
+		}
+	}
+
 	public int acquirableObjectCount() {
 		return 0;  // temporary
 		// returns the number of un-acquired AcquirableObjects in the map
@@ -60,6 +78,7 @@ public class Map {
 
 	public Speedy getSpeedy() {
 		for (Object[] row : map) {
+
 			for (Object object : row) {
 				if (object instanceof Speedy) {
 					return ((Speedy) object);
@@ -89,6 +108,5 @@ public class Map {
 			}
 		}
 		return null;
-	}
-
+	}	
 }
