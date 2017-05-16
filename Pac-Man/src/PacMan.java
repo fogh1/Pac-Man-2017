@@ -5,7 +5,7 @@ public class PacMan extends MovableObject {
 	private Direction queuedDirection;
 
 	public PacMan() {
-		super();
+		// super();
 		score = 0;
 		lives = 3;
 		setDirection(Direction.RIGHT);
@@ -36,11 +36,12 @@ public class PacMan extends MovableObject {
 	}
 	
 	public boolean canMove() {
-		
+		return true;  // temporary
+		// ...
 	}
 
 	public void move() {
-		// this should be overridden by each individual subclass
+		// ...
 	}
 
 }
