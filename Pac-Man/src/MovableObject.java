@@ -1,16 +1,14 @@
+import java.awt.*;
 import java.awt.Image;
 
-import java.awt.*;
-
-public abstract class MoveableObject {
+public abstract class MovableObject {
 
 	private int x;
 	private int y;
 	private Direction currentDirection;
 	private Image image;
-	protected map
 
-	public MoveableObject(int x, int y, Direction direction, Image image) {
+	public MovableObject(int x, int y, Direction direction, Image image) {
 		this.x = x;
 		this.y = y;
 		currentDirection = direction;
