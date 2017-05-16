@@ -2,7 +2,7 @@ import java.awt.Image;
 
 import java.awt.*;
 
-public abstract class Ghost extends MoveableObject {
+public abstract class Ghost extends MovableObject {
 	
 	public enum GhostMode 
 	{

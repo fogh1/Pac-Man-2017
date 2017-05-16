@@ -1,4 +1,4 @@
-public class PacMan extends MoveableObject {
+public class PacMan extends MovableObject {
 
 	private int score;
 	private int lives;
