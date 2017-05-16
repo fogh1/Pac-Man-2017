@@ -99,12 +99,13 @@ public class Map {
 		for (int clcv = 0; clcv < map.length; clcv++)
 		{
 			Object check = map[rlcv][clcv];
-			if (check instanceof present)      //is object at location equal to what we want?
+			if (check.equals(z))      //is object at location equal to what we want?
 			{
 				return rlcv;
 			}
 		}
-	}	
+	}
+	return -1;
 	}
 	
 	public int findYCoordinate(Object z) 
@@ -114,15 +115,16 @@ public class Map {
 			for (int clcv = 0; clcv < map.length; clcv++)
 			{
 				Object check = map[rlcv][clcv];
-				if (check instanceof present)  //is object at location equal to what we want?
+				if (check.equals(z))  //is object at location equal to what we want?
 				{
 					return clcv;
 				}
 			}
 		}
+	return -1;
 	 }
 
-	public Object getAdjacentObject(MoveableObject present){ 
+	public Object getAdjacentObject(MovableObject present){ 
 		Object adjacentObject = null;
 		Direction presentDirection = present.getDirection();
 		int x = findXCoordinate(present);
