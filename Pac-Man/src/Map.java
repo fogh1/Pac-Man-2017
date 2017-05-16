@@ -11,6 +11,25 @@ public class Map {
 		return map[x][y];
 	}
 
+	public Object getAdjacentObject(MovableObject object) {
+		Direction direction = object.getDirection();
+		int x = object.getX();
+		int y = object.getY();
+		if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+			return getObjectAt(x, y + 1);
+		}
+		else if (direction == Direction.DOWN) {
+			return getObjectAt(x, y - 1);
+		} 
+		else if (direction == Direction.LEFT) {
+			return getObjectAt(x - 1, y);
+		} 
+		else {
+			return getObjectAt(x+1, y);
+		}
+		return null;
+	}
+
 	public int acquirableObjectCount() {
 		return 0;  // temporary
 		// returns the number of un-acquired AcquirableObjects in the map
@@ -89,63 +108,6 @@ public class Map {
 			}
 		}
 		return null;
-	}
-	
-	
-	public int findXCoordinate(Object z) 
-	{ //Precondition: Moveable Object must actually be in grid
-	for (int rlcv = 0; rlcv < map.length; rlcv++)
-	{
-		for (int clcv = 0; clcv < map.length; clcv++)
-		{
-			Object check = map[rlcv][clcv];
-			if (check instanceof present)      //is object at location equal to what we want?
-			{
-				return rlcv;
-			}
-		}
 	}	
-	}
-	
-	public int findYCoordinate(Object z) 
-	{ //Precondition: Moveable Object must actually be in grid
-		for (int rlcv = 0; rlcv < map.length; rlcv++)
-		{
-			for (int clcv = 0; clcv < map.length; clcv++)
-			{
-				Object check = map[rlcv][clcv];
-				if (check instanceof present)  //is object at location equal to what we want?
-				{
-					return clcv;
-				}
-			}
-		}
-	 }
 
-	public Object getAdjacentObject(MoveableObject present){ 
-		Object adjacentObject = null;
-		Direction presentDirection = present.getDirection();
-		int x = findXCoordinate(present);
-		int y = findYCoordinate(present);
-		if (presentDirection == Direction.UP)   //Shouldn't return nullpointer, if moveable object ain't on border walls
-		{
-			adjacentObject = getObjectAt(x, y+1);
-		}
-		else if (presentDirection == Direction.DOWN)
-		{
-			adjacentObject = getObjectAt(x, y-1);
-		} 
-		else if (presentDirection == Direction.LEFT)
-		{
-			adjacentObject = getObjectAt(x-1, y);
-		} 
-		else
-		{
-			adjacentObject = getObjectAt(x+1, y);
-		}
-		return adjacentObject;
-		}
-		
-
-	}
-
+}

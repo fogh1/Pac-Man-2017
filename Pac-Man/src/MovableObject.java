@@ -1,18 +1,17 @@
-import java.awt.*;
-import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public abstract class MovableObject {
 
 	private int x;
 	private int y;
 	private Direction currentDirection;
-	private Image image;
+	private ImageIcon icon;
 
-	public MovableObject(int x, int y, Direction direction, Image image) {
+	public MovableObject(int x, int y, Direction direction, ImageIcon icon) {
 		this.x = x;
 		this.y = y;
 		currentDirection = direction;
-		this.image = image;
+		this.icon = icon;
 	}
 
 	public int getX() {
@@ -32,8 +31,8 @@ public abstract class MovableObject {
 		return currentDirection;
 	}
 
-	public Image getImage() {
-		return image;
+	public ImageIcon getIcon() {
+		return icon;
 	}
 
 	public boolean canMove() {
