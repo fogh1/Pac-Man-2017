@@ -4,10 +4,10 @@ import Ghost.GhostMode;
 
 public class Speedy extends Ghost {
 	
-	public Speedy(int x, int y, Direction currentDirection, Image ghostImage) 
+	public Speedy(int x, int y, Direction currentDirection, ImageIcon ghostImage, Map thisMap) 
 	{
-		super(x, y, currentDirection, ghostImage);
-		currentMode = CHASE;
+		super(x, y, currentDirection, ghostImage, thisMap);
+		currentMode = GhostMode.CHASE;
 	}
 	
 	public static void getMove() { 
