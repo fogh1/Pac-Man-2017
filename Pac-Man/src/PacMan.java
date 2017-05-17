@@ -1,11 +1,13 @@
+import javax.swing.ImageIcon;
+
 public class PacMan extends MovableObject {
 
 	private int score;
 	private int lives;
 	private Direction queuedDirection;
 
-	public PacMan() {
-		// super();
+	public PacMan(int x, int y, Direction direction, ImageIcon icon, Map thisMap) {
+	    super(x, y, direction, icon, thisMap);
 		score = 0;
 		lives = 3;
 		setDirection(Direction.RIGHT);
