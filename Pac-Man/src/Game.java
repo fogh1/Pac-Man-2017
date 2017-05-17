@@ -17,7 +17,7 @@ public class Game {
 	public Game() {
 		isPaused = true;//pauses game to prevent any grid action during grid setup
 		timer = new Timer();
-		timer.schedule(gameLoop(), 1000);
+		timer.scheduleAtFixedRate(gameLoop(), 500, 500);
 		map = new Map();  // the map class constructor is responsible for constructing all objects present on the map (ie. pacman, pacdots, walls, ghosts)
 		ui = new UI();  // UI is responsible for displaying a JFrame and interpreting the map to dipslay the game properly
 		pacMan = map.getPacMan();  // TODO write get Pac Man method in map class to return constructed Pac Man

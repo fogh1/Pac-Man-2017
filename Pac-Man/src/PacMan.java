@@ -1,3 +1,5 @@
+import javax.swing.ImageIcon;
+
 public class PacMan extends MovableObject {
 
 	private int score;
@@ -6,13 +8,15 @@ public class PacMan extends MovableObject {
 
 	public PacMan() {
 		super();
+
+	public PacMan(int x, int y) {
+		super(x, y, Direction.RIGHT, "TestPacMan.png");
 		score = 0;
 		lives = 3;
-		setDirection(Direction.RIGHT);
 	}
 
 	public Direction getQueuedDirection() {
-		return queuedDirection;  // we could use final constants rather than enums if we can't get this to compile
+		return queuedDirection;
 	}
 
 	public void setQueuedDirection(Direction newDirection) {
@@ -37,7 +41,7 @@ public class PacMan extends MovableObject {
 	
 	public boolean canMove() {
 		return true;  // temporary
-		// ...
+		// true unless adjacent object is wall or door
 	}
 
 	public void move() {

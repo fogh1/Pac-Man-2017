@@ -30,13 +30,20 @@ public class Map {
 			return getObjectAt(x - 1, y);
 		} 
 		else {
-			return getObjectAt(x+1, y);
+			return getObjectAt(x + 1, y);
 		}
 	}
 
 	public int acquirableObjectCount() {
-		return 0;  // temporary
-		// returns the number of un-acquired AcquirableObjects in the map
+		int count = 0;
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object instanceof AcquirableObject) {
+					count++;
+				}
+			} 
+		}
+		return count;
 	}
 
 	public Object set(Object object, int x, int y) {
@@ -46,8 +53,9 @@ public class Map {
 	}
 
 	public Object move(Object object, int x, int y) {
-		return null;  // temporary
+		map [x][y] = object;
 		// moves the specified object to the specified new coordinates
+		// need to also remove the object from its previous location to avoid duplication
 	}
 
 	public Object remove(Object object) {

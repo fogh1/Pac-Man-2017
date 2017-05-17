@@ -4,10 +4,9 @@ import javax.swing.*;
 
 public class UI implements ActionListener {
 
-	private ClassLoader classLoader;
 	private Game game;
 	private JFrame frame;
-	private GamePanel gamePanel;  // the GamePanel class is not in the project now, but it has been created already
+	private GamePanel gamePanel;
 	private KeyInputHandler keyInputHandler;
 	private JButton pauseButton;
 	private JButton resetButton;
@@ -17,7 +16,6 @@ public class UI implements ActionListener {
 	private JLabel highScoreLabel;
 
 	public UI(Game game) {
-		classLoader = this.getClass().getClassLoader();
 		this.game = game;
 		frame = new JFrame("Pac-Man 2017");
 		gamePanel = new GamePanel();
