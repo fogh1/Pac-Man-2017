@@ -30,8 +30,15 @@ public class Map {
 	}
 
 	public int acquirableObjectCount() {
-		return 0;  // temporary
-		// returns the number of un-acquired AcquirableObjects in the map
+		int AcquirablesInMap = 0;
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object instanceof AcquirableObject) {
+					AcquirablesInMap++;
+				}
+			} 
+			}
+		return AcquirablesInMap;
 	}
 
 	public Object set(Object object, int x, int y) {
