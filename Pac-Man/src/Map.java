@@ -30,15 +30,15 @@ public class Map {
 	}
 
 	public int acquirableObjectCount() {
-		int AcquirablesInMap = 0;
+		int count = 0;
 		for (Object[] row : map) {
 			for (Object object : row) {
 				if (object instanceof AcquirableObject) {
-					AcquirablesInMap++;
+					count++;
 				}
 			} 
-			}
-		return AcquirablesInMap;
+		}
+		return count;
 	}
 
 	public Object set(Object object, int x, int y) {

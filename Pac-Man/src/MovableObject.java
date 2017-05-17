@@ -2,16 +2,18 @@ import javax.swing.ImageIcon;
 
 public abstract class MovableObject {
 
+	private ClassLoader classLoader;
 	private int x;
 	private int y;
 	private Direction currentDirection;
 	private ImageIcon icon;
 
-	public MovableObject(int x, int y, Direction direction, ImageIcon icon) {
+	public MovableObject(int x, int y, Direction direction, String iconPath) {
+		classLoader = this.getClass().getClassLoader();
 		this.x = x;
 		this.y = y;
 		currentDirection = direction;
-		this.icon = icon;
+		icon = new ImageIcon(classLoader.getResource(iconPath));
 	}
 
 	public int getX() {

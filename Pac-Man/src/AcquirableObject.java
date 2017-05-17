@@ -2,10 +2,19 @@ import javax.swing.ImageIcon;
 
 public abstract class AcquirableObject {
 
+	private ClassLoader classLoader;
 	private int x;
 	private int y;
 	private int pointValue;
 	private ImageIcon icon;
+
+	public AcquirableObject(int x, int y, int pointValue, String iconPath) {
+		classLoader = this.getClass().getClassLoader();
+		this.x = x;
+		this.y = y;
+		this.pointValue = pointValue;
+		icon = new ImageIcon(classLoader.getResource(iconPath));
+	}
 
 	public int getX() {
 		return x;
