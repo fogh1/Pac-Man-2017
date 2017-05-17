@@ -4,13 +4,11 @@ import javax.swing.*;
 public class GamePanel extends JPanel {
 
     private ImageIcon backgroundIcon;
-    private Image backgroundImage;
 
     public GamePanel() {
         ClassLoader classLoader = this.getClass().getClassLoader();
         backgroundIcon = new ImageIcon(classLoader.getResource("TestBackground.png"));
-        backgroundImage = backgroundIcon.getImage();
-        Dimension dimensions = new Dimension(backgroundImage.getWidth(null), backgroundImage.getHeight(null));
+        Dimension dimensions = new Dimension(backgroundIcon.getIconWidth(), backgroundIcon.getIconHeight());
         setPreferredSize(dimensions);
         setMinimumSize(dimensions);
         setMaximumSize(dimensions);
@@ -19,7 +17,7 @@ public class GamePanel extends JPanel {
     }
 
     public void paintComponent(Graphics graphics) {
-        graphics.drawImage(backgroundImage, 0, 0, null);
+        graphics.drawImage(backgroundIcon.getImage(), 0, 0, null);
     }
 
 }

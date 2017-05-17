@@ -1,4 +1,4 @@
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public abstract class MovableObject {
 
