@@ -1,3 +1,5 @@
+import javax.swing.ImageIcon;
+
 public class PacMan extends MovableObject {
 
 	private int score;
