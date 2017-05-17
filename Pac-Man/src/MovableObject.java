@@ -6,12 +6,14 @@ public abstract class MovableObject {
 	private int y;
 	private Direction currentDirection;
 	private ImageIcon icon;
+	private Map ObjectMap;
 
-	public MovableObject(int x, int y, Direction direction, ImageIcon icon) {
+	public MovableObject(int x, int y, Direction direction, ImageIcon icon, Map thisMap) {
 		this.x = x;
 		this.y = y;
 		currentDirection = direction;
 		this.icon = icon;
+		this.ObjectMap = thisMap;
 	}
 
 	public int getX() {
