@@ -38,6 +38,8 @@ public abstract class AcquirableObject {
 
 	public void acquire() {
 		// called when a PacMan "eats" the object (plays a sound, removes object from the UI, updates points, et cetera, depending on the type of object)
+		// map removes acquirable
+		//passes value to map(?) update pac-man score
 	}
 
 }

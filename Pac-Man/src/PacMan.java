@@ -13,7 +13,7 @@ public class PacMan extends MovableObject {
 	}
 
 	public Direction getQueuedDirection() {
-		return queuedDirection;  // we could use final constants rather than enums if we can't get this to compile
+		return queuedDirection; 
 	}
 
 	public void setQueuedDirection(Direction newDirection) {
@@ -38,6 +38,7 @@ public class PacMan extends MovableObject {
 	
 	public boolean canMove() {
 		return true;  // temporary
+		//moves unless adjacent object is wall or door
 		// ...
 	}
 

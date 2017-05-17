@@ -25,7 +25,7 @@ public class Map {
 			return getObjectAt(x - 1, y);
 		} 
 		else {
-			return getObjectAt(x+1, y);
+			return getObjectAt(x + 1, y);
 		}
 	}
 
@@ -48,7 +48,8 @@ public class Map {
 	}
 
 	public Object move(Object object, int x, int y) {
-		return null;  // temporary
+		map [x][y] = object;
+		//need to also remove the object from its previous location to avoid duplication
 		// moves the specified object to the specified new coordinates
 	}
 
