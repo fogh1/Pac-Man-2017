@@ -13,7 +13,7 @@ public class PacMan extends MovableObject {
 	}
 
 	public Direction getQueuedDirection() {
-		return queuedDirection; 
+		return queuedDirection;
 	}
 
 	public void setQueuedDirection(Direction newDirection) {
@@ -38,8 +38,7 @@ public class PacMan extends MovableObject {
 	
 	public boolean canMove() {
 		return true;  // temporary
-		//moves unless adjacent object is wall or door
-		// ...
+		// true unless adjacent object is wall or door
 	}
 
 	public void move() {

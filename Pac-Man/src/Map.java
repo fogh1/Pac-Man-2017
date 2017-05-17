@@ -49,8 +49,8 @@ public class Map {
 
 	public Object move(Object object, int x, int y) {
 		map [x][y] = object;
-		//need to also remove the object from its previous location to avoid duplication
 		// moves the specified object to the specified new coordinates
+		// need to also remove the object from its previous location to avoid duplication
 	}
 
 	public Object remove(Object object) {
