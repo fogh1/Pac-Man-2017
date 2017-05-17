@@ -1,13 +1,12 @@
 import java.awt.Image;
 
-import Ghost.GhostMode;
+
 
 public class Speedy extends Ghost {
 	
-	public Speedy(int x, int y, Direction currentDirection, Image ghostImage) 
+	public Speedy() //can we keep the constructors without parameters for simplicity, unless we need to, location is stored in the map class, and direction should be a parameter i guess.
 	{
-		super(x, y, currentDirection, ghostImage);
-		currentMode = CHASE;
+		super();
 	}
 	
 	public static void getMove() { 

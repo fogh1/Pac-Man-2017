@@ -6,6 +6,13 @@ public abstract class MovableObject {
 	private int y;
 	private Direction currentDirection;
 	private ImageIcon icon;
+	
+	//TEMP
+	public MovableObject()
+	{
+		
+	}
+	//TEMP
 
 	public MovableObject(int x, int y, Direction direction, ImageIcon icon) {
 		this.x = x;

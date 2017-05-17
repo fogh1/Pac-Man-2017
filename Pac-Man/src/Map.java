@@ -1,3 +1,8 @@
+import java.io.*;
+import java.net.URL;
+import java.util.Scanner;
+
+
 public class Map {
 
 	private Object[][] map;
@@ -52,6 +57,72 @@ public class Map {
 
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
+		map = new Object[31][28];
+		ClassLoader cldr = Map.class.getClassLoader();
+		readFile(cldr.getResource("Map.csv"));
+	}
+	
+	public void readFile(URL resource)
+	{
+		try
+		{
+			Scanner file = new Scanner(resource.openStream());
+			file.useDelimiter(",");
+			while (file.hasNextLine())
+			{
+				int row = file.nextInt();
+				int col = file.nextInt();
+				String thing = file.next();
+				String direction = file.nextLine();
+				direction = direction.substring(1);
+				Object thing2pointO = new Object();
+				Direction realdirection;
+				switch (direction)
+				{
+				case "0": realdirection = Direction.UP;
+				break;
+				case "90": realdirection = Direction.RIGHT;
+				break;
+				case "180": realdirection = Direction.DOWN;
+				break;
+				case "270": realdirection = Direction.LEFT;
+				break;
+				default: realdirection = Direction.UP;
+				}
+				switch (thing)
+				{
+				case "Wall": thing2pointO = new Wall();
+				break;
+				case "null": thing2pointO = null;
+				break;
+				case "PacDot": thing2pointO = new PacDot();
+				break;
+				case "PowerPellet": thing2pointO = new PowerPellet();
+				break;
+				case "PacMan": thing2pointO = new PacMan();
+				((PacMan)thing2pointO).setQueuedDirection(realdirection);
+				break;
+				case "Bashful": thing2pointO = new Bashful();
+				break;
+				case "Pokey": thing2pointO = new Pokey();
+				break;
+				case "Shadow": thing2pointO = new Shadow();
+				break;
+				case "Speedy": thing2pointO = new Speedy();
+				break;
+				}
+				map[row][col] = thing2pointO;
+			}
+			file.close();
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("ERROR : CSV FILE NOT FOUND");
+		}
+		catch(IOException e)
+		{
+			System.out.println("ERROR : IO EXCEPTION : " + e);
+		}
 	}
 
 	public PacMan getPacMan() {

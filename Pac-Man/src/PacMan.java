@@ -5,7 +5,7 @@ public class PacMan extends MovableObject {
 	private Direction queuedDirection;
 
 	public PacMan() {
-		// super();
+		super();
 		score = 0;
 		lives = 3;
 		setDirection(Direction.RIGHT);
