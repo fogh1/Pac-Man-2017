@@ -6,7 +6,7 @@ public class UI implements ActionListener {
 
 	private Game game;
 	private JFrame frame;
-	private GamePanel gamePanel;  // the GamePanel class is not in the project now, but it has been created already
+	private GamePanel gamePanel;
 	private KeyInputHandler keyInputHandler;
 	private JButton pauseButton;
 	private JButton resetButton;
