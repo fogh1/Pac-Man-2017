@@ -5,7 +5,7 @@ public abstract class MovableObject {
 	private ClassLoader classLoader;
 	private int x;
 	private int y;
-	private Direction currentDirection;
+	private Direction direction;
 	private ImageIcon icon;
 	
 	//TEMP
@@ -19,7 +19,7 @@ public abstract class MovableObject {
 		classLoader = this.getClass().getClassLoader();
 		this.x = x;
 		this.y = y;
-		currentDirection = direction;
+		this.direction = direction;
 		icon = new ImageIcon(classLoader.getResource(iconPath));
 	}
 
@@ -40,12 +40,12 @@ public abstract class MovableObject {
 	}
 
 	public Direction getDirection() {
-		return currentDirection;
+		return direction;
 	}
 
 	public Direction setDirection(Direction newDirection) {
-		currentDirection = newDirection;
-		return currentDirection;
+		direction = newDirection;
+		return direction;
 	}
 
 	public ImageIcon getIcon() {
