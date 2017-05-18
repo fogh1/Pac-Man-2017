@@ -6,8 +6,10 @@ import java.util.Scanner;
 public class Map {
 
 	private Object[][] map;
+	private Game currentGame;
 
-	public Map() {
+	public Map(Game game) {
+		currentGame = game;
 		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
 		// ...
 	}
@@ -53,13 +55,22 @@ public class Map {
 	}
 
 	public Object move(Object object, int x, int y) {
+		Object old = map[x][y];
 		map [x][y] = object;
+		return remove(old);
 		// moves the specified object to the specified new coordinates
 		// need to also remove the object from its previous location to avoid duplication
 	}
 
 	public Object remove(Object object) {
-		return null;  // temporary
+		int[] location = getLocation(object);
+		int row = location[0];
+		int col = location[1];
+		if (row == -1||col == -1)
+			return null;
+		Object old = map[row][col];
+		map[row][col] = null;
+		return old;
 		// removes the specified object from the map model
 	}
 
@@ -70,7 +81,24 @@ public class Map {
 		readFile(cldr.getResource("Map.csv"));
 	}
 	
-	public void readFile(URL resource)
+	public int[] getLocation(Object object)
+	{
+		int[] location = {-1,-1};
+		for (int row = 0; row < 31; row++)
+		{
+			for (int col = 0; col < 28; col++)
+			{
+				if (object == map[row][col])
+				{
+					location[0] = row;
+					location[1] = col;
+				}
+			}
+		}
+		return location;
+	}
+	
+	public void readFile(URL resource)//this method is reposibile for reading a CSV file that contains all the map inforamtion
 	{
 		try
 		{
@@ -85,7 +113,7 @@ public class Map {
 				direction = direction.substring(1);
 				Object thing2pointO = new Object();
 				Direction realdirection;
-				switch (direction)
+				switch (direction)//this switch changes ints to Directions
 				{
 				case "0": realdirection = Direction.UP;
 				break;
@@ -97,7 +125,7 @@ public class Map {
 				break;
 				default: realdirection = Direction.UP;
 				}
-				switch (thing)
+				switch (thing)//this switch turns the 
 				{
 				case "Wall": thing2pointO = new Wall();
 				break;
@@ -107,16 +135,16 @@ public class Map {
 				break;
 				case "PowerPellet": thing2pointO = new PowerPellet();
 				break;
-				case "PacMan": thing2pointO = new PacMan();
+				case "PacMan": thing2pointO = new PacMan(row, col, currentGame);
 				((PacMan)thing2pointO).setQueuedDirection(realdirection);
 				break;
-				case "Bashful": thing2pointO = new Bashful();
+				case "Bashful": thing2pointO = new Bashful(row, col, currentGame);
 				break;
-				case "Pokey": thing2pointO = new Pokey();
+				case "Pokey": thing2pointO = new Pokey(row, col, currentGame);
 				break;
-				case "Shadow": thing2pointO = new Shadow();
+				case "Shadow": thing2pointO = new Shadow(row, col, currentGame);
 				break;
-				case "Speedy": thing2pointO = new Speedy();
+				case "Speedy": thing2pointO = new Speedy(row, col, currentGame);
 				break;
 				}
 				map[row][col] = thing2pointO;

@@ -8,6 +8,7 @@ public class PacMan extends MovableObject {
 
 	public PacMan() {
 		super();
+	}
 
 	public PacMan(int x, int y) {
 		super(x, y, Direction.RIGHT, "TestPacMan.png");
@@ -40,11 +41,18 @@ public class PacMan extends MovableObject {
 	}
 	
 	public boolean canMove() {
-		return true;  // temporary
+		Object thing = currentMap.getAdjancentObject(this);
+		if (thing instanceof Wall)
+			return false;
+		return true;
 		// true unless adjacent object is wall or door
 	}
 
 	public void move() {
+		if (canMove())
+		{
+			currentMap.
+		}
 		// ...
 	}
 
