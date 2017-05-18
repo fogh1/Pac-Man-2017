@@ -2,7 +2,6 @@ import java.io.*;
 import java.net.URL;
 import java.util.Scanner;
 
-
 public class Map {
 
 	private Object[][] map;
