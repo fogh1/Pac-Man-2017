@@ -7,7 +7,7 @@ public abstract class MovableObject {
 	private int y;
 	private Direction direction;
 	private ImageIcon icon;
-	
+
 	//TEMP
 	public MovableObject()
 	{
