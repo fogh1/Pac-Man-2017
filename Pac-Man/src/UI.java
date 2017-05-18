@@ -19,7 +19,7 @@ public class UI implements ActionListener {
 		this.game = game;
 		frame = new JFrame("Pac-Man 2017");
 		gamePanel = new GamePanel();
-		keyInputHandler = new KeyInputHandler(game);
+		keyInputHandler = new KeyInputHandler(game.getMap());
 		setUpFrame();
 	}
 
@@ -33,16 +33,38 @@ public class UI implements ActionListener {
 		frame.setVisible(true);
 	}
 
+	private void addToPanel(Object object) {
+		int gridScale = 25;
+		if (object instanceof MovableObject) {
+			MovableObject movableObject = (MovableObject) object;
+			ImageIcon icon = movableObject.getIcon();
+			JLabel label = new JLabel(icon);
+			int x = (gridScale * movableObject.getX()) + (gridScale / 2);
+			int y = (gridScale * movableObject.getY());
+			label.setBounds(x, y, icon.getIconWidth(), icon.getIconHeight());
+			gamePanel.add(label);
+		}
+		else if (object instanceof AcquirableObject) {
+			AcquirableObject acquirableObject = (AcquirableObject) object;
+			ImageIcon icon = acquirableObject.getIcon();
+			JLabel label = new JLabel(icon);
+			int x = (gridScale * acquirableObject.getX()) + (gridScale / 2);
+			int y = (gridScale * acquirableObject.getY());
+			label.setBounds(x, y, icon.getIconWidth(), icon.getIconHeight());
+			gamePanel.add(label);
+		}
+	}
+
 	public void repaintPanel() {
 		// repaints gamePanel to handle PacMan moving, eating PacDots, et cetera
+		gamePanel.removeAll();
+		addToPanel(game.getMap().getPacMan());
+		gamePanel.revalidate();
+		gamePanel.repaint();
 	}
 
 	public void actionPerformed(ActionEvent event) {
 		// handles clicks from the two buttons
-	}
-
-	public void remove(Object object) {
-		// removes an object (like a PacDot) from the UI
 	}
 
 }

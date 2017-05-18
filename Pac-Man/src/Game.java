@@ -17,9 +17,9 @@ public class Game {
 	public Game() {
 		isPaused = true;  //pauses game to prevent any grid action during grid setup
 		timer = new Timer();
-		timer.scheduleAtFixedRate(gameLoop(), 500, 500);
+		timer.scheduleAtFixedRate(gameLoop(), 125, 125);
 		map = new Map();  // the map class constructor is responsible for constructing all objects present on the map (ie. pacman, pacdots, walls, ghosts)
-		ui = new UI();  // UI is responsible for displaying a JFrame and interpreting the map to dipslay the game properly
+		ui = new UI(this);  // UI is responsible for displaying a JFrame and interpreting the map to dipslay the game properly
 		pacMan = map.getPacMan();
 		shadow = map.getShadow();
 		speedy = map.getSpeedy();
@@ -29,6 +29,20 @@ public class Game {
 		highScorers = new String[100];
 		togglePause();
 		start();
+	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public boolean togglePause() {
+		isPaused = !isPaused;
+		return isPaused;
+		// pauses or unpauses the game
+	}
+
+	public boolean isPaused() {
+		return isPaused;
 	}
 
 	public void start() {
@@ -43,26 +57,14 @@ public class Game {
 		togglePause();
 	}
 
-	public boolean togglePause() {
-		isPaused = !isPaused;
-		return isPaused;
-		// pauses or unpauses the game
-	}
-
-	public boolean isPaused() {
-		return isPaused;
-	}
-
 	public TimerTask gameLoop() {
 		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
 		return new TimerTask() {
 			public void run() {
-				// input all periodic tasks per tick
-				if (isPaused) {
-					ui.displayPaused();  // TODO write method in UI class to display a "paused" screen if the method is called
-					return;
+				if (pacMan.canMove()) {
+					pacMan.move();
 				}
-				
+				ui.repaintPanel();
 			}
 		};
 	}

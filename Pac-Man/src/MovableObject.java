@@ -15,7 +15,7 @@ public abstract class MovableObject {
 	}
 	//TEMP
 
-	public MovableObject(int x, int y, Direction direction, String iconPath, Map map) {
+	public MovableObject(int x, int y, Direction direction, String iconPath) {
 		classLoader = this.getClass().getClassLoader();
 		this.x = x;
 		this.y = y;
