@@ -5,6 +5,7 @@ import javax.swing.*;
 public class UI implements ActionListener {
 
 	private Game game;
+	private Map map;
 	private JFrame frame;
 	private GamePanel gamePanel;
 	private KeyInputHandler keyInputHandler;
@@ -17,9 +18,10 @@ public class UI implements ActionListener {
 
 	public UI(Game game) {
 		this.game = game;
-		frame = new JFrame("Pac-Man 2017");
-		gamePanel = new GamePanel();
-		keyInputHandler = new KeyInputHandler(game.getMap());
+		this.map = game.getMap();
+		this.frame = new JFrame("Pac-Man 2017");
+		this.gamePanel = new GamePanel();
+		this.keyInputHandler = new KeyInputHandler(game.getMap());
 		setUpFrame();
 	}
 
@@ -39,18 +41,18 @@ public class UI implements ActionListener {
 			MovableObject movableObject = (MovableObject) object;
 			ImageIcon icon = movableObject.getIcon();
 			JLabel label = new JLabel(icon);
-			int x = (gridScale * movableObject.getX()) + (gridScale / 2);
-			int y = (gridScale * movableObject.getY());
-			label.setBounds(x, y, icon.getIconWidth(), icon.getIconHeight());
+			int xAsPixels = (gridScale * movableObject.getY()) + (gridScale / 2);
+			int yAsPixels = (gridScale * movableObject.getX());
+			label.setBounds(xAsPixels, yAsPixels, icon.getIconWidth(), icon.getIconHeight());
 			gamePanel.add(label);
 		}
 		else if (object instanceof AcquirableObject) {
 			AcquirableObject acquirableObject = (AcquirableObject) object;
 			ImageIcon icon = acquirableObject.getIcon();
 			JLabel label = new JLabel(icon);
-			int x = (gridScale * acquirableObject.getX()) + (gridScale / 2);
-			int y = (gridScale * acquirableObject.getY());
-			label.setBounds(x, y, icon.getIconWidth(), icon.getIconHeight());
+			int xAsPixels = (gridScale * acquirableObject.getY());
+			int yAsPixels = (gridScale * acquirableObject.getX());
+			label.setBounds(xAsPixels, yAsPixels, icon.getIconWidth(), icon.getIconHeight());
 			gamePanel.add(label);
 		}
 	}
@@ -58,8 +60,15 @@ public class UI implements ActionListener {
 	public void repaintPanel() {
 		// repaints gamePanel to handle PacMan moving, eating PacDots, et cetera
 		gamePanel.removeAll();
-		addToPanel(game.getMap().getPacMan());
-		gamePanel.revalidate();
+		addToPanel(map.getPacMan());
+		for (int row = 0; row < 31; row++) {
+			for (int column = 0; column < 28; column++) {
+				Object object = map.getObjectAt(row, column);
+				if (object instanceof PacDot || object instanceof PowerPellet) {
+					addToPanel(object);
+				}
+			}
+		}
 		gamePanel.repaint();
 	}
 

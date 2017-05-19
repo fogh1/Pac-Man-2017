@@ -15,20 +15,13 @@ public class Game {
 	private String[] highScorers;
 
 	public Game() {
-		isPaused = true;  //pauses game to prevent any grid action during grid setup
-		timer = new Timer();
-		timer.scheduleAtFixedRate(gameLoop(), 125, 125);
-		map = new Map();  // the map class constructor is responsible for constructing all objects present on the map (ie. pacman, pacdots, walls, ghosts)
+		isPaused = false;
+		createMap();
 		ui = new UI(this);  // UI is responsible for displaying a JFrame and interpreting the map to dipslay the game properly
-		pacMan = map.getPacMan();
-		shadow = map.getShadow();
-		speedy = map.getSpeedy();
-		bashful = map.getBashful();
-		pokey = map.getPokey();
+		timer = new Timer();
+		timer.scheduleAtFixedRate(gameLoop(), 1000, 1000);
 		highScores = new int[100];
 		highScorers = new String[100];
-		togglePause();
-		start();
 	}
 
 	public Map getMap() {
@@ -45,7 +38,7 @@ public class Game {
 		return isPaused;
 	}
 
-	public void start() {
+	public void createMap() {
 		// starts or restarts the game
 		togglePause();  // pauses game to prevent any grid action during grid setup
 		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
@@ -61,9 +54,6 @@ public class Game {
 		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
 		return new TimerTask() {
 			public void run() {
-				if (pacMan.canMove()) {
-					pacMan.move();
-				}
 				ui.repaintPanel();
 			}
 		};

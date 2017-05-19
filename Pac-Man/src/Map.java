@@ -56,6 +56,7 @@ public class Map {
 						object = new PacMan(row, column);
 						((PacMan) object).setDirection(verbalDirection);
 						break;
+					/*  // temporarily commented out Ghost subclass constructors so the game can be run
 					case "Bashful":
 						object = new Bashful();
 						break;
@@ -68,6 +69,7 @@ public class Map {
 					case "Speedy":
 						object = new Speedy();
 						break;
+					*/
 				}
 				map[row][column] = object;
 			}
