@@ -7,8 +7,85 @@ public class Map {
 	private Object[][] map;
 
 	public Map() {
-		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
+		reset(); // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
 		// ...
+	}
+
+	public void createMapFromResource(URL resource) {
+		try {
+			Scanner file = new Scanner(resource.openStream());
+			file.useDelimiter(",");
+			while (file.hasNextLine()) {
+				int row = file.nextInt();
+				int column = file.nextInt();
+				String objectAsString = file.next();
+				String direction = file.nextLine();
+				direction = direction.substring(1);
+				Object object = new Object();
+				Direction verbalDirection;
+				switch (direction) {
+					case "0":
+						verbalDirection = Direction.UP;
+						break;
+					case "90":
+						verbalDirection = Direction.RIGHT;
+						break;
+					case "180":
+						verbalDirection = Direction.DOWN;
+						break;
+					case "270":
+						verbalDirection = Direction.LEFT;
+						break;
+					default:
+						verbalDirection = Direction.UP;
+				}
+				switch (objectAsString) {
+					case "Wall":
+						object = new Wall();
+						break;
+					case "null":
+						object = null;
+						break;
+					case "PacDot":
+						object = new PacDot();
+						break;
+					case "PowerPellet":
+						object = new PowerPellet();
+						break;
+					case "PacMan":
+						object = new PacMan();
+						((PacMan) object).setQueuedDirection(verbalDirection);
+						break;
+					case "Bashful":
+						object = new Bashful();
+						break;
+					case "Pokey":
+						object = new Pokey();
+						break;
+					case "Shadow":
+						object = new Shadow();
+						break;
+					case "Speedy":
+						object = new Speedy();
+						break;
+				}
+				map[row][column] = object;
+			}
+			file.close();
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("ERROR : CSV FILE NOT FOUND");
+		}
+		catch (IOException e) {
+			System.out.println("ERROR : IO EXCEPTION : " + e);
+		}
+	}
+
+	public void reset() {
+		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
+		map = new Object[31][28];
+		ClassLoader classLoader = this.getClass().getClassLoader();
+		createMapFromResource(classLoader.getResource("Map.csv"));
 	}
 
 	public Object getObjectAt(int x, int y) {
@@ -19,15 +96,15 @@ public class Map {
 		Direction direction = object.getDirection();
 		int x = object.getX();
 		int y = object.getY();
-		if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+		if (direction == Direction.UP) {
 			return getObjectAt(x, y + 1);
 		}
 		else if (direction == Direction.DOWN) {
 			return getObjectAt(x, y - 1);
-		} 
+		}
 		else if (direction == Direction.LEFT) {
 			return getObjectAt(x - 1, y);
-		} 
+		}
 		else {
 			return getObjectAt(x + 1, y);
 		}
@@ -40,7 +117,7 @@ public class Map {
 				if (object instanceof AcquirableObject) {
 					count++;
 				}
-			} 
+			}
 		}
 		return count;
 	}
@@ -52,7 +129,7 @@ public class Map {
 	}
 
 	public Object move(Object object, int x, int y) {
-		map [x][y] = object;
+		map[x][y] = object;
 		// moves the specified object to the specified new coordinates
 		// need to also remove the object from its previous location to avoid duplication
 	}
@@ -60,76 +137,6 @@ public class Map {
 	public Object remove(Object object) {
 		return null;  // temporary
 		// removes the specified object from the map model
-	}
-
-	public void reset() {
-		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
-		map = new Object[31][28];
-		ClassLoader cldr = Map.class.getClassLoader();
-		readFile(cldr.getResource("Map.csv"));
-	}
-	
-	public void readFile(URL resource)
-	{
-		try
-		{
-			Scanner file = new Scanner(resource.openStream());
-			file.useDelimiter(",");
-			while (file.hasNextLine())
-			{
-				int row = file.nextInt();
-				int col = file.nextInt();
-				String thing = file.next();
-				String direction = file.nextLine();
-				direction = direction.substring(1);
-				Object thing2pointO = new Object();
-				Direction realdirection;
-				switch (direction)
-				{
-				case "0": realdirection = Direction.UP;
-				break;
-				case "90": realdirection = Direction.RIGHT;
-				break;
-				case "180": realdirection = Direction.DOWN;
-				break;
-				case "270": realdirection = Direction.LEFT;
-				break;
-				default: realdirection = Direction.UP;
-				}
-				switch (thing)
-				{
-				case "Wall": thing2pointO = new Wall();
-				break;
-				case "null": thing2pointO = null;
-				break;
-				case "PacDot": thing2pointO = new PacDot();
-				break;
-				case "PowerPellet": thing2pointO = new PowerPellet();
-				break;
-				case "PacMan": thing2pointO = new PacMan();
-				((PacMan)thing2pointO).setQueuedDirection(realdirection);
-				break;
-				case "Bashful": thing2pointO = new Bashful();
-				break;
-				case "Pokey": thing2pointO = new Pokey();
-				break;
-				case "Shadow": thing2pointO = new Shadow();
-				break;
-				case "Speedy": thing2pointO = new Speedy();
-				break;
-				}
-				map[row][col] = thing2pointO;
-			}
-			file.close();
-		}
-		catch(FileNotFoundException e)
-		{
-			System.out.println("ERROR : CSV FILE NOT FOUND");
-		}
-		catch(IOException e)
-		{
-			System.out.println("ERROR : IO EXCEPTION : " + e);
-		}
 	}
 
 	public PacMan getPacMan() {
@@ -156,7 +163,6 @@ public class Map {
 
 	public Speedy getSpeedy() {
 		for (Object[] row : map) {
-
 			for (Object object : row) {
 				if (object instanceof Speedy) {
 					return ((Speedy) object);
@@ -186,5 +192,5 @@ public class Map {
 			}
 		}
 		return null;
-	}	
+	}
 }
