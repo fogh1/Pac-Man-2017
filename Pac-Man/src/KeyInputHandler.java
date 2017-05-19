@@ -4,15 +4,25 @@ import javax.swing.*;
 
 public class KeyInputHandler implements KeyListener {
 
-	private Game game;
+	private Map map;
 
-	public KeyInputHandler(Game game) {
-		this.game = game;
+	public KeyInputHandler(Map map) {
+		this.map = map;
 	}
 
 	public void keyPressed(KeyEvent event) {
-		if (event.getKeyCode() == KeyEvent.VK_D) {
-			// ...
+		PacMan pacMan = map.getPacMan();
+		if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+			pacMan.setDirection(Direction.LEFT);
+		}
+		else if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
+			pacMan.setDirection(Direction.RIGHT);
+		}
+		else if (event.getKeyCode() == KeyEvent.VK_UP) {
+			pacMan.setDirection(Direction.UP);
+		}
+		else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+			pacMan.setDirection(Direction.DOWN);
 		}
 	}
 

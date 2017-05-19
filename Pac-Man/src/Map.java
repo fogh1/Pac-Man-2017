@@ -17,6 +17,34 @@ public class Map {
 	public Object getObjectAt(int x, int y) {
 		return map[x][y];
 	}
+	
+	public int[] getAdjacentLocation(MovableObject object)
+	{
+		Direction direction = object.getDirection();
+		int x = object.getX();
+		int y = object.getY();
+		int[] location = new int[2];
+		if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+			location[0] = x;
+			location[1] = y + 1;
+			return location;
+		}
+		else if (direction == Direction.DOWN) {
+			location[0] = x;
+			location[1] = y - 1;
+			return location;
+		} 
+		else if (direction == Direction.LEFT) {
+			location[0] = x - 1;
+			location[1] = y;
+			return location;
+		} 
+		else {
+			location[0] = x + 1;
+			location[1] = y;
+			return location;
+		}
+	}
 
 	public Object getAdjacentObject(MovableObject object) {
 		Direction direction = object.getDirection();
@@ -57,6 +85,11 @@ public class Map {
 	public Object move(Object object, int x, int y) {
 		Object old = map[x][y];
 		map [x][y] = object;
+		if (object instanceof MovableObject)
+		{
+			((MovableObject)object).setX(x);
+			((MovableObject)object).setY(y);
+		}
 		return remove(old);
 		// moves the specified object to the specified new coordinates
 		// need to also remove the object from its previous location to avoid duplication

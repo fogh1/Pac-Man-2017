@@ -1,4 +1,4 @@
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public class PacMan extends MovableObject {
 
@@ -6,10 +6,10 @@ public class PacMan extends MovableObject {
 	private int lives;
 	private Direction queuedDirection;
 
-	public PacMan() {
+	public PacMan()//a temporary contructor to get the testing phases working
+	 {
 		super();
 	}
-
 	public PacMan(int x, int y) {
 		super(x, y, Direction.RIGHT, "TestPacMan.png");
 		score = 0;
@@ -51,7 +51,7 @@ public class PacMan extends MovableObject {
 	public void move() {
 		if (canMove())
 		{
-			currentMap.
+			currentMap.move(this, currentMap.getAdjacentLocation()[0], currentMap.getAdjacentLocation()[1]);
 		}
 		// ...
 	}

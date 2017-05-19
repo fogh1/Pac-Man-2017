@@ -1,8 +1,7 @@
+public class Wall {
 
-public class Wall
-{
-	public Wall()
-	{
-		//Literally does nothing yay
+	public Wall() {
+		// Literally does nothing, just a placeholder
 	}
+
 }
