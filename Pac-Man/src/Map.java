@@ -47,14 +47,14 @@ public class Map {
 						object = null;
 						break;
 					case "PacDot":
-						object = new PacDot();
+						object = new PacDot(row, column);
 						break;
 					case "PowerPellet":
-						object = new PowerPellet();
+						object = new PowerPellet(row, column);
 						break;
 					case "PacMan":
-						object = new PacMan();
-						((PacMan) object).setQueuedDirection(verbalDirection);
+						object = new PacMan(row, column);
+						((PacMan) object).setDirection(verbalDirection);
 						break;
 					case "Bashful":
 						object = new Bashful();
@@ -73,11 +73,11 @@ public class Map {
 			}
 			file.close();
 		}
-		catch (FileNotFoundException e) {
+		catch (FileNotFoundException exception) {
 			System.out.println("ERROR : CSV FILE NOT FOUND");
 		}
-		catch (IOException e) {
-			System.out.println("ERROR : IO EXCEPTION : " + e);
+		catch (IOException exception) {
+			System.out.println("ERROR : IO EXCEPTION : " + exception);
 		}
 	}
 
@@ -130,6 +130,7 @@ public class Map {
 
 	public Object move(Object object, int x, int y) {
 		map[x][y] = object;
+		return null;  // temporary
 		// moves the specified object to the specified new coordinates
 		// need to also remove the object from its previous location to avoid duplication
 	}
