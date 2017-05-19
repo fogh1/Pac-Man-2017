@@ -1,6 +1,6 @@
 import java.io.*;
-import java.net.URL;
-import java.util.Scanner;
+import java.net.*;
+import java.util.*;
 
 public class Map {
 
