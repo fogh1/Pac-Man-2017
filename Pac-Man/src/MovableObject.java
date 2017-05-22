@@ -5,22 +5,23 @@ public abstract class MovableObject {
 	private ClassLoader classLoader;
 	private int x;
 	private int y;
+	private Map map;
 	private Direction direction;
 	private ImageIcon icon;
 
 	//TEMP
-	public MovableObject()
-	{
-		
+	public MovableObject() {
+		// ...
 	}
 	//TEMP
 
-	public MovableObject(int x, int y, Direction direction, String iconPath) {
-		classLoader = this.getClass().getClassLoader();
+	public MovableObject(int x, int y, Map map, Direction direction, String iconPath) {
+		this.classLoader = this.getClass().getClassLoader();
 		this.x = x;
 		this.y = y;
+		this.map = map;
 		this.direction = direction;
-		icon = new ImageIcon(classLoader.getResource(iconPath));
+		this.icon = new ImageIcon(classLoader.getResource(iconPath));
 	}
 
 	public int getX() {
@@ -37,6 +38,10 @@ public abstract class MovableObject {
 
 	public void setY(int newY) {
 		y = newY;
+	}
+
+	public Map getMap() {
+		return map;
 	}
 
 	public Direction getDirection() {

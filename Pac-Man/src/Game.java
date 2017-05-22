@@ -17,11 +17,9 @@ public class Game {
 	public Game() {
 		isPaused = false;
 		createMap();
-		ui = new UI(this);  // UI is responsible for displaying a JFrame and interpreting the map to dipslay the game properly
+		ui = new UI(this);
 		timer = new Timer();
-		timer.scheduleAtFixedRate(gameLoop(), 1000, 1000);
-		highScores = new int[100];
-		highScorers = new String[100];
+		timer.scheduleAtFixedRate(gameLoop(), 125, 125);
 	}
 
 	public Map getMap() {
@@ -41,7 +39,7 @@ public class Game {
 	public void createMap() {
 		// starts or restarts the game
 		togglePause();  // pauses game to prevent any grid action during grid setup
-		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+		map = new Map(this);  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
 		pacMan = map.getPacMan();
 		shadow = map.getShadow();
 		speedy = map.getSpeedy();

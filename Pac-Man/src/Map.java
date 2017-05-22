@@ -6,8 +6,8 @@ public class Map {
 
 	private Object[][] map;
 
-	public Map() {
-		reset(); // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
+	public Map(Game game) {
+		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
 		// ...
 	}
 
@@ -53,7 +53,7 @@ public class Map {
 						object = new PowerPellet(row, column);
 						break;
 					case "PacMan":
-						object = new PacMan(row, column);
+						object = new PacMan(row, column, this);
 						((PacMan) object).setDirection(verbalDirection);
 						break;
 					/*  // temporarily commented out Ghost subclass constructors so the game can be run
@@ -94,19 +94,46 @@ public class Map {
 		return map[x][y];
 	}
 
+	public int[] getAdjacentLocation(MovableObject object) {
+		Direction direction = object.getDirection();
+		int x = object.getX();
+		int y = object.getY();
+		int[] location = new int[2];
+		if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+			location[0] = x;
+			location[1] = y + 1;
+			return location;
+		}
+		else if (direction == Direction.DOWN) {
+			location[0] = x;
+			location[1] = y - 1;
+			return location;
+		} 
+		else if (direction == Direction.LEFT) {
+			location[0] = x - 1;
+			location[1] = y;
+			return location;
+		} 
+		else {
+			location[0] = x + 1;
+			location[1] = y;
+			return location;
+		}
+	}
+
 	public Object getAdjacentObject(MovableObject object) {
 		Direction direction = object.getDirection();
 		int x = object.getX();
 		int y = object.getY();
-		if (direction == Direction.UP) {
+		if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
 			return getObjectAt(x, y + 1);
 		}
 		else if (direction == Direction.DOWN) {
 			return getObjectAt(x, y - 1);
-		}
+		} 
 		else if (direction == Direction.LEFT) {
 			return getObjectAt(x - 1, y);
-		}
+		} 
 		else {
 			return getObjectAt(x + 1, y);
 		}
@@ -119,7 +146,7 @@ public class Map {
 				if (object instanceof AcquirableObject) {
 					count++;
 				}
-			}
+			} 
 		}
 		return count;
 	}
@@ -130,16 +157,28 @@ public class Map {
 		return oldOccupant;
 	}
 
-	public Object move(Object object, int x, int y) {
-		map[x][y] = object;
-		return null;  // temporary
+	public Object move(MovableObject object, int x, int y) {
+		Object oldOccupant = map[x][y];
+		if (oldOccupant instanceof AcquirableObject) {
+			((AcquirableObject) oldOccupant).acquire();
+		}
+		map [x][y] = object;
+		object.setX(x);
+		object.setY(y);
+		return oldOccupant;
 		// moves the specified object to the specified new coordinates
 		// need to also remove the object from its previous location to avoid duplication
 	}
 
-	public Object remove(Object object) {
-		return null;  // temporary
-		// removes the specified object from the map model
+	public AcquirableObject remove(AcquirableObject objectToRemove) {
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object == objectToRemove) {
+					map[objectToRemove.getX()][objectToRemove.getY()] = null;
+				}
+			}
+		}
+		return objectToRemove;
 	}
 
 	public PacMan getPacMan() {
@@ -195,5 +234,5 @@ public class Map {
 			}
 		}
 		return null;
-	}
+	}	
 }

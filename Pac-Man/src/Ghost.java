@@ -1,11 +1,11 @@
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public abstract class Ghost extends MovableObject {
 
 	private static GhostMode currentMode;
 
-	public Ghost(int x, int y, Direction direction, String iconPath) {
-	    super(x, y, direction, iconPath);
+	public Ghost(int x, int y, Map map, Direction direction, String iconPath) {
+	    super(x, y, map, direction, iconPath);
 	}
 
 	public static GhostMode getMode() {

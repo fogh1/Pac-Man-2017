@@ -6,8 +6,8 @@ public class PacMan extends MovableObject {
 	private int lives;
 	private Direction queuedDirection;
 
-	public PacMan(int x, int y) {
-		super(x, y, Direction.RIGHT, "TestPacMan.png");
+	public PacMan(int x, int y, Map map) {
+		super(x, y, map, Direction.RIGHT, "TestPacMan.png");
 		score = 0;
 		lives = 3;
 	}
@@ -37,22 +37,19 @@ public class PacMan extends MovableObject {
 	}
 	
 	public boolean canMove() {
-		return true;  // temporary
+		Object adjacentObject = getMap().getAdjacentObject(this);
+		if (adjacentObject instanceof Wall) {
+			return false;
+		}
+		else {
+			return true;
+		}
 		// true unless adjacent object is wall or door
 	}
 
 	public void move() {
-		if (getDirection() == Direction.LEFT) {
-			setX(getX() - 1);
-		}
-		else if (getDirection() == Direction.RIGHT) {
-			setX(getX() + 1);
-		}
-		else if (getDirection() == Direction.UP) {
-			setY(getY() - 1);
-		}
-		else if (getDirection() == Direction.DOWN) {
-			setY(getY() + 1);
+		if (canMove()) {
+			getMap().move(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
 		}
 	}
 
