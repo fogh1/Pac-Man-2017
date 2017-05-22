@@ -173,16 +173,14 @@ public class Map {
 	}
 
 	public Object remove(Object object) {
-		int[] location = getLocation(object);
-		int row = location[0];
-		int col = location[1];
-		if (row == -1||col == -1)
-			return null;
+		int row = ((AcquirableObject) object).getX();
+		int col = ((AcquirableObject) object).getY();
 		Object old = map[row][col];
 		map[row][col] = null;
 		return old;
 		// removes the specified object from the map model
 	}
+	
 	
 	public PacMan getPacMan() {
 		for (Object[] row : map) {
