@@ -85,7 +85,7 @@ public class Map {
 
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
-		map = new Object[28][31];
+		map = new Object[31][28];
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		createMapFromResource(classLoader.getResource("Map.csv"));
 	}
