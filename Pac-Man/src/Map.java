@@ -17,7 +17,7 @@ public class Map {
 			file.useDelimiter(",");
 			while (file.hasNextLine()) {
 				int row = file.nextInt();
-				int col = file.nextInt();
+				int column = file.nextInt();
 				String objectAsString = file.next();
 				String direction = file.nextLine();
 				direction = direction.substring(1);
@@ -47,13 +47,13 @@ public class Map {
 						object = null;
 						break;
 					case "PacDot":
-						object = new PacDot(row, col);
+						object = new PacDot(column, row);
 						break;
 					case "PowerPellet":
-						object = new PowerPellet(row, col);
+						object = new PowerPellet(column, row);
 						break;
 					case "PacMan":
-						object = new PacMan(row, col, this);
+						object = new PacMan(column, row, this);
 						((PacMan) object).setDirection(verbalDirection);
 						break;
 					/*  // temporarily commented out Ghost subclass constructors so the game can be run
@@ -71,7 +71,7 @@ public class Map {
 						break;
 					*/
 				}
-				map[row][col] = object;
+				map[column][row] = object;
 			}
 			file.close();
 		}
@@ -158,7 +158,6 @@ public class Map {
 	}
 
 	public Object move(MovableObject object, int x, int y) {
-		
 		Object oldOccupant = map[x][y];
 		if (oldOccupant instanceof AcquirableObject) {
 			((AcquirableObject) oldOccupant).acquire();
