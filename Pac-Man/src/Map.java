@@ -67,7 +67,7 @@ public class Map {
 						object = new Shadow();
 						break;
 					case "Speedy":
-						object = new Speedy();
+						object = new Speedy(row, column, verbalDirection, this);
 						break;
 					*/
 				}

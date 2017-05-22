@@ -8,6 +8,7 @@ public abstract class MovableObject {
 	private Map map;
 	private Direction direction;
 	private ImageIcon icon;
+	protected Map currentMap;
 
 	//TEMP
 	public MovableObject() {
@@ -17,6 +18,7 @@ public abstract class MovableObject {
 
 	public MovableObject(int x, int y, Map map, Direction direction, String iconPath) {
 		this.classLoader = this.getClass().getClassLoader();
+		classLoader = this.getClass().getClassLoader();
 		this.x = x;
 		this.y = y;
 		this.map = map;
