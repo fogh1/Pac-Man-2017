@@ -8,7 +8,6 @@ public abstract class MovableObject {
 	private Map map;
 	private Direction direction;
 	private ImageIcon icon;
-	protected Map currentMap;
 
 	//TEMP
 	public MovableObject() {
