@@ -52,6 +52,7 @@ public class Game {
 		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
 		return new TimerTask() {
 			public void run() {
+				pacMan.move();
 				ui.repaintPanel();
 			}
 		};
