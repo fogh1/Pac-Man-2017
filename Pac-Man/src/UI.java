@@ -41,8 +41,8 @@ public class UI implements ActionListener {
 			MovableObject movableObject = (MovableObject) object;
 			ImageIcon icon = movableObject.getIcon();
 			JLabel label = new JLabel(icon);
-			int xAsPixels = (gridScale * movableObject.getY()) + (gridScale / 2);
-			int yAsPixels = (gridScale * movableObject.getX());
+			int xAsPixels = (gridScale * movableObject.getX());
+			int yAsPixels = (gridScale * movableObject.getY());
 			label.setBounds(xAsPixels, yAsPixels, icon.getIconWidth(), icon.getIconHeight());
 			gamePanel.add(label);
 		}
@@ -50,8 +50,8 @@ public class UI implements ActionListener {
 			AcquirableObject acquirableObject = (AcquirableObject) object;
 			ImageIcon icon = acquirableObject.getIcon();
 			JLabel label = new JLabel(icon);
-			int xAsPixels = (gridScale * acquirableObject.getY());
-			int yAsPixels = (gridScale * acquirableObject.getX());
+			int xAsPixels = (gridScale * acquirableObject.getX());
+			int yAsPixels = (gridScale * acquirableObject.getY());
 			label.setBounds(xAsPixels, yAsPixels, icon.getIconWidth(), icon.getIconHeight());
 			gamePanel.add(label);
 		}
@@ -61,8 +61,8 @@ public class UI implements ActionListener {
 		// repaints gamePanel to handle PacMan moving, eating PacDots, et cetera
 		gamePanel.removeAll();
 		addToPanel(map.getPacMan());
-		for (int row = 0; row < 31; row++) {
-			for (int column = 0; column < 28; column++) {
+		for (int row = 0; row < 28; row++) {
+			for (int column = 0; column < 31; column++) {
 				Object object = map.getObjectAt(row, column);
 				if (object instanceof PacDot || object instanceof PowerPellet) {
 					addToPanel(object);
