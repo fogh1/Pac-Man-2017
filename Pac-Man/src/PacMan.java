@@ -4,14 +4,17 @@ public class PacMan extends MovableObject {
 
 	private int score;
 	private int lives;
+	private Direction currentDirection;
 	private Direction queuedDirection;
 
 	public PacMan()//a temporary contructor to get the testing phases working
 	 {
 		super();
 	}
-	public PacMan(int x, int y) {
-		super(x, y, Direction.RIGHT, "TestPacMan.png");
+	public PacMan(int x, int y, Direction direction, Map map)
+	{
+		super(x, y, Direction.RIGHT, "TestPacMan.png", map);
+		currentDirection = direction;
 		score = 0;
 		lives = 3;
 	}
@@ -41,7 +44,7 @@ public class PacMan extends MovableObject {
 	}
 	
 	public boolean canMove() {
-		Object thing = currentMap.getAdjancentObject(this);
+		Object thing = currentMap.getAdjacentObject(this);
 		if (thing instanceof Wall)
 			return false;
 		return true;
@@ -51,7 +54,7 @@ public class PacMan extends MovableObject {
 	public void move() {
 		if (canMove())
 		{
-			currentMap.move(this, currentMap.getAdjacentLocation()[0], currentMap.getAdjacentLocation()[1]);
+			currentMap.move(this, currentMap.getAdjacentLocation(this)[0], currentMap.getAdjacentLocation(this)[1]);
 		}
 		// ...
 	}

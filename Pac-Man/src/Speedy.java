@@ -4,11 +4,9 @@ import java.awt.Image;
 
 public class Speedy extends Ghost {
 	
-	public Speedy() //can we keep the constructors without parameters for simplicity, unless we need to, location is stored in the map class, and direction should be a parameter i guess.
-	{
-		super();
-	public Speedy(int x, int y, Direction currentDirection) {
-		super(x, y, Direction.UP, "Speedy.png");
+	
+	public Speedy(int x, int y, Direction currentDirection, Map map) {
+		super(x, y, Direction.UP, "Speedy.png", map);
 	}
 
 	public static void getMove() { 

@@ -56,8 +56,7 @@ public class Map {
 						object = new PowerPellet(row, column);
 						break;
 					case "PacMan":
-						object = new PacMan(row, column);
-						((PacMan) object).setDirection(verbalDirection);
+						object = new PacMan(row, column, verbalDirection, this);
 						break;
 					case "Bashful":
 						object = new Bashful();
@@ -69,7 +68,7 @@ public class Map {
 						object = new Shadow();
 						break;
 					case "Speedy":
-						object = new Speedy();
+						object = new Speedy(row, column, verbalDirection, this);
 						break;
 				}
 				map[row][column] = object;
