@@ -31,10 +31,6 @@ public class Game {
 		start();
 	}
 
-	public Map getMap() {
-		return map;
-	}
-
 	public boolean togglePause() {
 		isPaused = !isPaused;
 		return isPaused;
@@ -48,7 +44,7 @@ public class Game {
 	public void start() {
 		// starts or restarts the game
 		togglePause();  // pauses game to prevent any grid action during grid setup
-		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+		map = new Map(this);  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
 		pacMan = map.getPacMan();
 		shadow = map.getShadow();
 		speedy = map.getSpeedy();
