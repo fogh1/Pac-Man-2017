@@ -6,8 +6,8 @@ public abstract class MovableObject {
 	private int x;
 	private int y;
 	private Map map;
-	private Direction direction;
-	private ImageIcon icon;
+	protected Direction direction;
+	protected ImageIcon icon;
 
 	//TEMP
 	public MovableObject() {

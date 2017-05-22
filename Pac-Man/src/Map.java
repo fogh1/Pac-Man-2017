@@ -17,7 +17,7 @@ public class Map {
 			file.useDelimiter(",");
 			while (file.hasNextLine()) {
 				int row = file.nextInt();
-				int column = file.nextInt();
+				int col = file.nextInt();
 				String objectAsString = file.next();
 				String direction = file.nextLine();
 				direction = direction.substring(1);
@@ -71,7 +71,7 @@ public class Map {
 						break;
 					*/
 				}
-				map[row][column] = object;
+				map[row][col] = object;
 			}
 			file.close();
 		}
@@ -85,7 +85,7 @@ public class Map {
 
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
-		map = new Object[31][28];
+		map = new Object[28][31];
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		createMapFromResource(classLoader.getResource("Map.csv"));
 	}
@@ -158,6 +158,7 @@ public class Map {
 	}
 
 	public Object move(MovableObject object, int x, int y) {
+		
 		Object oldOccupant = map[x][y];
 		if (oldOccupant instanceof AcquirableObject) {
 			((AcquirableObject) oldOccupant).acquire();

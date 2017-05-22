@@ -4,12 +4,11 @@ public class PacMan extends MovableObject {
 
 	private int score;
 	private int lives;
-	private Direction currentDirection;
 	private Direction queuedDirection;
 
 	public PacMan(int x, int y, Map map) {
 		super(x, y, map, Direction.RIGHT, "TestPacMan.png");
-	}
+	}	
 
 	public Direction getQueuedDirection() {
 		return queuedDirection;
