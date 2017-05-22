@@ -19,7 +19,7 @@ public class Game {
 		createMap();
 		ui = new UI(this);
 		timer = new Timer();
-		timer.scheduleAtFixedRate(gameLoop(), 125, 125);
+		timer.scheduleAtFixedRate(gameLoop(), 125, 200);
 	}
 
 	public Map getMap() {
