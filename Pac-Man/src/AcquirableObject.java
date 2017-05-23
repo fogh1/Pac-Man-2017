@@ -9,11 +9,11 @@ public abstract class AcquirableObject {
 	private ImageIcon icon;
 
 	public AcquirableObject(int x, int y, int pointValue, String iconPath) {
-		classLoader = this.getClass().getClassLoader();
+		this.classLoader = this.getClass().getClassLoader();
 		this.x = x;
 		this.y = y;
 		this.pointValue = pointValue;
-		icon = new ImageIcon(classLoader.getResource(iconPath));
+		this.icon = new ImageIcon(classLoader.getResource(iconPath));
 	}
 
 	public int getX() {
@@ -22,14 +22,6 @@ public abstract class AcquirableObject {
 
 	public int getY() {
 		return y;
-	}
-
-	public void setX(int newX) {
-		x = newX;
-	}
-
-	public void setY(int newY) {
-		y = newY;
 	}
 
 	public ImageIcon getIcon() {

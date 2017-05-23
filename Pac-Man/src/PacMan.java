@@ -54,7 +54,11 @@ public class PacMan extends MovableObject {
 	public int getLives() {
 		return lives;
 	}
-	
+
+	public void loseLife() {
+		lives--;
+	}
+
 	public boolean canMove() {
 		Object adjacentObject = getMap().getAdjacentObject(this);
 		if (adjacentObject instanceof Wall) {
@@ -68,7 +72,9 @@ public class PacMan extends MovableObject {
 
 	public void move() {
 		if (canMove()) {
-			getMap().move(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
+			int x = getMap().getAdjacentLocation(this)[0];
+			int y = getMap().getAdjacentLocation(this)[1];
+			getMap().move(this, x, y);
 		}
 	}
 
