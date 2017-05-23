@@ -51,7 +51,9 @@ public class PacMan extends MovableObject {
 
 	public void move() {
 		if (canMove()) {
-			getMap().move(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
+			int x = getMap().getAdjacentLocation(this)[0];
+			int y = getMap().getAdjacentLocation(this)[1];
+			getMap().move(this, x, y);
 		}
 	}
 
