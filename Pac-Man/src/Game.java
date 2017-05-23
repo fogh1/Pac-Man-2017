@@ -26,26 +26,26 @@ public class Game {
 		return map;
 	}
 
-	public boolean togglePause() {
-		isPaused = !isPaused;
-		return isPaused;
-		// pauses or unpauses the game
-	}
-
-	public boolean isPaused() {
-		return isPaused;
-	}
-
 	public void createMap() {
 		// starts or restarts the game
 		togglePause();  // pauses game to prevent any grid action during grid setup
-		map = new Map(this);  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
 		pacMan = map.getPacMan();
 		shadow = map.getShadow();
 		speedy = map.getSpeedy();
 		bashful = map.getBashful();
 		pokey = map.getPokey();
 		togglePause();
+	}
+
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+	public boolean togglePause() {
+		isPaused = !isPaused;
+		return isPaused;
+		// pauses or unpauses the game
 	}
 
 	public TimerTask gameLoop() {
