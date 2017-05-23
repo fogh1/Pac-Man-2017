@@ -174,8 +174,8 @@ public class Map {
 	public Object move(MovableObject object, int x, int y) {
 		Object oldOccupant = map[x][y];
 		if (oldOccupant instanceof AcquirableObject) {
-			int value = ((AcquirableObject) oldOccupant).acquire();
 			if (object instanceof PacMan) {
+				int value = ((AcquirableObject) oldOccupant).acquire();
 				((PacMan) object).increaseScore(value);
 			}
 		}
