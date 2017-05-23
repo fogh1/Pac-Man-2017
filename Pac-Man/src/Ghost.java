@@ -1,4 +1,4 @@
-import javax.swing.*;
+//import javax.swing.*;
 
 public abstract class Ghost extends MovableObject {
 

@@ -1,4 +1,4 @@
-import java.awt.Image;
+//import java.awt.Image;
 
 public class Speedy extends Ghost {
 

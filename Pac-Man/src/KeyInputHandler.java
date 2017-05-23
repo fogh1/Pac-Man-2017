@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
+@SuppressWarnings("unused")
 public class KeyInputHandler implements KeyListener {
 
 	private Map map;
@@ -13,16 +15,16 @@ public class KeyInputHandler implements KeyListener {
 	public void keyPressed(KeyEvent event) {
 		PacMan pacMan = map.getPacMan();
 		if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-			pacMan.setDirection(Direction.LEFT);
+			pacMan.setQueuedDirection(Direction.LEFT);
 		}
 		else if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-			pacMan.setDirection(Direction.RIGHT);
+			pacMan.setQueuedDirection(Direction.RIGHT);
 		}
 		else if (event.getKeyCode() == KeyEvent.VK_UP) {
-			pacMan.setDirection(Direction.UP);
+			pacMan.setQueuedDirection(Direction.UP);
 		}
 		else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-			pacMan.setDirection(Direction.DOWN);
+			pacMan.setQueuedDirection(Direction.DOWN);
 		}
 	}
 
