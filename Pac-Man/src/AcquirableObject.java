@@ -24,14 +24,6 @@ public abstract class AcquirableObject {
 		return y;
 	}
 
-	public void setX(int newX) {
-		x = newX;
-	}
-
-	public void setY(int newY) {
-		y = newY;
-	}
-
 	public ImageIcon getIcon() {
 		return icon;
 	}
