@@ -8,27 +8,21 @@ public class PacMan extends MovableObject {
 
 	public PacMan(int x, int y, Map map) {
 		super(x, y, map, Direction.RIGHT, "PacManRight.png");
-	}	
-	
-	public Direction setDirection(Direction newDirection)
-	{
-		if(newDirection == Direction.UP)
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManUp.png"));
+	}
+
+	public ImageIcon getIcon() {
+		if (getDirection() == Direction.UP) {
+			return new ImageIcon(getClassLoader().getResource("PacManUp.png"));
 		}
-		else if(newDirection == Direction.DOWN)
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManDown.png"));
+		else if (getDirection() == Direction.DOWN) {
+			return new ImageIcon(getClassLoader().getResource("PacManDown.png"));
 		}
-		else if(newDirection == Direction.LEFT)
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManLeft.png"));
+		else if (getDirection() == Direction.LEFT) {
+			return new ImageIcon(getClassLoader().getResource("PacManLeft.png"));
 		}
-		else
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManRight.png"));
+		else {
+			return new ImageIcon(getClassLoader().getResource("PacManRight.png"));
 		}
-		return super.setDirection(newDirection);
 	}
 
 	public Direction getQueuedDirection() {

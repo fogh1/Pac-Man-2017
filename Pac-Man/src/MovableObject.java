@@ -2,12 +2,12 @@ import javax.swing.*;
 
 public abstract class MovableObject {
 
-	protected ClassLoader classLoader;
+	private ClassLoader classLoader;
 	private int x;
 	private int y;
 	private Map map;
-	protected Direction direction;
-	protected ImageIcon icon;
+	private Direction direction;
+	private ImageIcon icon;
 
 	//TEMP
 	public MovableObject() {
@@ -22,6 +22,10 @@ public abstract class MovableObject {
 		this.map = map;
 		this.direction = direction;
 		this.icon = new ImageIcon(classLoader.getResource(iconPath));
+	}
+
+	public ClassLoader getClassLoader() {
+		return classLoader;
 	}
 
 	public int getX() {
