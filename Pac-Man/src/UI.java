@@ -22,6 +22,7 @@ public class UI implements ActionListener {
 		this.frame = new JFrame("Pac-Man 2017");
 		this.gamePanel = new GamePanel();
 		this.keyInputHandler = new KeyInputHandler(game.getMap());
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUpFrame();
 	}
 
