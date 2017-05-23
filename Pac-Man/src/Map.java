@@ -99,6 +99,18 @@ public class Map {
 		int x = object.getX();
 		int y = object.getY();
 		int[] location = new int[2]; 
+		if (x == 0&&y == 14&&direction == Direction.LEFT)
+		{
+			location[0] = 27;
+			location[1] = 14;
+			return location;
+		}
+		if (x == 27&&y == 14&&direction == Direction.RIGHT)
+		{
+			location[0] = 0;
+			location[1] = 14;
+			return location;
+		}
 		if (direction == Direction.LEFT) {
 			location[0] = x - 1;
 			location[1] = y;
@@ -125,6 +137,14 @@ public class Map {
 		Direction direction = object.getDirection();
 		int x = object.getX();
 		int y = object.getY();
+		if (x == 0&&y == 14&&direction == Direction.LEFT)
+		{
+			return getObjectAt(27, 14);
+		}
+		if (x == 27&&y == 14&&direction == Direction.RIGHT)
+		{
+			return getObjectAt(0, 14);
+		}
 		if (direction == Direction.LEFT) {
 			return getObjectAt(x - 1, y);
 		} 
