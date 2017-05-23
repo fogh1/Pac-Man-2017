@@ -30,6 +30,7 @@ public class UI implements ActionListener {
 		contentPane.setLayout(new BorderLayout(15, 15));
 		contentPane.add(gamePanel, BorderLayout.CENTER);
 		frame.addKeyListener(keyInputHandler);
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setResizable(false);
 		frame.setVisible(true);

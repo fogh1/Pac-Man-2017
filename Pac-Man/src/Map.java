@@ -7,7 +7,7 @@ public class Map {
 	private Object[][] map;
 
 	public Map() {
-		reset();  // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
+		reset(); // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
 		// ...
 	}
 
@@ -47,29 +47,15 @@ public class Map {
 						object = null;
 						break;
 					case "PacDot":
-						object = new PacDot(column, row);
+						object = new PacDot(column, row, this);
 						break;
 					case "PowerPellet":
-						object = new PowerPellet(column, row);
+						object = new PowerPellet(column, row, this);
 						break;
 					case "PacMan":
 						object = new PacMan(column, row, this);
 						((PacMan) object).setDirection(verbalDirection);
 						break;
-					/*  // temporarily commented out Ghost subclass constructors so the game can be run
-					case "Bashful":
-						object = new Bashful();
-						break;
-					case "Pokey":
-						object = new Pokey();
-						break;
-					case "Shadow":
-						object = new Shadow();
-						break;
-					case "Speedy":
-						object = new Speedy(row, column, verbalDirection, this);
-						break;
-					*/
 				}
 				map[column][row] = object;
 			}
@@ -98,18 +84,28 @@ public class Map {
 		Direction direction = object.getDirection();
 		int x = object.getX();
 		int y = object.getY();
-		int[] location = new int[2]; 
-		if (direction == Direction.LEFT) {
+		int[] location = new int[2];
+		if (x == 0 && y == 14 && direction == Direction.LEFT) {
+			location[0] = 27;
+			location[1] = 14;
+			return location;
+		}
+		else if (x == 27 && y == 14 && direction == Direction.RIGHT) {
+			location[0] = 0;
+			location[1] = 14;
+			return location;
+		}
+		else if (direction == Direction.LEFT) {
 			location[0] = x - 1;
 			location[1] = y;
 			return location;
-		} 
+		}
 		else if (direction == Direction.RIGHT) {
 			location[0] = x + 1;
 			location[1] = y;
 			return location;
 		}
-		else if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+		else if (direction == Direction.UP) { // Shouldn't return NullPointerException, if MovableObject ain't on border walls
 			location[0] = x;
 			location[1] = y - 1;
 			return location;
@@ -125,13 +121,19 @@ public class Map {
 		Direction direction = object.getDirection();
 		int x = object.getX();
 		int y = object.getY();
-		if (direction == Direction.LEFT) {
+		if (x == 0 && y == 14 && direction == Direction.LEFT) {
+			return getObjectAt(27, 14);
+		}
+		else if (x == 27 && y == 14 && direction == Direction.RIGHT) {
+			return getObjectAt(0, 14);
+		}
+		else if (direction == Direction.LEFT) {
 			return getObjectAt(x - 1, y);
-		} 
+		}
 		else if (direction == Direction.RIGHT) {
 			return getObjectAt(x + 1, y);
 		}
-		else if (direction == Direction.UP) {  // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+		else if (direction == Direction.UP) { // Shouldn't return NullPointerException, if MovableObject ain't on border walls
 			return getObjectAt(x, y - 1);
 		}
 		else {
@@ -146,7 +148,7 @@ public class Map {
 				if (object instanceof AcquirableObject) {
 					count++;
 				}
-			} 
+			}
 		}
 		return count;
 	}
@@ -162,7 +164,7 @@ public class Map {
 		if (oldOccupant instanceof AcquirableObject) {
 			((AcquirableObject) oldOccupant).acquire();
 		}
-		map [x][y] = object;
+		map[x][y] = object;
 		object.setX(x);
 		object.setY(y);
 		return oldOccupant;
@@ -234,5 +236,5 @@ public class Map {
 			}
 		}
 		return null;
-	}	
+	}
 }
