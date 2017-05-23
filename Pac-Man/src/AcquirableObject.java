@@ -31,11 +31,10 @@ public abstract class AcquirableObject {
 	}
 
 
-	public int acquire() {		
+	public void acquire() {		
 		// called when a PacMan "eats" the object (plays a sound, removes object from the UI, updates points, et cetera, depending on the type of object)
 		// Map removes acquirable by overwriting it. 
-		//TODO allow Ghosts to move, then replace the pacdot back at that location
-		return pointValue;
+		// To-do: allow Ghosts to move, then replace the pacdot back at that location
 	}
 
 }
