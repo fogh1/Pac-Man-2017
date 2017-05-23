@@ -28,13 +28,9 @@ public abstract class AcquirableObject {
 		return icon;
 	}
 
-	public void acquire() {
+	public int acquire() {		
 		// called when a PacMan "eats" the object (plays a sound, removes object from the UI, updates points, et cetera, depending on the type of object)
 		// Map removes acquirable
-	}
-	
-	public int getPointValue()
-	{
 		return pointValue;
 	}
 
