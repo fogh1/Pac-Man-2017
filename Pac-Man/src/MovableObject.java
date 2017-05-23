@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public abstract class MovableObject {
 
-	private ClassLoader classLoader;
+	protected ClassLoader classLoader;
 	private int x;
 	private int y;
 	private Map map;
