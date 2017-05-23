@@ -22,7 +22,6 @@ public class UI implements ActionListener {
 		this.frame = new JFrame("Pac-Man 2017");
 		this.gamePanel = new GamePanel();
 		this.keyInputHandler = new KeyInputHandler(game.getMap());
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUpFrame();
 	}
 
@@ -31,7 +30,7 @@ public class UI implements ActionListener {
 		contentPane.setLayout(new BorderLayout(15, 15));
 		contentPane.add(gamePanel, BorderLayout.CENTER);
 		frame.addKeyListener(keyInputHandler);
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setResizable(false);
 		frame.setVisible(true);
@@ -60,7 +59,6 @@ public class UI implements ActionListener {
 	}
 
 	public void repaintPanel() {
-		// repaints gamePanel to handle PacMan moving, eating PacDots, et cetera
 		gamePanel.removeAll();
 		addToPanel(map.getPacMan());
 		for (int row = 0; row < 28; row++) {
