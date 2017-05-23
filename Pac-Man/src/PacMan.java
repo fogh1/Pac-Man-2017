@@ -8,27 +8,21 @@ public class PacMan extends MovableObject {
 
 	public PacMan(int x, int y, Map map) {
 		super(x, y, map, Direction.RIGHT, "PacManRight.png");
-	}	
-	
-	public Direction setDirection(Direction newDirection)
-	{
-		if(newDirection == Direction.UP)
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManUp.png"));
+	}
+
+	public ImageIcon getIcon() {
+		if (getDirection() == Direction.UP) {
+			return new ImageIcon(getClassLoader().getResource("PacManUp.png"));
 		}
-		else if(newDirection == Direction.DOWN)
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManDown.png"));
+		else if (getDirection() == Direction.DOWN) {
+			return new ImageIcon(getClassLoader().getResource("PacManDown.png"));
 		}
-		else if(newDirection == Direction.LEFT)
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManLeft.png"));
+		else if (getDirection() == Direction.LEFT) {
+			return new ImageIcon(getClassLoader().getResource("PacManLeft.png"));
 		}
-		else
-		{
-			icon = new ImageIcon(classLoader.getResource("PacManRight.png"));
+		else {
+			return new ImageIcon(getClassLoader().getResource("PacManRight.png"));
 		}
-		return super.setDirection(newDirection);
 	}
 
 	public Direction getQueuedDirection() {
@@ -59,7 +53,7 @@ public class PacMan extends MovableObject {
 		lives--;
 	}
 
-	public boolean canMoveInFront() {
+	public boolean canMoveInCurrentDirection() {
 		Object adjacentObject = getMap().getAdjacentObject(this);
 		if (adjacentObject instanceof Wall) {
 			return false;
@@ -69,30 +63,27 @@ public class PacMan extends MovableObject {
 		}
 		// true unless adjacent object is wall or door
 	}
-	
-	public boolean canMoveInQueued()
-	{
-		Direction current = this.getDirection();
-		Direction queued = this.queuedDirection;
-		if (queued == null)
+
+	public boolean canMoveInQueuedDirection() {
+		Direction currentDirection = this.getDirection();
+		if (queuedDirection == null) {
 			return false;
-		setDirection(queued);
-		if (canMoveInFront())
-		{
-			setDirection(current);
+		}
+		setDirection(queuedDirection);
+		if (canMoveInCurrentDirection()) {
+			setDirection(currentDirection);
 			return true;
 		}
-		setDirection(current);
+		setDirection(currentDirection);
 		return false;
 	}
 
 	public void move() {
-		if (canMoveInQueued())
-		{
+		if (canMoveInQueuedDirection()) {
 			setDirection(queuedDirection);
 			queuedDirection = null;
 		}
-		if (canMoveInFront()) {
+		if (canMoveInCurrentDirection()) {
 			int x = getMap().getAdjacentLocation(this)[0];
 			int y = getMap().getAdjacentLocation(this)[1];
 			getMap().move(this, x, y);

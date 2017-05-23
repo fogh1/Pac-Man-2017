@@ -8,7 +8,7 @@ public class GamePanel extends JPanel {
     public GamePanel() {
     	super(true);
         ClassLoader classLoader = this.getClass().getClassLoader();
-        backgroundIcon = new ImageIcon(classLoader.getResource("TestBackground.png"));
+        backgroundIcon = new ImageIcon(classLoader.getResource("Background.png"));
         Dimension dimensions = new Dimension(backgroundIcon.getIconWidth(), backgroundIcon.getIconHeight());
         setPreferredSize(dimensions);
         setMinimumSize(dimensions);

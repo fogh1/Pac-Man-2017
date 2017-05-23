@@ -3,7 +3,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-@SuppressWarnings("unused")
 public class KeyInputHandler implements KeyListener {
 
 	private Map map;
