@@ -9,12 +9,6 @@ public abstract class MovableObject {
 	private Direction direction;
 	private ImageIcon icon;
 
-	//TEMP
-	public MovableObject() {
-		// ...
-	}
-	//TEMP
-
 	public MovableObject(int x, int y, Map map, Direction direction, String iconPath) {
 		this.classLoader = this.getClass().getClassLoader();
 		this.x = x;
