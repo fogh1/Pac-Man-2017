@@ -25,18 +25,13 @@ public abstract class AcquirableObject {
 	public int getY() {
 		return y;
 	}
-	
-	public int getPointValue()
-	{
-	return pointValue;
-	}
 
 	public ImageIcon getIcon() {
 		return icon;
 	}
 
-
-	public void acquire() {		
+	public void acquire() {
+		map.getPacMan().increaseScore(pointValue);
 		// called when a PacMan "eats" the object (plays a sound, removes object from the UI, updates points, et cetera, depending on the type of object)
 		// Map removes acquirable by overwriting it. 
 		// To-do: allow Ghosts to move, then replace the pacdot back at that location

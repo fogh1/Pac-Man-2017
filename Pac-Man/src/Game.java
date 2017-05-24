@@ -53,6 +53,9 @@ public class Game {
 		return new TimerTask() {
 			public void run() {
 				pacMan.move();
+				for (Ghost ghost : Arrays.asList(shadow, speedy, bashful, pokey)) {
+					ghost.move();
+				}
 				ui.repaintPanel();
 			}
 		};
