@@ -25,6 +25,11 @@ public abstract class AcquirableObject {
 	public int getY() {
 		return y;
 	}
+	
+	public int getPointValue()
+	{
+	return pointValue;
+	}
 
 	public ImageIcon getIcon() {
 		return icon;
