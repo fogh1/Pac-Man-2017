@@ -64,7 +64,7 @@ public class UI implements ActionListener {
 		for (int row = 0; row < 28; row++) {
 			for (int column = 0; column < 31; column++) {
 				Object object = map.getObjectAt(row, column);
-				if (object instanceof PacDot || object instanceof PowerPellet) {
+				if (!(object instanceof PacMan)) {
 					addToPanel(object);
 				}
 			}

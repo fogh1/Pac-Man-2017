@@ -40,11 +40,11 @@ public class Map {
 						verbalDirection = Direction.UP;
 				}
 				switch (objectAsString) {
-					case "Wall":
-						object = new Wall();
-						break;
 					case "null":
 						object = null;
+						break;
+					case "Wall":
+						object = new Wall();
 						break;
 					case "PacDot":
 						object = new PacDot(column, row, this);
@@ -58,6 +58,17 @@ public class Map {
 						break;
 					case "Door":
 						object = new Door();
+					case "Shadow":
+						object = new Shadow(column, row, this);
+						break;
+					case "Speedy":
+						object = new Speedy(column, row, this);
+						break;
+					case "Bashful":
+						object = new Bashful(column, row, this);
+						break;
+					case "Pokey":
+						object = new Pokey(column, row, this);
 						break;
 				}
 				map[column][row] = object;

@@ -1,7 +1,11 @@
 public class Shadow extends Ghost {
 
-	public Shadow(int x, int y, Map map, Direction direction) {
-		super(x, y, map, direction, "Shadow.png");
+	public Shadow(int x, int y, Map map) {
+		super(x, y, map, "Shadow.png");
+	}
+
+	public void move() {
+		// ...
 	}
 
 }
