@@ -56,6 +56,9 @@ public class Map {
 						object = new PacMan(column, row, this);
 						((PacMan) object).setDirection(verbalDirection);
 						break;
+					case "Door":
+						object = new Door();
+						break;
 				}
 				map[column][row] = object;
 			}
@@ -68,6 +71,7 @@ public class Map {
 			System.out.println("ERROR : IO EXCEPTION : " + exception);
 		}
 	}
+	
 
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets

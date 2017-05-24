@@ -55,7 +55,7 @@ public class PacMan extends MovableObject {
 
 	public boolean canMoveInCurrentDirection() {
 		Object adjacentObject = getMap().getAdjacentObject(this);
-		if (adjacentObject instanceof Wall) {
+		if (adjacentObject instanceof Wall||adjacentObject instanceof Door) {
 			return false;
 		}
 		else {
