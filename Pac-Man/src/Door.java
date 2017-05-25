@@ -1,8 +1,5 @@
+public class Door {
 
-public class Door
-{
-	public Door()
-	{
-		
-	}
+	public Door() {}
+
 }

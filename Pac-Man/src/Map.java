@@ -47,6 +47,9 @@ public class Map {
 					case "Wall":
 						object = new Wall();
 						break;
+					case "Door":
+						object = new Door();
+						break;
 					case "PacDot":
 						object = new PacDot(column, row, this);
 						break;
@@ -57,8 +60,6 @@ public class Map {
 						object = new PacMan(column, row, this);
 						((PacMan) object).setDirection(verbalDirection);
 						break;
-					case "Door":
-						object = new Door();
 					case "Shadow":
 						object = new Shadow(column, row, this);
 						break;
@@ -104,7 +105,6 @@ public class Map {
 			}
 		}
 	}
-	
 
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
