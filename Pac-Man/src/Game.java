@@ -52,11 +52,13 @@ public class Game {
 		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
 		return new TimerTask() {
 			public void run() {
-				pacMan.move();
-				for (Ghost ghost : Arrays.asList(shadow, speedy, bashful, pokey)) {
-					ghost.move();
+				if (!isPaused()) {
+					pacMan.move();
+					for (Ghost ghost : Arrays.asList(shadow, speedy, bashful, pokey)) {
+						ghost.move();
+					}
+					ui.repaintPanel();
 				}
-				ui.repaintPanel();
 			}
 		};
 	}
