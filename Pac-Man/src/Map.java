@@ -5,6 +5,7 @@ import java.util.*;
 public class Map {
 
 	private Object[][] map;
+	private Ghost[][] ghostMap;
 
 	public Map() {
 		reset(); // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
@@ -73,6 +74,7 @@ public class Map {
 				}
 				map[column][row] = object;
 			}
+			createGhostMap();
 			file.close();
 		}
 		catch (FileNotFoundException exception) {
@@ -80,6 +82,26 @@ public class Map {
 		}
 		catch (IOException exception) {
 			System.out.println("ERROR : IO EXCEPTION : " + exception);
+		}
+	}
+	
+	public void createGhostMap()
+	{
+		ghostMap = new Ghost[28][31];
+		for (int col = 0; col < 28; col++)
+		{
+			for (int row = 0; row < 31; row++)
+			{
+				if (map[col][row] instanceof Ghost)
+				{
+					ghostMap[col][row] = (Ghost)map[col][row];
+					remove((MovableObject)map[col][row]);
+				}
+				else
+				{
+					ghostMap[col][row] = null;
+				}
+			}
 		}
 	}
 	
@@ -191,6 +213,17 @@ public class Map {
 	
 
 	public AcquirableObject remove(AcquirableObject objectToRemove) {
+		for (Object[] row : map) {
+			for (Object object : row) {
+				if (object == objectToRemove) {
+					map[objectToRemove.getX()][objectToRemove.getY()] = null;
+				}
+			}
+		}
+		return objectToRemove;
+	}
+	
+	public MovableObject remove(MovableObject objectToRemove) {
 		for (Object[] row : map) {
 			for (Object object : row) {
 				if (object == objectToRemove) {

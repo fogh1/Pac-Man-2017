@@ -19,7 +19,5 @@ public abstract class Ghost extends MovableObject {
 	public static void setMode(GhostMode newMode) {
 		currentMode = newMode;
 	}
-	
-	public 
 
 }
