@@ -16,7 +16,25 @@ public class Shadow extends Ghost {
 		prevLoc[1] = getY();
 		if (atIntersection())
 		{
-			
+			//TODO main AI for ghosts
+		}
+		else if (atCorner())
+		{
+			turn();
+			if (canMoveOn(getMap().getAdjacentObject(this)))
+			{
+				moveForward();
+			}
+			else
+			{
+				turn();
+				turn();
+				moveForward();
+			}
+		}
+		else
+		{
+			moveForward();
 		}
 	}
 

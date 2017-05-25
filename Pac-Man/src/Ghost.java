@@ -66,5 +66,43 @@ public abstract class Ghost extends MovableObject {
 			return true;
 		}
 	}
+	
+	protected boolean atCorner()
+	{
+		if (atIntersection())
+		{
+			return false;
+		}
+		if ((canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.DOWN))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.LEFT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.DOWN))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.RIGHT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.UP))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.LEFT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.UP))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.RIGHT))))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	protected void turn()//turns the ghost clockwise
+	{
+		if (getDirection() == Direction.DOWN)
+		{
+			setDirection(Direction.LEFT);
+		}
+		else if (getDirection() == Direction.LEFT)
+		{
+			setDirection(Direction.UP);
+		}
+		else if (getDirection() == Direction.UP)
+		{
+			setDirection(Direction.RIGHT);
+		}
+		else if (getDirection() == Direction.RIGHT)
+		{
+			setDirection(Direction.DOWN);
+		}
+	}
+	
+	protected void moveForward()
+	{
+		getMap().move(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
+	}
 
 }
