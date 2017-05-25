@@ -54,9 +54,9 @@ public class Game {
 			public void run() {
 				if (!isPaused()) {
 					pacMan.move();
-					for (Ghost ghost : Arrays.asList(shadow, speedy, bashful, pokey)) {
-						ghost.move();
-					}
+					//for (Ghost ghost : Arrays.asList(shadow, speedy, bashful, pokey)) {
+					//	ghost.move();
+					//}
 					ui.repaintPanel();
 				}
 			}
