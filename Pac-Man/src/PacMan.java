@@ -61,7 +61,7 @@ public class PacMan extends MovableObject {
 		else {
 			return true;
 		}
-		// true unless adjacent object is wall or door
+		// true unless adjacent object is Wall or Door
 	}
 
 	public boolean canMoveInQueuedDirection() {

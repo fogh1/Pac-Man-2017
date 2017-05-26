@@ -55,11 +55,6 @@ public abstract class MovableObject {
 		return icon;
 	}
 
-	public boolean canMove() {
-		return false;
-		// this should be overridden by each individual subclass
-	}
-
 	public void move() {
 		// this should be overridden by each individual subclass
 	}
