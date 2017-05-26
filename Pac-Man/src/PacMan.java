@@ -53,29 +53,28 @@ public class PacMan extends MovableObject {
 		lives--;
 	}
 
-	public boolean canMoveInCurrentDirection() {
-		Object adjacentObject = getMap().getAdjacentObject(this);
-		if (adjacentObject instanceof Wall || adjacentObject instanceof Door) {
+	public boolean canMoveOnto(Object object) {
+		if (object instanceof Wall || object instanceof Door) {
 			return false;
 		}
 		else {
 			return true;
 		}
-		// true unless adjacent object is Wall or Door
+	}
+
+	public boolean canMoveInCurrentDirection() {
+		Object adjacentObject = getMap().getAdjacentObject(this);
+		return canMoveOnto(adjacentObject);
 	}
 
 	public boolean canMoveInQueuedDirection() {
-		Direction currentDirection = this.getDirection();
 		if (queuedDirection == null) {
 			return false;
 		}
-		setDirection(queuedDirection);
-		if (canMoveInCurrentDirection()) {
-			setDirection(currentDirection);
-			return true;
+		else {
+			Object adjacentObject = getMap().getAdjacentObjectInDirection(this, queuedDirection);
+			return canMoveOnto(adjacentObject);
 		}
-		setDirection(currentDirection);
-		return false;
 	}
 
 	public void move() {

@@ -1,11 +1,13 @@
+import java.util.*;
+
 public abstract class Ghost extends MovableObject {
 
 	private static GhostMode currentMode;
-	protected boolean outsideRoom;
+	private boolean isOutsideRoom;
 
 	public Ghost(int x, int y, Map map, String iconPath) {
-	    super(x, y, map, Direction.UP, iconPath);
-	    outsideRoom = false;
+		super(x, y, map, Direction.UP, iconPath);
+		isOutsideRoom = false;
 	}
 
 	public static GhostMode getMode() {
@@ -16,93 +18,78 @@ public abstract class Ghost extends MovableObject {
 		currentMode = newMode;
 	}
 
-	public void move() {
-		// this probably needs to be overridden by each subclass
+	public boolean isOutsideRoom() {
+		return isOutsideRoom;
 	}
-	
-	protected boolean atIntersection()
-	{
-		int counter = 0;
-		Direction facing = getDirection();
-		setDirection(Direction.DOWN);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(Direction.UP);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(Direction.RIGHT);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(Direction.LEFT);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(facing);
-		if (counter > 2)
-		{
-			return true;
-		}
-		else
-		{
+
+	public boolean canMoveOnto(Object object) {
+		if (object instanceof Wall || (object instanceof Door && isOutsideRoom)) {
 			return false;
 		}
-	}
-	
-	protected boolean canMoveOn(Object object)
-	{
-		if (object instanceof Wall||(object instanceof Door&&outsideRoom))
-		{
-			return false;
-		}
-		else
-		{
+		else {
 			return true;
 		}
 	}
-	
-	protected boolean atCorner()
-	{
-		if (atIntersection())
-		{
-			return false;
+
+	public boolean canMoveInDirection(Direction direction) {
+		Object adjacentObject = getMap().getAdjacentObjectInDirection(this, direction);
+		return canMoveOnto(adjacentObject);
+	}
+
+	public boolean isAtIntersection() {
+		int blockedSideCount = 0;
+		for (Direction direction : Arrays.asList(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT)) {
+			Object adjacentObject = getMap().getAdjacentObjectInDirection(this, direction);
+			if (canMoveOnto(adjacentObject)) {
+				blockedSideCount++;
+			}
 		}
-		if ((canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.DOWN))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.LEFT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.DOWN))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.RIGHT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.UP))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.LEFT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.UP))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.RIGHT))))
-		{
+		if (blockedSideCount > 2) {
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
-	
-	protected void turn()//turns the ghost clockwise
-	{
-		if (getDirection() == Direction.DOWN)
-		{
-			setDirection(Direction.LEFT);
+
+	public boolean isAtCorner() {
+		if (isAtIntersection()) {
+			return false;
 		}
-		else if (getDirection() == Direction.LEFT)
-		{
-			setDirection(Direction.UP);
+		else {
+			if ((canMoveInDirection(Direction.UP) || canMoveInDirection(Direction.DOWN)) && (canMoveInDirection(Direction.LEFT) || canMoveInDirection(Direction.RIGHT))) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		else if (getDirection() == Direction.UP)
-		{
+	}
+
+	public void turn() {
+		// turns clockwise
+		if (getDirection() == Direction.UP) {
 			setDirection(Direction.RIGHT);
 		}
-		else if (getDirection() == Direction.RIGHT)
-		{
+		else if (getDirection() == Direction.DOWN) {
+			setDirection(Direction.LEFT);
+		}
+		else if (getDirection() == Direction.LEFT) {
+			setDirection(Direction.UP);
+		}
+		else {
 			setDirection(Direction.DOWN);
 		}
 	}
-	
-	protected void moveForward()
-	{
-		getMap().move(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
+
+	public void move() {
+		// this probably needs to be overridden by each subclass
+	}
+
+	public void moveForward() {
+		int x = getMap().getAdjacentLocation(this)[0];
+		int y = getMap().getAdjacentLocation(this)[1];
+		getMap().move(this, x, y);
 	}
 
 }
