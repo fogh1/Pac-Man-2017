@@ -9,7 +9,6 @@ import java.io.*;
 public class AudioPlayer {
 	private Clip clip;
 	private AudioInputStream input;
-	private Volume volume;
 	private File audioFile;
 	
 	public AudioPlayer(String fileName){
