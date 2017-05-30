@@ -1,4 +1,5 @@
 import java.util.*;
+import javax.swing.ImageIcon;
 
 public abstract class Ghost extends MovableObject {
 
@@ -16,6 +17,15 @@ public abstract class Ghost extends MovableObject {
 
 	public static void setMode(GhostMode newMode) {
 		currentMode = newMode;
+	}
+
+	public ImageIcon getIcon() {
+		if (currentMode == GhostMode.FRIGHTENED) {
+			return new ImageIcon(getClassLoader().getResource("FrightenedGhost.png"));
+		}
+		else {
+			return super.getIcon();
+		}
 	}
 
 	public boolean isOutsideRoom() {
