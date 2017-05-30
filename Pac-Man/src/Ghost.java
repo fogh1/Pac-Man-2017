@@ -31,6 +31,10 @@ public abstract class Ghost extends MovableObject {
 	public boolean isOutsideRoom() {
 		return isOutsideRoom;
 	}
+	
+	public void setIsOutsideRoom(boolean thing) {
+		isOutsideRoom = thing;
+	}
 
 	public boolean canMoveOnto(Object object) {
 		if (object instanceof Ghost || object instanceof Wall || (object instanceof Door && isOutsideRoom)) {
@@ -92,7 +96,7 @@ public abstract class Ghost extends MovableObject {
 			else {
 				if (xDifference > 0 && this.canMoveInDirection(Direction.LEFT))
 					return Direction.LEFT;
-				if (this.canMoveInDirection(Direction.RIGHT))
+				if (xDifference <= 0 && this.canMoveInDirection(Direction.RIGHT))
 					return Direction.RIGHT;
 				if (yDifference > 0 && this.canMoveInDirection(Direction.UP))
 					return Direction.UP;
