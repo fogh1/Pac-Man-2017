@@ -49,12 +49,32 @@ public abstract class Ghost extends MovableObject {
 				blockedSideCount++;
 			}
 		}
-		if (blockedSideCount > 2) {
-			return true;
+		return (blockedSideCount > 2);
+	}
+	
+	protected Direction determineNewDirection(int targetX, int targetY) {
+		// not currently working
+		if (isAtIntersection()) {
+			int xDifference = this.getX() - targetX;
+			int yDifference = this.getY() - targetY;
+			if (Math.abs(xDifference) > Math.abs(yDifference)) {
+				if (xDifference > 0) {
+					return Direction.UP;
+				}
+				else {
+					return Direction.DOWN;
+				}
+			}
+			else {
+				if (yDifference > 0) {
+					return Direction.RIGHT;
+				}
+				else {
+					return Direction.LEFT;
+				}
+			}
 		}
-		else {
-			return false;
-		}
+		return this.getDirection();
 	}
 
 	public boolean isAtCorner() {
