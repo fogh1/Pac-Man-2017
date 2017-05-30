@@ -100,16 +100,16 @@ public class Map {
 		}
 	}
 
+	public Ghost[] getGhostList() {
+		return new Ghost[] {getShadow(), getSpeedy(), getBashful(), getPokey()};
+	}
+
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
 		map = new Object[28][31];
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		createMapFromResource(classLoader.getResource("Map.csv"));
 		createGhostMap();
-	}
-
-	public Object getObjectAt(int x, int y) {
-		return map[x][y];
 	}
 
 	public int[] getAdjacentLocation(MovableObject object) {
@@ -149,6 +149,14 @@ public class Map {
 		}
 	}
 
+	public Object getObjectAt(int x, int y) {
+		return map[x][y];
+	}
+
+	public Object getGhostMapObjectAt(int x, int y) {
+		return ghostMap[x][y];
+	}
+
 	public Object getAdjacentObjectInDirection(MovableObject object, Direction direction) {
 		int x = object.getX();
 		int y = object.getY();
@@ -174,6 +182,33 @@ public class Map {
 
 	public Object getAdjacentObject(MovableObject object) {
 		return getAdjacentObjectInDirection(object, object.getDirection());
+	}
+
+	public Object getAdjacentGhostMapObjectInDirection(Ghost ghost, Direction direction) {
+		int x = ghost.getX();
+		int y = ghost.getY();
+		if (x == 0 && y == 14 && direction == Direction.LEFT) {
+			return getGhostMapObjectAt(27, 14);
+		}
+		else if (x == 27 && y == 14 && direction == Direction.RIGHT) {
+			return getGhostMapObjectAt(0, 14);
+		}
+		else if (direction == Direction.LEFT) {
+			return getGhostMapObjectAt(x - 1, y);
+		}
+		else if (direction == Direction.RIGHT) {
+			return getGhostMapObjectAt(x + 1, y);
+		}
+		else if (direction == Direction.UP) { 
+			return getGhostMapObjectAt(x, y - 1);
+		}
+		else {
+			return getGhostMapObjectAt(x, y + 1);
+		}
+	}
+
+	public Object getAdjacentGhostMapObject(Ghost ghost) {
+		return getAdjacentGhostMapObjectInDirection(ghost, ghost.getDirection());
 	}
 
 	public int getAcquirableObjectCount() {
@@ -207,20 +242,17 @@ public class Map {
 		object.setY(y);
 		return oldOccupant;
 	}
-	
+
 	public void moveGhost(Ghost ghost, int x, int y) {
-		Object occupant = map[x][y];
+		Object oldOccupant = map[x][y];
 		removeGhost(ghost);
-		if (occupant instanceof PacMan) {
-			//TODO lost life
+		if (oldOccupant instanceof PacMan) {
+			// TODO lost life
 		}
 		ghostMap[x][y] = ghost;
 		ghost.setX(x);
 		ghost.setY(y);
 	}
-		// moves the specified object to the specified new coordinates
-		// need to also remove the object from its previous location to avoid duplication
-	
 
 	public AcquirableObject remove(AcquirableObject objectToRemove) {
 		for (Object[] row : map) {
@@ -308,30 +340,6 @@ public class Map {
 			}
 		}
 		return null;
-	}
-	
-	public boolean checkWinConditions()//can add into win conditions if need be
-	{
-		if (getAcquirableObjectCount() == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	public boolean checkLoseConditions()//can add into lose conditions if need be
-	{
-		if (getPacMan().getLives() == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
 	}
 
 }

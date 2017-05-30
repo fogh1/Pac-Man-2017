@@ -59,10 +59,16 @@ public class UI  {
 
 	public void repaintPanels() {
 		gamePanel.removeAll();
+		addToPanel(map.getPacMan());
+		for (Ghost ghost: map.getGhostList()) {
+			addToPanel(ghost);
+		}
 		for (int row = 0; row < 28; row++) {
 			for (int column = 0; column < 31; column++) {
 				Object object = map.getObjectAt(row, column);
-				addToPanel(object);
+				if (!(object instanceof PacMan || object instanceof Ghost)) {
+					addToPanel(object);
+				}
 			}
 		}
 		gamePanel.repaint();

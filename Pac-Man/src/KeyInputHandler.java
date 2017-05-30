@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class KeyInputHandler implements KeyListener {
@@ -26,6 +25,9 @@ public class KeyInputHandler implements KeyListener {
 			else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
 				pacMan.setQueuedDirection(Direction.DOWN);
 			}
+		}
+		if (event.getKeyCode() == KeyEvent.VK_P) {
+			game.togglePause();
 		}
 	}
 
