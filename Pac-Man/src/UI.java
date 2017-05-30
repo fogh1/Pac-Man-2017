@@ -17,8 +17,8 @@ public class UI  {
 		this.map = game.getMap();
 		this.frame = new JFrame("Pac-Man 2017");
 		this.gamePanel = new GamePanel();
-		this.lowerPanel = new LowerPanel();
-		this.keyInputHandler = new KeyInputHandler(game.getMap());
+		this.lowerPanel = new LowerPanel(game);
+		this.keyInputHandler = new KeyInputHandler(game);
 		setUpFrame();
 	}
 
@@ -66,7 +66,7 @@ public class UI  {
 			}
 		}
 		gamePanel.repaint();
-		lowerPanel.updateScoreLabels(map.getPacMan().getScore());
+		lowerPanel.updateLabels();
 	}
 
 }

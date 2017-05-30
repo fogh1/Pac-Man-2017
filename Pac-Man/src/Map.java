@@ -240,7 +240,7 @@ public class Map {
 	}
 
 	public Shadow getShadow() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Shadow) {
 					return ((Shadow) object);
@@ -251,7 +251,7 @@ public class Map {
 	}
 
 	public Speedy getSpeedy() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Speedy) {
 					return ((Speedy) object);
@@ -262,7 +262,7 @@ public class Map {
 	}
 
 	public Bashful getBashful() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Bashful) {
 					return ((Bashful) object);
@@ -273,7 +273,7 @@ public class Map {
 	}
 
 	public Pokey getPokey() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Pokey) {
 					return ((Pokey) object);

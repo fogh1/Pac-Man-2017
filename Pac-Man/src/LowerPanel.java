@@ -5,19 +5,19 @@ import javax.swing.*;
 
 public class LowerPanel extends JPanel implements ActionListener {
 
+	private Game game;
 	private JLabel scoreLabel;
 	private JLabel highScoreLabel;
-	private JButton pauseButton;
-	private JButton resetButton;
 
-	public LowerPanel() {
+	public LowerPanel(Game game) {
 		super(true);
+		this.game = game;
 		setLayout(new GridLayout(1, 4));
 		setBackground(Color.BLACK);
-		updateScoreLabels(0);
+		updateLabels();
 	}
 
-	public void updateScoreLabels(int score) {
+	public void updateLabels() {
 		scoreLabel = new JLabel("<html>"
 			+ "<div style=\"font-family: Courier; text-align: center;\">"
 				+ "<p style=\"font-size: 12px; font-style: italic;\">"
@@ -25,7 +25,7 @@ public class LowerPanel extends JPanel implements ActionListener {
 					+ "SCORE"
 				+ "</p>"
 				+ "<p style=\"font-size: 16px\">"
-					+ score
+					+ game.getMap().getPacMan().getScore()
 					+ "<br><br>"
 				+ "</p>"
 			+ "</div>"

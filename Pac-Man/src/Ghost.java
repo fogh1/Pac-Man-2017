@@ -36,6 +36,11 @@ public abstract class Ghost extends MovableObject {
 		return canMoveOnto(adjacentObject);
 	}
 
+	public boolean canMoveInCurrentDirection() {
+		Object adjacentObject = getMap().getAdjacentObject(this);
+		return canMoveOnto(adjacentObject);
+	}
+
 	public boolean isAtIntersection() {
 		int blockedSideCount = 0;
 		for (Direction direction : Arrays.asList(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT)) {
@@ -82,14 +87,52 @@ public abstract class Ghost extends MovableObject {
 		}
 	}
 
-	public void move() {
-		// this probably needs to be overridden by each subclass
-	}
-
 	public void moveForward() {
 		int x = getMap().getAdjacentLocation(this)[0];
 		int y = getMap().getAdjacentLocation(this)[1];
 		getMap().move(this, x, y);
+	}
+
+	public void move() {
+		if (isAtIntersection()) {
+			double randomNumber = Math.random() * 2;
+			if (randomNumber < 1) {
+				if (canMoveInCurrentDirection()) {
+					moveForward();
+				}
+				else {
+					turn();
+					moveForward();
+				}
+			}
+			else {
+				turn();
+				turn();
+				turn();
+				if (canMoveInCurrentDirection()) {
+					moveForward();
+				}
+				else {
+					turn();
+					turn();
+					moveForward();
+				}
+			}
+		}
+		else if (isAtCorner()) {
+			turn();
+			if (canMoveInCurrentDirection()) {
+				moveForward();
+			}
+			else {
+				turn();
+				turn();
+				moveForward();
+			}
+		}
+		else {
+			moveForward();
+		}
 	}
 
 }
