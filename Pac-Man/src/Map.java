@@ -100,6 +100,10 @@ public class Map {
 		}
 	}
 
+	public Ghost[] getGhostList() {
+		return new Ghost[] {getShadow(), getSpeedy(), getBashful(), getPokey()};
+	}
+
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
 		map = new Object[28][31];
@@ -200,6 +204,7 @@ public class Map {
 				((AcquirableObject) oldOccupant).acquire();
 			}
 		}
+		remove(object);
 		map[x][y] = object;
 		object.setX(x);
 		object.setY(y);
