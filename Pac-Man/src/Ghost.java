@@ -26,7 +26,21 @@ public abstract class Ghost extends MovableObject {
 		if (object instanceof Wall || (object instanceof Door && isOutsideRoom)) {
 			return false;
 		}
-		else {
+		else
+		{
+			return true;
+		}
+
+	}
+	
+	public boolean canMoveOn(Object object)
+	{
+		if (object instanceof Wall||(object instanceof Door&&isOutsideRoom))
+		{
+			return false;
+		}
+		else
+		{
 			return true;
 		}
 	}
@@ -107,11 +121,10 @@ public abstract class Ghost extends MovableObject {
 			setDirection(Direction.DOWN);
 		}
 	}
-
-	public void moveForward() {
-		int x = getMap().getAdjacentLocation(this)[0];
-		int y = getMap().getAdjacentLocation(this)[1];
-		getMap().move(this, x, y);
+	
+	protected void moveForward()
+	{
+		getMap().moveGhost(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
 	}
 
 	public void move() {
