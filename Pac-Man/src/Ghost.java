@@ -51,25 +51,26 @@ public abstract class Ghost extends MovableObject {
 		}
 		return (blockedSideCount > 2);
 	}
-	
+		
 	protected Direction determineNewDirection(int targetX, int targetY) {
-		// not currently working
 		if (isAtIntersection()) {
 			int xDifference = this.getX() - targetX;
 			int yDifference = this.getY() - targetY;
 			if (Math.abs(xDifference) > Math.abs(yDifference)) {
-				if (xDifference > 0) {
+				if (xDifference > 0 && this.canMoveInDirection(Direction.UP)) {
 					return Direction.UP;
 				}
 				else {
+					if (this.canMoveInDirection(Direction.DOWN))
 					return Direction.DOWN;
 				}
 			}
 			else {
-				if (yDifference > 0) {
+				if (yDifference > 0 && this.canMoveInDirection(Direction.RIGHT)) {
 					return Direction.RIGHT;
 				}
 				else {
+					if (this.canMoveInDirection(Direction.LEFT))
 					return Direction.LEFT;
 				}
 			}
