@@ -309,5 +309,29 @@ public class Map {
 		}
 		return null;
 	}
+	
+	public boolean checkWinConditions()//can add into win conditions if need be
+	{
+		if (getAcquirableObjectCount() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean checkLoseConditions()//can add into lose conditions if need be
+	{
+		if (getPacMan().getLives() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 }
