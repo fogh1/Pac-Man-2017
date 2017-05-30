@@ -55,7 +55,7 @@ public abstract class Ghost extends MovableObject {
 		}
 	}
 	
-	protected boolean canMoveOn(Object object)
+	public boolean canMoveOn(Object object)
 	{
 		if (object instanceof Wall||(object instanceof Door&&outsideRoom))
 		{
@@ -102,7 +102,7 @@ public abstract class Ghost extends MovableObject {
 	
 	protected void moveForward()
 	{
-		getMap().move(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
+		getMap().moveGhost(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
 	}
 
 }

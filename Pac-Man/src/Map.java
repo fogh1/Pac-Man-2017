@@ -170,7 +170,7 @@ public class Map {
 		else if (direction == Direction.RIGHT) {
 			return getObjectAt(x + 1, y);
 		}
-		else if (direction == Direction.UP) { // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+		else if (direction == Direction.UP) {
 			return getObjectAt(x, y - 1);
 		}
 		else {
@@ -193,7 +193,7 @@ public class Map {
 		else if (direction == Direction.RIGHT) {
 			return getObjectAt(x + 1, y);
 		}
-		else if (direction == Direction.UP) { // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+		else if (direction == Direction.UP) { 
 			return getObjectAt(x, y - 1);
 		}
 		else {
@@ -219,18 +219,30 @@ public class Map {
 		return oldOccupant;
 	}
 	
-		public Object move(MovableObject object, int x, int y) {
-			Object oldOccupant = map[x][y];
-			if (oldOccupant instanceof AcquirableObject) {
-				if (object instanceof PacMan) {
-					((AcquirableObject) oldOccupant).acquire();
-				}
+	public Object move(MovableObject object, int x, int y) {
+		Object oldOccupant = map[x][y];
+		remove(object);
+		if (oldOccupant instanceof AcquirableObject) {
+			if (object instanceof PacMan) {
+				((AcquirableObject) oldOccupant).acquire();
 			}
-			map[x][y] = object;
-			object.setX(x);
-			object.setY(y);
-			return oldOccupant;
 		}
+		map[x][y] = object;
+		object.setX(x);
+		object.setY(y);
+		return oldOccupant;
+	}
+	
+	public void moveGhost(Ghost ghost, int x, int y) {
+		Object occupant = map[x][y];
+		removeGhost(ghost);
+		if (occupant instanceof PacMan) {
+			//TODO lost life
+		}
+		ghostMap[x][y] = ghost;
+		ghost.setX(x);
+		ghost.setY(y);
+	}
 		// moves the specified object to the specified new coordinates
 		// need to also remove the object from its previous location to avoid duplication
 	
@@ -256,6 +268,17 @@ public class Map {
 		}
 		return objectToRemove;
 	}
+	
+	public Ghost removeGhost(Ghost ghostToRemove) {
+		for (Object[] row : ghostMap) {
+			for (Object object : row) {
+				if (object == ghostToRemove) {
+					ghostMap[ghostToRemove.getX()][ghostToRemove.getY()] = null;
+				}
+			}
+		}
+		return ghostToRemove;
+	}
 
 	public PacMan getPacMan() {
 		for (Object[] row : map) {
@@ -269,7 +292,7 @@ public class Map {
 	}
 
 	public Shadow getShadow() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Shadow) {
 					return ((Shadow) object);
@@ -280,7 +303,7 @@ public class Map {
 	}
 
 	public Speedy getSpeedy() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Speedy) {
 					return ((Speedy) object);
@@ -291,7 +314,7 @@ public class Map {
 	}
 
 	public Bashful getBashful() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Bashful) {
 					return ((Bashful) object);
@@ -302,7 +325,7 @@ public class Map {
 	}
 
 	public Pokey getPokey() {
-		for (Object[] row : map) {
+		for (Object[] row : ghostMap) {
 			for (Object object : row) {
 				if (object instanceof Pokey) {
 					return ((Pokey) object);
