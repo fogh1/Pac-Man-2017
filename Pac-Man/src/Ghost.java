@@ -67,6 +67,41 @@ public abstract class Ghost extends MovableObject {
 		}
 	}
 	
+	protected Direction determineNewDirection(int targetX, int targetY) //not currently working
+	{
+		if (atIntersection())
+		{
+			int xDifference = this.getX()-targetX;
+			int yDifference = this.getY()-targetY;
+			Direction orginalDirection = getDirection();   
+			if(Math.abs(xDifference)>Math.abs(yDifference))
+			{
+
+					if(xDifference>0)
+					{
+						
+						return Direction.UP;
+					}
+					else
+					{
+						return Direction.DOWN;
+					}
+			}
+			else
+			{
+				if(yDifference>0)
+				{
+					return Direction.RIGHT;
+				}
+				else
+				{
+					return Direction.LEFT;
+				}
+			}
+		}
+		return this.getDirection();
+	}
+	
 	protected boolean atCorner()
 	{
 		if (atIntersection())
