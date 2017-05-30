@@ -152,6 +152,7 @@ public class Map {
 			return location;
 		}
 	}
+
 	public Object getAdjacentObjectInDirection(MovableObject object, Direction direction) {
 		int x = object.getX();
 		int y = object.getY();
@@ -167,7 +168,7 @@ public class Map {
 		else if (direction == Direction.RIGHT) {
 			return getObjectAt(x + 1, y);
 		}
-		else if (direction == Direction.UP) { // Shouldn't return NullPointerException, if MovableObject ain't on border walls
+		else if (direction == Direction.UP) { 
 			return getObjectAt(x, y - 1);
 		}
 		else {
@@ -210,6 +211,20 @@ public class Map {
 		object.setY(y);
 		return oldOccupant;
 	}
+	
+	public void moveGhost(Ghost ghost, int x, int y) {
+		Object occupant = map[x][y];
+		removeGhost(ghost);
+		if (occupant instanceof PacMan) {
+			//TODO lost life
+		}
+		ghostMap[x][y] = ghost;
+		ghost.setX(x);
+		ghost.setY(y);
+	}
+		// moves the specified object to the specified new coordinates
+		// need to also remove the object from its previous location to avoid duplication
+	
 
 	public AcquirableObject remove(AcquirableObject objectToRemove) {
 		for (Object[] row : map) {
@@ -231,6 +246,17 @@ public class Map {
 			}
 		}
 		return objectToRemove;
+	}
+	
+	public Ghost removeGhost(Ghost ghostToRemove) {
+		for (Object[] row : ghostMap) {
+			for (Object object : row) {
+				if (object == ghostToRemove) {
+					ghostMap[ghostToRemove.getX()][ghostToRemove.getY()] = null;
+				}
+			}
+		}
+		return ghostToRemove;
 	}
 
 	public PacMan getPacMan() {
@@ -286,6 +312,30 @@ public class Map {
 			}
 		}
 		return null;
+	}
+	
+	public boolean checkWinConditions()//can add into win conditions if need be
+	{
+		if (getAcquirableObjectCount() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean checkLoseConditions()//can add into lose conditions if need be
+	{
+		if (getPacMan().getLives() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }
