@@ -5,25 +5,27 @@ import javax.swing.*;
 
 public class KeyInputHandler implements KeyListener {
 
-	private Map map;
+	private Game game;
 
-	public KeyInputHandler(Map map) {
-		this.map = map;
+	public KeyInputHandler(Game game) {
+		this.game = game;
 	}
 
 	public void keyPressed(KeyEvent event) {
-		PacMan pacMan = map.getPacMan();
-		if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-			pacMan.setQueuedDirection(Direction.LEFT);
-		}
-		else if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-			pacMan.setQueuedDirection(Direction.RIGHT);
-		}
-		else if (event.getKeyCode() == KeyEvent.VK_UP) {
-			pacMan.setQueuedDirection(Direction.UP);
-		}
-		else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-			pacMan.setQueuedDirection(Direction.DOWN);
+		if (!game.isPaused()) {
+			PacMan pacMan = game.getMap().getPacMan();
+			if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+				pacMan.setQueuedDirection(Direction.LEFT);
+			}
+			else if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
+				pacMan.setQueuedDirection(Direction.RIGHT);
+			}
+			else if (event.getKeyCode() == KeyEvent.VK_UP) {
+				pacMan.setQueuedDirection(Direction.UP);
+			}
+			else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+				pacMan.setQueuedDirection(Direction.DOWN);
+			}
 		}
 	}
 

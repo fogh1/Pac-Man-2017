@@ -75,7 +75,6 @@ public class Map {
 				}
 				map[column][row] = object;
 			}
-			createGhostMap();
 			file.close();
 		}
 		catch (FileNotFoundException exception) {
@@ -85,22 +84,17 @@ public class Map {
 			System.out.println("ERROR : IO EXCEPTION : " + exception);
 		}
 	}
-	
-	public void createGhostMap()
-	{
+
+	public void createGhostMap() {
 		ghostMap = new Ghost[28][31];
-		for (int col = 0; col < 28; col++)
-		{
-			for (int row = 0; row < 31; row++)
-			{
-				if (map[col][row] instanceof Ghost)
-				{
-					ghostMap[col][row] = (Ghost)map[col][row];
-					remove((MovableObject)map[col][row]);
+		for (int column = 0; column < 28; column++) {
+			for (int row = 0; row < 31; row++) {
+				if (map[column][row] instanceof Ghost) {
+					ghostMap[column][row] = (Ghost) map[column][row];
+					remove((MovableObject) map[column][row]);
 				}
-				else
-				{
-					ghostMap[col][row] = null;
+				else {
+					ghostMap[column][row] = null;
 				}
 			}
 		}
@@ -111,6 +105,7 @@ public class Map {
 		map = new Object[28][31];
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		createMapFromResource(classLoader.getResource("Map.csv"));
+		createGhostMap();
 	}
 
 	public Object getObjectAt(int x, int y) {
@@ -154,30 +149,6 @@ public class Map {
 		}
 	}
 
-	public Object getAdjacentObject(MovableObject object) {
-		Direction direction = object.getDirection();
-		int x = object.getX();
-		int y = object.getY();
-		if (x == 0 && y == 14 && direction == Direction.LEFT) {
-			return getObjectAt(27, 14);
-		}
-		else if (x == 27 && y == 14 && direction == Direction.RIGHT) {
-			return getObjectAt(0, 14);
-		}
-		else if (direction == Direction.LEFT) {
-			return getObjectAt(x - 1, y);
-		}
-		else if (direction == Direction.RIGHT) {
-			return getObjectAt(x + 1, y);
-		}
-		else if (direction == Direction.UP) {
-			return getObjectAt(x, y - 1);
-		}
-		else {
-			return getObjectAt(x, y + 1);
-		}
-	}
-	
 	public Object getAdjacentObjectInDirection(MovableObject object, Direction direction) {
 		int x = object.getX();
 		int y = object.getY();
@@ -201,7 +172,11 @@ public class Map {
 		}
 	}
 
-	public int acquirableObjectCount() {
+	public Object getAdjacentObject(MovableObject object) {
+		return getAdjacentObjectInDirection(object, object.getDirection());
+	}
+
+	public int getAcquirableObjectCount() {
 		int count = 0;
 		for (Object[] row : map) {
 			for (Object object : row) {
@@ -218,15 +193,15 @@ public class Map {
 		map[x][y] = object;
 		return oldOccupant;
 	}
-	
+
 	public Object move(MovableObject object, int x, int y) {
 		Object oldOccupant = map[x][y];
-		remove(object);
 		if (oldOccupant instanceof AcquirableObject) {
 			if (object instanceof PacMan) {
 				((AcquirableObject) oldOccupant).acquire();
 			}
 		}
+		remove(object);
 		map[x][y] = object;
 		object.setX(x);
 		object.setY(y);
@@ -257,7 +232,7 @@ public class Map {
 		}
 		return objectToRemove;
 	}
-	
+
 	public MovableObject remove(MovableObject objectToRemove) {
 		for (Object[] row : map) {
 			for (Object object : row) {
@@ -334,4 +309,5 @@ public class Map {
 		}
 		return null;
 	}
+
 }

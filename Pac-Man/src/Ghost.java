@@ -1,11 +1,13 @@
+import java.util.*;
+
 public abstract class Ghost extends MovableObject {
 
 	private static GhostMode currentMode;
-	protected boolean outsideRoom;
+	private boolean isOutsideRoom;
 
 	public Ghost(int x, int y, Map map, String iconPath) {
-	    super(x, y, map, Direction.UP, iconPath);
-	    outsideRoom = false;
+		super(x, y, map, Direction.UP, iconPath);
+		isOutsideRoom = false;
 	}
 
 	public static GhostMode getMode() {
@@ -16,48 +18,24 @@ public abstract class Ghost extends MovableObject {
 		currentMode = newMode;
 	}
 
-	public void move() {
-		// this probably needs to be overridden by each subclass
+	public boolean isOutsideRoom() {
+		return isOutsideRoom;
 	}
-	
-	protected boolean atIntersection()
-	{
-		int counter = 0;
-		Direction facing = getDirection();
-		setDirection(Direction.DOWN);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(Direction.UP);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(Direction.RIGHT);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(Direction.LEFT);
-		if (canMoveOn(getMap().getAdjacentObject(this)))
-		{
-			counter++;
-		}
-		setDirection(facing);
-		if (counter > 2)
-		{
-			return true;
+
+	public boolean canMoveOnto(Object object) {
+		if (object instanceof Wall || (object instanceof Door && isOutsideRoom)) {
+			return false;
 		}
 		else
 		{
-			return false;
+			return true;
 		}
+
 	}
 	
 	public boolean canMoveOn(Object object)
 	{
-		if (object instanceof Wall||(object instanceof Door&&outsideRoom))
+		if (object instanceof Wall||(object instanceof Door&&isOutsideRoom))
 		{
 			return false;
 		}
@@ -66,36 +44,79 @@ public abstract class Ghost extends MovableObject {
 			return true;
 		}
 	}
-	
-	protected boolean atCorner()
-	{
-		if (atIntersection())
-		{
-			return false;
+
+	public boolean canMoveInDirection(Direction direction) {
+		Object adjacentObject = getMap().getAdjacentObjectInDirection(this, direction);
+		return canMoveOnto(adjacentObject);
+	}
+
+	public boolean canMoveInCurrentDirection() {
+		Object adjacentObject = getMap().getAdjacentObject(this);
+		return canMoveOnto(adjacentObject);
+	}
+
+	public boolean isAtIntersection() {
+		int blockedSideCount = 0;
+		for (Direction direction : Arrays.asList(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT)) {
+			Object adjacentObject = getMap().getAdjacentObjectInDirection(this, direction);
+			if (canMoveOnto(adjacentObject)) {
+				blockedSideCount++;
+			}
 		}
-		if ((canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.DOWN))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.LEFT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.DOWN))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.RIGHT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.UP))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.LEFT)))||(canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.UP))&&canMoveOn(getMap().getAdjacentObjectInDirection(this, Direction.RIGHT))))
-		{
-			return true;
-		}
-		return false;
+		return (blockedSideCount > 2);
 	}
 	
-	protected void turn()//turns the ghost clockwise
-	{
-		if (getDirection() == Direction.DOWN)
-		{
-			setDirection(Direction.LEFT);
+	protected Direction determineNewDirection(int targetX, int targetY) {
+		// not currently working
+		if (isAtIntersection()) {
+			int xDifference = this.getX() - targetX;
+			int yDifference = this.getY() - targetY;
+			if (Math.abs(xDifference) > Math.abs(yDifference)) {
+				if (xDifference > 0) {
+					return Direction.UP;
+				}
+				else {
+					return Direction.DOWN;
+				}
+			}
+			else {
+				if (yDifference > 0) {
+					return Direction.RIGHT;
+				}
+				else {
+					return Direction.LEFT;
+				}
+			}
 		}
-		else if (getDirection() == Direction.LEFT)
-		{
-			setDirection(Direction.UP);
+		return this.getDirection();
+	}
+
+	public boolean isAtCorner() {
+		if (isAtIntersection()) {
+			return false;
 		}
-		else if (getDirection() == Direction.UP)
-		{
+		else {
+			if ((canMoveInDirection(Direction.UP) || canMoveInDirection(Direction.DOWN)) && (canMoveInDirection(Direction.LEFT) || canMoveInDirection(Direction.RIGHT))) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	public void turn() {
+		// turns clockwise
+		if (getDirection() == Direction.UP) {
 			setDirection(Direction.RIGHT);
 		}
-		else if (getDirection() == Direction.RIGHT)
-		{
+		else if (getDirection() == Direction.DOWN) {
+			setDirection(Direction.LEFT);
+		}
+		else if (getDirection() == Direction.LEFT) {
+			setDirection(Direction.UP);
+		}
+		else {
 			setDirection(Direction.DOWN);
 		}
 	}
@@ -103,6 +124,48 @@ public abstract class Ghost extends MovableObject {
 	protected void moveForward()
 	{
 		getMap().moveGhost(this, getMap().getAdjacentLocation(this)[0], getMap().getAdjacentLocation(this)[1]);
+	}
+
+	public void move() {
+		if (isAtIntersection()) {
+			double randomNumber = Math.random() * 2;
+			if (randomNumber < 1) {
+				if (canMoveInCurrentDirection()) {
+					moveForward();
+				}
+				else {
+					turn();
+					moveForward();
+				}
+			}
+			else {
+				turn();
+				turn();
+				turn();
+				if (canMoveInCurrentDirection()) {
+					moveForward();
+				}
+				else {
+					turn();
+					turn();
+					moveForward();
+				}
+			}
+		}
+		else if (isAtCorner()) {
+			turn();
+			if (canMoveInCurrentDirection()) {
+				moveForward();
+			}
+			else {
+				turn();
+				turn();
+				moveForward();
+			}
+		}
+		else {
+			moveForward();
+		}
 	}
 
 }
