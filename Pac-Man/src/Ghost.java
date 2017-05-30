@@ -70,23 +70,25 @@ public abstract class Ghost extends MovableObject {
 		if (isAtIntersection()) {
 			int xDifference = this.getX() - targetX;
 			int yDifference = this.getY() - targetY;
-			if (Math.abs(xDifference) > Math.abs(yDifference)) {
-				if (xDifference > 0 && this.canMoveInDirection(Direction.UP)) {
+			if (Math.abs(yDifference) > Math.abs(xDifference)) {
+				if (yDifference > 0 && this.canMoveInDirection(Direction.UP))
 					return Direction.UP;
-				}
-				else {
-					if (this.canMoveInDirection(Direction.DOWN))
+				if (this.canMoveInDirection(Direction.DOWN))
 					return Direction.DOWN;
-				}
+				if (xDifference > 0 && this.canMoveInDirection(Direction.LEFT))
+					return Direction.LEFT;
+				if (this.canMoveInDirection(Direction.RIGHT))
+					return Direction.RIGHT;
 			}
 			else {
-				if (yDifference > 0 && this.canMoveInDirection(Direction.RIGHT)) {
-					return Direction.RIGHT;
-				}
-				else {
-					if (this.canMoveInDirection(Direction.LEFT))
+				if (xDifference > 0 && this.canMoveInDirection(Direction.LEFT))
 					return Direction.LEFT;
-				}
+				if (this.canMoveInDirection(Direction.RIGHT))
+					return Direction.RIGHT;
+				if (yDifference > 0 && this.canMoveInDirection(Direction.UP))
+					return Direction.UP;
+				if (this.canMoveInDirection(Direction.DOWN))
+					return Direction.DOWN;
 			}
 		}
 		return this.getDirection();
