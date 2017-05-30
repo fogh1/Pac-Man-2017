@@ -8,6 +8,8 @@ public class PacMan extends MovableObject {
 
 	public PacMan(int x, int y, Map map) {
 		super(x, y, map, Direction.RIGHT, "PacManRight.png");
+		score = 0;
+		lives = 3;
 	}
 
 	public ImageIcon getIcon() {

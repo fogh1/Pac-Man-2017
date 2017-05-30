@@ -57,6 +57,10 @@ public class Game {
 					for (Ghost ghost : Arrays.asList(shadow, speedy, bashful, pokey)) {
 						ghost.move();
 					}
+					if (map.checkWinConditions()||map.checkLoseConditions())
+					{
+						togglePause();
+					}
 					ui.repaintPanels();
 				}
 			}
