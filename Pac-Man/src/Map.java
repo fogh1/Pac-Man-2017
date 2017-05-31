@@ -111,6 +111,29 @@ public class Map {
 		createMapFromResource(classLoader.getResource("Map.csv"));
 		createGhostMap();
 	}
+	
+	public void moveableObjectReset()
+	{
+		Shadow shadow = getShadow();
+		Pokey pokey = getPokey();
+		Bashful bashful = getBashful();
+		Speedy speedy = getSpeedy();
+		PacMan pacMan = getPacMan();
+		removeGhost(shadow);
+		removeGhost(pokey);
+		removeGhost(bashful);
+		removeGhost(speedy);
+		shadow = new Shadow(11, 14, this);
+		bashful = new Bashful(14, 12, this);
+		speedy = new Speedy(14, 14, this);
+		pokey = new Pokey(14, 16, this);
+		shadow.setDirection(Direction.LEFT);
+		bashful.setDirection(Direction.UP);
+		speedy.setDirection(Direction.DOWN);
+		pokey.setDirection(Direction.UP);
+		createGhostMap();
+		move(pacMan, 13, 23);
+	}
 
 	public int[] getAdjacentLocation(MovableObject object) {
 		Direction direction = object.getDirection();
