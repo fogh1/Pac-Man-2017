@@ -20,7 +20,7 @@ public class Shadow extends Ghost {
 			super.move();
 		}
 	}
-	
+
 	public void chaseMove()
 	{
 			if (isAtIntersection()) {
