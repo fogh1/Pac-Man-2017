@@ -89,6 +89,14 @@ public class PacMan extends MovableObject {
 			int y = getMap().getAdjacentLocation(this)[1];
 			getMap().move(this, x, y);
 		}
+		Ghost[] ghosts = getMap().getGhostList();
+		for (Ghost ghost : ghosts)
+		{
+			if (ghost.getX() == this.getX() && ghost.getY() == this.getY() && ghost.getMode() != GhostMode.FRIGHTENED)
+			{
+				loseLife();
+			}
+		}
 	}
 
 }
