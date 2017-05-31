@@ -89,7 +89,7 @@ public abstract class Ghost extends MovableObject {
 			if (Math.abs(yDifference) > Math.abs(xDifference)) {
 				if (yDifference > 0 && this.canMoveInDirection(Direction.UP))
 					return Direction.UP;
-				if (this.canMoveInDirection(Direction.DOWN))
+				if (yDifference <= 0 && this.canMoveInDirection(Direction.DOWN))
 					return Direction.DOWN;
 				if (xDifference > 0 && this.canMoveInDirection(Direction.LEFT))
 					return Direction.LEFT;
@@ -142,7 +142,8 @@ public abstract class Ghost extends MovableObject {
 		}
 	}
 
-	public void move() {
+
+	public void frightenedMove() {
 		if (currentMode == GhostMode.FRIGHTENED)
 		{
 			if (frightenedTimer > 50)
