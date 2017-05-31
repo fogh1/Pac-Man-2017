@@ -141,7 +141,11 @@ public abstract class Ghost extends MovableObject {
 			return false;
 		}
 	}
-
+	
+	public void move()
+	{
+		frightenedMove();
+	}
 
 	public void frightenedMove() {
 		if (currentMode == GhostMode.FRIGHTENED)
