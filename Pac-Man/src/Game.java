@@ -57,6 +57,10 @@ public class Game {
 					for (Ghost ghost : map.getGhostList()) {
 						ghost.move();
 					}
+					if (map.checkLoseCondition()||map.checkWinCondition())
+					{
+						togglePause();//placeholder for endgame
+					}
 					ui.repaintPanels();
 				}
 			}
