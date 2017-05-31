@@ -3,20 +3,23 @@ import javax.swing.ImageIcon;
 
 public abstract class Ghost extends MovableObject {
 
-	private static GhostMode currentMode;
+	private GhostMode currentMode;//removed static not sure why it was nessacary
 	private boolean isOutsideRoom;
+	private int frightenedTimer;
 
 	public Ghost(int x, int y, Map map, String iconPath) {
 		super(x, y, map, Direction.UP, iconPath);
 		isOutsideRoom = false;
+		frightenedTimer = 0;
 	}
 
-	public static GhostMode getMode() {
+	public GhostMode getMode() {
 		return currentMode;
 	}
 
-	public static void setMode(GhostMode newMode) {
+	public void setMode(GhostMode newMode) {
 		currentMode = newMode;
+		
 	}
 
 	public ImageIcon getIcon() {
@@ -139,7 +142,22 @@ public abstract class Ghost extends MovableObject {
 		}
 	}
 
-	public void move() {
+
+	public void frightenedMove() {
+		if (currentMode == GhostMode.FRIGHTENED)
+		{
+			if (frightenedTimer > 50)
+			{
+				setMode(GhostMode.CHASE);
+				frightenedTimer = 0;
+			}
+			else
+			{
+				frightenedTimer++;
+			}
+			if (frightenedTimer % 2 == 0)
+				return;
+		}
 		if (isAtIntersection()) {
 			double randomNumber = Math.random() * 2;
 			if (randomNumber < 1) {

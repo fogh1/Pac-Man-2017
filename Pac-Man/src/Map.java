@@ -364,5 +364,13 @@ public class Map {
 		}
 		return null;
 	}
+	
+	public void setAllGhostMode(GhostMode mode)
+	{
+		getPokey().setMode(mode);
+		getBashful().setMode(mode);
+		getSpeedy().setMode(mode);
+		getShadow().setMode(mode);
+	}
 
 }

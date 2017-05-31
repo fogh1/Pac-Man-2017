@@ -36,5 +36,10 @@ public abstract class AcquirableObject {
 		// Map removes acquirable by overwriting it. 
 		// To-do: allow Ghosts to move, then replace the pacdot back at that location
 	}
+	
+	protected Map getMap()
+	{
+		return map;
+	}
 
 }
