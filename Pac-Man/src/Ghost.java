@@ -139,7 +139,7 @@ public abstract class Ghost extends MovableObject {
 		}
 	}
 
-	public void frightenedMove() {
+	public void move() {
 		if (isAtIntersection()) {
 			double randomNumber = Math.random() * 2;
 			if (randomNumber < 1) {
