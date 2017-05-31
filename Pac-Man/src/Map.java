@@ -112,7 +112,7 @@ public class Map {
 		createGhostMap();
 	}
 	
-	public void moveableObjectReset()
+	public void resetMoveableObject()
 	{
 		Shadow shadow = getShadow();
 		Pokey pokey = getPokey();
@@ -123,15 +123,19 @@ public class Map {
 		removeGhost(pokey);
 		removeGhost(bashful);
 		removeGhost(speedy);
-		shadow = new Shadow(11, 14, this);
-		bashful = new Bashful(14, 12, this);
+		shadow = new Shadow(14, 11, this);
+		bashful = new Bashful(12, 14, this);
 		speedy = new Speedy(14, 14, this);
-		pokey = new Pokey(14, 16, this);
+		pokey = new Pokey(16, 14, this);
 		shadow.setDirection(Direction.LEFT);
 		bashful.setDirection(Direction.UP);
 		speedy.setDirection(Direction.DOWN);
 		pokey.setDirection(Direction.UP);
-		createGhostMap();
+		ghostMap[14][11] = shadow;
+		ghostMap[12][14] = bashful;
+		ghostMap[14][14] = speedy;
+		ghostMap[16][14] = pokey;
+		pacMan.setDirection(Direction.RIGHT);
 		move(pacMan, 13, 23);
 	}
 
@@ -371,6 +375,30 @@ public class Map {
 		getBashful().setMode(mode);
 		getSpeedy().setMode(mode);
 		getShadow().setMode(mode);
+	}
+	
+	public boolean checkWinCondition()
+	{
+		if (getAcquirableObjectCount() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean checkLoseCondition()
+	{
+		if (getPacMan().getLives() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

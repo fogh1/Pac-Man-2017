@@ -53,6 +53,7 @@ public class PacMan extends MovableObject {
 
 	public void loseLife() {
 		lives--;
+		getMap().resetMoveableObject();
 	}
 
 	public boolean canMoveOnto(Object object) {
@@ -80,6 +81,10 @@ public class PacMan extends MovableObject {
 	}
 
 	public void move() {
+		if (isOnGhost())
+		{
+			loseLife();
+		}
 		if (canMoveInQueuedDirection()) {
 			setDirection(queuedDirection);
 			queuedDirection = null;
@@ -89,14 +94,23 @@ public class PacMan extends MovableObject {
 			int y = getMap().getAdjacentLocation(this)[1];
 			getMap().move(this, x, y);
 		}
+		if (isOnGhost())
+		{
+			loseLife();
+		}
+	}
+	
+	public boolean isOnGhost()
+	{
 		Ghost[] ghosts = getMap().getGhostList();
 		for (Ghost ghost : ghosts)
 		{
 			if (ghost.getX() == this.getX() && ghost.getY() == this.getY() && ghost.getMode() != GhostMode.FRIGHTENED)
 			{
-				loseLife();
+				return true;
 			}
 		}
+		return false;
 	}
 
 }
