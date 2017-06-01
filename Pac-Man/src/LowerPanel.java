@@ -1,9 +1,8 @@
 import java.util.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
-public class LowerPanel extends JPanel implements ActionListener {
+public class LowerPanel extends JPanel {
 
 	private Game game;
 	private JLabel livesLabel;
@@ -64,10 +63,6 @@ public class LowerPanel extends JPanel implements ActionListener {
 			add(label);
 		}
 		revalidate();
-	}
-
-	public void actionPerformed(ActionEvent event) {
-		// handles clicks from the two buttons
 	}
 
 }
