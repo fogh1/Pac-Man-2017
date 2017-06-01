@@ -260,22 +260,22 @@ public class Map {
 				((AcquirableObject) oldOccupant).acquire();
 			}
 		}
-		remove(object);
 		map[x][y] = object;
-		object.setX(x);
-		object.setY(y);
+		if (object != null) {
+			remove(object);
+			object.setX(x);
+			object.setY(y);
+		}
 		return oldOccupant;
 	}
 
 	public void moveGhost(Ghost ghost, int x, int y) {
-		Object oldOccupant = map[x][y];
-		removeGhost(ghost);
-		if (oldOccupant instanceof PacMan) {
-			getPacMan().loseLife();
-		}
 		ghostMap[x][y] = ghost;
-		ghost.setX(x);
-		ghost.setY(y);
+		if (ghost != null) {
+			removeGhost(ghost);
+			ghost.setX(x);
+			ghost.setY(y);
+		}
 	}
 
 	public AcquirableObject remove(AcquirableObject objectToRemove) {

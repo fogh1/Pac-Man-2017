@@ -6,10 +6,6 @@ public class Game {
 	private Map map;
 	private UI ui;
 	private PacMan pacMan;
-	private Shadow shadow;
-	private Speedy speedy;
-	private Bashful bashful;
-	private Pokey pokey;
 	private boolean isPaused;
 	private int[] highScores;
 	private String[] highScorers;
@@ -30,11 +26,6 @@ public class Game {
 		// starts or restarts the game
 		togglePause();  // pauses game to prevent any grid action during grid setup
 		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
-		pacMan = map.getPacMan();
-		shadow = map.getShadow();
-		speedy = map.getSpeedy();
-		bashful = map.getBashful();
-		pokey = map.getPokey();
 		togglePause();
 	}
 
