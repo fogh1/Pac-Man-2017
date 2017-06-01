@@ -13,11 +13,6 @@ public abstract class Ghost extends MovableObject {
 		isOutsideRoom = false;
 		frightenedTimer = 0;
 	}
-	
-	public void setIsOutsideRoom(boolean newMode)
-	{
-		isOutsideRoom = newMode;
-	}
 
 	public GhostMode getMode() {
 		return currentMode;
