@@ -8,8 +8,7 @@ public class Map {
 	private Ghost[][] ghostMap;
 
 	public Map() {
-		reset(); // for the sake of simplicity, since repopulating the map and creating it for the first time are essentially the same operation
-		// ...
+		reset();
 	}
 
 	public void createMapFromResource(URL resource) {
@@ -100,10 +99,6 @@ public class Map {
 		}
 	}
 
-	public Ghost[] getGhostList() {
-		return new Ghost[] {getShadow(), getSpeedy(), getBashful(), getPokey()};
-	}
-
 	public void reset() {
 		// returns all objects to the locations they occupy at the start of the game, and replaces any missing PacDots and PowerPellets
 		map = new Object[28][31];
@@ -112,31 +107,30 @@ public class Map {
 		createGhostMap();
 	}
 	
-	public void resetMoveableObject()
-	{
-		Shadow shadow = getShadow();
-		Pokey pokey = getPokey();
-		Bashful bashful = getBashful();
-		Speedy speedy = getSpeedy();
+	public void resetMovableObjects() {
 		PacMan pacMan = getPacMan();
-		removeGhost(shadow);
-		removeGhost(pokey);
-		removeGhost(bashful);
-		removeGhost(speedy);
-		shadow = new Shadow(14, 11, this);
-		bashful = new Bashful(12, 14, this);
-		speedy = new Speedy(14, 14, this);
-		pokey = new Pokey(16, 14, this);
+		Shadow shadow = getShadow();
+		Speedy speedy = getSpeedy();
+		Bashful bashful = getBashful();
+		Pokey pokey = getPokey();
+		move(shadow, 14, 11);
+		moveGhost(shadow, 14, 11);
+		move(speedy, 12, 14);
+		moveGhost(speedy, 12, 14);
+		move(bashful, 14, 14);
+		moveGhost(bashful, 14, 14);
+		move(pokey, 16, 14);
+		moveGhost(pokey, 16, 14);
 		shadow.setDirection(Direction.LEFT);
 		bashful.setDirection(Direction.UP);
 		speedy.setDirection(Direction.DOWN);
 		pokey.setDirection(Direction.UP);
-		ghostMap[14][11] = shadow;
-		ghostMap[12][14] = bashful;
-		ghostMap[14][14] = speedy;
-		ghostMap[16][14] = pokey;
 		pacMan.setDirection(Direction.RIGHT);
 		move(pacMan, 13, 23);
+	}
+
+	public Ghost[] getGhostList() {
+		return new Ghost[] {getShadow(), getSpeedy(), getBashful(), getPokey()};
 	}
 
 	public int[] getAdjacentLocation(MovableObject object) {
@@ -174,6 +168,15 @@ public class Map {
 			location[1] = y + 1;
 			return location;
 		}
+	}
+	
+	public int distanceBetween(MovableObject a, MovableObject b)
+	{
+		int aX = a.getX();
+		int aY = a.getY();
+		int bX = b.getX();
+		int bY = b.getY();
+		return (int) (Math.sqrt(Math.pow(Math.abs(bY-aY),2)+Math.pow(Math.abs(bX-aX),2)));
 	}
 
 	public Object getObjectAt(int x, int y) {
@@ -250,12 +253,6 @@ public class Map {
 		return count;
 	}
 
-	public Object set(Object object, int x, int y) {
-		Object oldOccupant = map[x][y];
-		map[x][y] = object;
-		return oldOccupant;
-	}
-
 	public Object move(MovableObject object, int x, int y) {
 		Object oldOccupant = map[x][y];
 		if (oldOccupant instanceof AcquirableObject) {
@@ -274,7 +271,7 @@ public class Map {
 		Object oldOccupant = map[x][y];
 		removeGhost(ghost);
 		if (oldOccupant instanceof PacMan) {
-			// TODO lost life
+			getPacMan().loseLife();
 		}
 		ghostMap[x][y] = ghost;
 		ghost.setX(x);
@@ -367,38 +364,6 @@ public class Map {
 			}
 		}
 		return null;
-	}
-	
-	public void setAllGhostMode(GhostMode mode)
-	{
-		getPokey().setMode(mode);
-		getBashful().setMode(mode);
-		getSpeedy().setMode(mode);
-		getShadow().setMode(mode);
-	}
-	
-	public boolean checkWinCondition()
-	{
-		if (getAcquirableObjectCount() == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	public boolean checkLoseCondition()
-	{
-		if (getPacMan().getLives() == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
 	}
 
 }

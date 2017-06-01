@@ -53,7 +53,16 @@ public class PacMan extends MovableObject {
 
 	public void loseLife() {
 		lives--;
-		getMap().resetMoveableObject();
+		getMap().resetMovableObjects();
+	}
+
+	public Ghost onGhost() {
+		for (Ghost ghost : getMap().getGhostList()) {
+			if (getX() == ghost.getX() && getY() == ghost.getY()) {
+				return ghost;
+			}
+		}
+		return null;
 	}
 
 	public boolean canMoveOnto(Object object) {
@@ -80,10 +89,22 @@ public class PacMan extends MovableObject {
 		}
 	}
 
+	public void acquireGhost(Ghost ghost) {
+		score += 200;
+		ghost.setMode(GhostMode.CHASE);
+		ghost.setOutsideRoom(false);
+		getMap().move(ghost, 13, 14);
+	}
+	
 	public void move() {
-		if (isOnGhost())
-		{
-			loseLife();
+		Ghost ghost = onGhost();
+		if (ghost != null) {
+			if (ghost.getMode() == GhostMode.FRIGHTENED) {
+				acquireGhost(ghost);
+			}
+			else {
+				loseLife();
+			}
 		}
 		if (canMoveInQueuedDirection()) {
 			setDirection(queuedDirection);
@@ -94,23 +115,6 @@ public class PacMan extends MovableObject {
 			int y = getMap().getAdjacentLocation(this)[1];
 			getMap().move(this, x, y);
 		}
-		if (isOnGhost())
-		{
-			loseLife();
-		}
-	}
-	
-	public boolean isOnGhost()
-	{
-		Ghost[] ghosts = getMap().getGhostList();
-		for (Ghost ghost : ghosts)
-		{
-			if (ghost.getX() == this.getX() && ghost.getY() == this.getY() && ghost.getMode() != GhostMode.FRIGHTENED)
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 
 }
