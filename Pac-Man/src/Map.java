@@ -113,18 +113,14 @@ public class Map {
 		Speedy speedy = getSpeedy();
 		Bashful bashful = getBashful();
 		Pokey pokey = getPokey();
-		move(shadow, 14, 11);
-		moveGhost(shadow, 14, 11);
-		move(speedy, 12, 14);
-		moveGhost(speedy, 12, 14);
-		move(bashful, 14, 14);
-		moveGhost(bashful, 14, 14);
-		move(pokey, 16, 14);
-		moveGhost(pokey, 16, 14);
-		shadow.setDirection(Direction.LEFT);
-		bashful.setDirection(Direction.UP);
-		speedy.setDirection(Direction.DOWN);
-		pokey.setDirection(Direction.UP);
+		removeGhost(shadow);
+		removeGhost(speedy);
+		removeGhost(bashful);
+		removeGhost(pokey);
+		ghostMap[14][11] = new Shadow(14, 11, this);
+		ghostMap[12][14] = new Bashful(12, 14, this);
+		ghostMap[14][14] = new Speedy(14, 14, this);
+		ghostMap[16][14] = new Pokey(16, 14, this);
 		pacMan.setDirection(Direction.RIGHT);
 		move(pacMan, 13, 23);
 	}
