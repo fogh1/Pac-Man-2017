@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.Timer;
+import javax.swing.*;
 
 public class Game {
 
@@ -48,12 +50,12 @@ public class Game {
 						ghost.move();
 					}
 					if (map.getPacMan().getLives() <= 0) {
-						// lose
-						togglePause();  // temporary
+						togglePause();
+						JOptionPane.showMessageDialog(null, "GAME OVER");
 					}
 					else if (map.getAcquirableObjectCount() <= 0) {
-						// win
 						togglePause();  // temporary
+						JOptionPane.showMessageDialog(null, "YOU WIN");
 					}
 					ui.repaintPanels();
 				}
