@@ -26,6 +26,10 @@ public abstract class AcquirableObject {
 		return y;
 	}
 
+	public Map getMap() {
+		return map;
+	}
+
 	public ImageIcon getIcon() {
 		return icon;
 	}
