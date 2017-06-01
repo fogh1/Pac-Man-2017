@@ -57,9 +57,13 @@ public class Game {
 					for (Ghost ghost : map.getGhostList()) {
 						ghost.move();
 					}
-					if (map.checkLoseCondition()||map.checkWinCondition())
-					{
-						togglePause();//placeholder for endgame
+					if (map.getPacMan().getLives() <= 0) {
+						// lose
+						togglePause();  // temporary
+					}
+					else if (map.getAcquirableObjectCount() <= 0) {
+						// win
+						togglePause();  // temporary
 					}
 					ui.repaintPanels();
 				}
