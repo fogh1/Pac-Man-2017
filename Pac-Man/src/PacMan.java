@@ -91,7 +91,7 @@ public class PacMan extends MovableObject {
 
 	public void acquireGhost(Ghost ghost) {
 		score += 200;
-		ghost.setMode(CHASE);
+		ghost.setMode(GhostMode.CHASE);
 		ghost.setOutsideRoom(false);
 		getMap().move(ghost, 13, 14);
 	}

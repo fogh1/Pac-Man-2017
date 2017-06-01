@@ -108,6 +108,7 @@ public class Map {
 	}
 	
 	public void resetMovableObjects() {
+		PacMan pacMan = getPacMan();
 		Shadow shadow = getShadow();
 		Speedy speedy = getSpeedy();
 		Bashful bashful = getBashful();
@@ -126,6 +127,10 @@ public class Map {
 		pokey.setDirection(Direction.UP);
 		pacMan.setDirection(Direction.RIGHT);
 		move(pacMan, 13, 23);
+	}
+
+	public Ghost[] getGhostList() {
+		return new Ghost[] {getShadow(), getSpeedy(), getBashful(), getPokey()};
 	}
 
 	public int[] getAdjacentLocation(MovableObject object) {
