@@ -22,8 +22,10 @@ public class Game {
 
 	public void createMap() {
 		// starts or restarts the game
-		togglePause();  // pauses game to prevent any grid action during grid setup
-		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+		togglePause(); // pauses game to prevent any grid action during grid
+						// setup
+		map = new Map(); // reconstructs new map for new game, then reassigns
+							// all instance variables pointing to grid objects
 		pacMan = map.getPacMan();
 		togglePause();
 	}
@@ -39,21 +41,23 @@ public class Game {
 	}
 
 	public TimerTask gameLoop() {
-		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
+		// performs tasks like updating the model and UI on set intervals
+		// (controlled by the Timer)
 		return new TimerTask() {
 			public void run() {
 				if (!isPaused()) {
-					pacMan.move();
-					for (Ghost ghost : map.getGhostList()) {
-						ghost.move();
+					if (map.getAcquirableObjectCount() <= 0) {
+						// win
+						togglePause(); // temporary
 					}
 					if (map.getPacMan().getLives() <= 0) {
 						// lose
-						togglePause();  // temporary
-					}
-					else if (map.getAcquirableObjectCount() <= 0) {
-						// win
-						togglePause();  // temporary
+						togglePause(); // temporary
+					} else {
+						pacMan.move();
+						for (Ghost ghost : map.getGhostList()) {
+							ghost.move();
+						}
 					}
 					ui.repaintPanels();
 				}
