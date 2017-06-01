@@ -261,10 +261,6 @@ public class Map {
 	}
 
 	public void moveGhost(Ghost ghost, int x, int y) {
-		Object oldOccupant = map[x][y];
-		if (oldOccupant instanceof PacMan) {
-			getPacMan().loseLife();
-		}
 		ghostMap[x][y] = ghost;
 		if (ghost != null) {
 			removeGhost(ghost);
