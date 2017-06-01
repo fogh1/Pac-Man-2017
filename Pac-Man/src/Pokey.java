@@ -7,7 +7,7 @@ public class Pokey extends Ghost {
 	
 	public void move()
 	{
-		if(getMode() == GhostMode.CHASE && isOutsideRoom())
+		if(getMap().distanceBetween(this, getMap().getPacMan()) > 8 && getMode() == GhostMode.CHASE && isOutsideRoom())
 		{
 			chaseMove();
 		}
@@ -24,7 +24,7 @@ public class Pokey extends Ghost {
 	public void chaseMove()
 	{
 			if (isAtIntersection()) {
-				Direction newDirection = determineNewDirection(getMap().getPacMan().getX(), getMap().getPacMan().getY()); //wants to get to PacMan
+				Direction newDirection = getDirectionTowardsTarget(getMap().getPacMan()); //wants to get to PacMan
 				setDirection(newDirection);
 				moveForward();
 			}
