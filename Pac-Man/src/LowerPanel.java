@@ -8,7 +8,6 @@ public class LowerPanel extends JPanel implements ActionListener {
 	private Game game;
 	private JLabel livesLabel;
 	private JLabel scoreLabel;
-	private JLabel highScoreLabel;
 	private JLabel pauseLabel;
 
 	public LowerPanel(Game game) {
@@ -44,18 +43,6 @@ public class LowerPanel extends JPanel implements ActionListener {
 				+ "</p>"
 			+ "</div>"
 		+ "</html>");
-		highScoreLabel = new JLabel("<html>"
-			+ "<div style=\"font-family: Courier; text-align: center;\">"
-				+ "<p style=\"font-size: 12px; font-style: italic;\">"
-					+ "<br>"
-					+ "HI-SCORE"
-				+ "</p>"
-				+ "<p style=\"font-size: 16px\">"
-					+ "3460"  // temporary test score
-					+ "<br><br>"
-				+ "</p>"
-			+ "</div>"
-		+ "</html>");
 		pauseLabel = new JLabel("<html>"
 				+ "<div style=\"font-family: Courier; text-align: center;\">"
 					+ "<p style=\"font-size: 11px;\">"
@@ -71,7 +58,7 @@ public class LowerPanel extends JPanel implements ActionListener {
 				+ "</div>"
 			+ "</html>");
 		removeAll();
-		for (JLabel label : Arrays.asList(livesLabel, scoreLabel, highScoreLabel, pauseLabel)) {
+		for (JLabel label : Arrays.asList(livesLabel, scoreLabel, pauseLabel)) {
 			label.setForeground(Color.WHITE);
 			label.setHorizontalAlignment(JLabel.CENTER);
 			add(label);
