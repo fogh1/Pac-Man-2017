@@ -2,7 +2,6 @@ public class Pokey extends Ghost {
 
 	public Pokey(int x, int y, Map map) {
 		super(x, y, map, "Pokey.png");
-		super.setMode(GhostMode.CHASE);
 	}
 	
 	public void move()
@@ -11,10 +10,10 @@ public class Pokey extends Ghost {
 		{
 			chaseMove();
 		}
-		//if(getMode() == GhostMode.SCATTER)
-		//{
-		//	scatterMove();
-		//}
+		else if(getMode() == GhostMode.SCATTER && isOutsideRoom())
+		{
+			scatterMove(30, 2);
+		}
 		else
 		{
 			super.move();
@@ -24,7 +23,7 @@ public class Pokey extends Ghost {
 	public void chaseMove()
 	{
 			if (isAtIntersection()) {
-				Direction newDirection = determineNewDirection(getMap().getPacMan().getX(), getMap().getPacMan().getY()); //wants to get to PacMan
+				Direction newDirection = getDirectionTowardsTarget(getMap().getPacMan().getX(), getMap().getPacMan().getY()); //wants to get to PacMan
 				setDirection(newDirection);
 				moveForward();
 			}
