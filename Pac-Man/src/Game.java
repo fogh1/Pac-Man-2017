@@ -50,7 +50,7 @@ public class Game {
 						togglePause();
 						JOptionPane.showMessageDialog(null, "YOU WIN");
 					}
-					else if (map.getPacMan().getLives() <= 0) {
+					else if (map.getPacMan() != null && map.getPacMan().getLives() <= 0) {
 						togglePause();
 						JOptionPane.showMessageDialog(null, "GAME OVER");
 					}
