@@ -26,6 +26,7 @@ public class Game {
 		// starts or restarts the game
 		togglePause();  // pauses game to prevent any grid action during grid setup
 		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+		pacMan = map.getPacMan();
 		togglePause();
 	}
 
