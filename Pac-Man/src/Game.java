@@ -7,8 +7,6 @@ public class Game {
 	private UI ui;
 	private PacMan pacMan;
 	private boolean isPaused;
-	private int[] highScores;
-	private String[] highScorers;
 
 	public Game() {
 		isPaused = false;
