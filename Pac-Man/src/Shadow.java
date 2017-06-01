@@ -1,5 +1,5 @@
 public class Shadow extends Ghost {
-	
+
 	public Shadow(int x, int y, Map map) {
 		super(x, y, map, "Shadow.png");
 		setOutsideRoom(true);
@@ -14,16 +14,16 @@ public class Shadow extends Ghost {
 			}
 			else if (isAtCorner()) {
 				turn();
-				if (!moveForward()) {
+				if ( !moveForward()) {
 					turn();
 					turn();
 					moveForward();
 				}
 			}
 			else {
-				if (!moveForward()) {
+				if ( !moveForward()) {
 					turn();
-					if (!moveForward()) {
+					if ( !moveForward()) {
 						turn();
 						moveForward();
 					}
@@ -34,5 +34,5 @@ public class Shadow extends Ghost {
 			super.move();
 		}
 	}
-
+	
 }

@@ -24,8 +24,8 @@ public class Game {
 
 	public void createMap() {
 		// starts or restarts the game
-		togglePause();  // pauses game to prevent any grid action during grid setup
-		map = new Map();  // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
+		togglePause(); // pauses game to prevent any grid action during grid setup
+		map = new Map(); // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
 		pacMan = map.getPacMan();
 		togglePause();
 	}
@@ -41,21 +41,24 @@ public class Game {
 	}
 
 	public TimerTask gameLoop() {
-		// performs tasks like updating the model and UI on set intervals (controlled by the Timer)
+		// performs tasks like updating the model and UI on set intervals
+		// (controlled by the Timer)
 		return new TimerTask() {
 			public void run() {
 				if (!isPaused()) {
-					pacMan.move();
-					for (Ghost ghost : map.getGhostList()) {
-						ghost.move();
+					if (map.getAcquirableObjectCount() <= 0) {
+						togglePause();
+						JOptionPane.showMessageDialog(null, "YOU WIN");
 					}
-					if (map.getPacMan().getLives() <= 0) {
+					else if (map.getPacMan().getLives() <= 0) {
 						togglePause();
 						JOptionPane.showMessageDialog(null, "GAME OVER");
 					}
-					else if (map.getAcquirableObjectCount() <= 0) {
-						togglePause();  // temporary
-						JOptionPane.showMessageDialog(null, "YOU WIN");
+					else {
+						for (Ghost ghost : map.getGhostList()) {
+							ghost.move();
+						}
+						pacMan.move();
 					}
 					ui.repaintPanels();
 				}

@@ -165,6 +165,14 @@ public class Map {
 			return location;
 		}
 	}
+	
+	public int getDistanceBetween(MovableObject a, MovableObject b) {
+		int aX = a.getX();
+		int aY = a.getY();
+		int bX = b.getX();
+		int bY = b.getY();
+		return (int) (Math.sqrt(Math.pow(Math.abs(bY - aY), 2) + Math.pow(Math.abs(bX - aX), 2)));
+	}
 
 	public Object getObjectAt(int x, int y) {
 		return map[x][y];
