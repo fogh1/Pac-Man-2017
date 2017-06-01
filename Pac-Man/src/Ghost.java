@@ -94,7 +94,7 @@ public abstract class Ghost extends MovableObject {
 	}
 
 	public Direction getDirectionTowardsTarget(MovableObject target) {
-		if (isAtIntersection()) {
+		if (target != null && isAtIntersection()) {
 			int xDifference = this.getX() - target.getX();
 			int yDifference = this.getY() - target.getY();
 			if (Math.abs(yDifference) > Math.abs(xDifference)) {
