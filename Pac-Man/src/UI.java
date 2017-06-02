@@ -1,9 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 public class UI  {
 
+	@SuppressWarnings("unused")
 	private Game game;
 	private Map map;
 	private JFrame frame;

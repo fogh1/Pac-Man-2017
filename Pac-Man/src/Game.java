@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.Timer;
-import javax.swing.*;
 
 public class Game {
 

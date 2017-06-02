@@ -1,7 +1,9 @@
 import java.util.*;
 import java.awt.*;
+
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class LowerPanel extends JPanel {
 
 	private Game game;

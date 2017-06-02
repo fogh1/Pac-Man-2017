@@ -1,6 +1,8 @@
 import java.awt.*;
+
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel {
 
 	private ImageIcon backgroundIcon;
