@@ -113,6 +113,10 @@ public class Map {
 		Speedy speedy = getSpeedy();
 		Bashful bashful = getBashful();
 		Pokey pokey = getPokey();
+		moveGhost(shadow, 14, 11);
+		moveGhost(shadow, 12, 14);
+		moveGhost(shadow, 14, 14);
+		moveGhost(shadow, 16, 14);
 		removeGhost(shadow);
 		removeGhost(speedy);
 		removeGhost(bashful);
@@ -274,10 +278,15 @@ public class Map {
 	}
 
 	public AcquirableObject remove(AcquirableObject objectToRemove) {
+		int col = 0;
+		int rowr = 0;
 		for (Object[] row : map) {
+			col++;
+			rowr = 0;
 			for (Object object : row) {
+				rowr++;
 				if (object == objectToRemove) {
-					map[objectToRemove.getX()][objectToRemove.getY()] = null;
+					map[col][rowr] = null;
 				}
 			}
 		}

@@ -168,6 +168,7 @@ public abstract class Ghost extends MovableObject {
 	public void resetFrightenedTimer() {
 		frightenedTimer = 0;
 	}
+	
 
 	public void move() {
 		if (currentMode == GhostMode.FRIGHTENED) {
