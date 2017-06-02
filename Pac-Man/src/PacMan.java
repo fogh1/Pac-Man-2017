@@ -86,8 +86,11 @@ public class PacMan extends MovableObject {
 	}
 
 	public boolean canMoveInCurrentDirection() {
-		Object adjacentObject = getMap().getAdjacentObject(this);
-		return canMoveOnto(adjacentObject);
+		if (getDirection() != null) {
+			Object adjacentObject = getMap().getAdjacentObject(this);
+			return canMoveOnto(adjacentObject);
+		}
+		return false;
 	}
 
 	public boolean canMoveInQueuedDirection() {

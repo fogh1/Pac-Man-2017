@@ -48,13 +48,11 @@ public class Game {
 				if (!isPaused()) {
 					if (map.getAcquirableObjectCount() <= 0) {
 						togglePause();
-						JOptionPane.showMessageDialog(null, "You Win!");
-						ui.closeFrame();
+						ui.showEndOfGamePrompt("You Win!");
 					}
 					else if (map.getPacMan() != null && map.getPacMan().getLives() <= 0) {
 						togglePause();
-						JOptionPane.showMessageDialog(null, "Game Over!");
-						ui.closeFrame();
+						ui.showEndOfGamePrompt("Game Over!");
 					}
 					else {
 						for (Ghost ghost : map.getGhostList()) {

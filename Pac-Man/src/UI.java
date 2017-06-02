@@ -74,7 +74,14 @@ public class UI  {
 		lowerPanel.updateLabels();
 	}
 
-	public void closeFrame() {
+	public void showEndOfGamePrompt(String statusMessage) {
+		int playAgain = JOptionPane.showConfirmDialog(null, statusMessage + " Would you like to play again?", "Play Again?", JOptionPane.YES_NO_OPTION);
+		if (playAgain == 0) {
+			// create new game
+		}
+		else {
+			System.exit(0);
+		}
 		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 	}
 
