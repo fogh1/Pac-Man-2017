@@ -166,13 +166,12 @@ public class Map {
 		}
 	}
 	
-	public int distanceBetween(MovableObject a, MovableObject b)
-	{
+	public int getDistanceBetween(MovableObject a, MovableObject b) {
 		int aX = a.getX();
 		int aY = a.getY();
 		int bX = b.getX();
 		int bY = b.getY();
-		return (int) (Math.sqrt(Math.pow(Math.abs(bY-aY),2)+Math.pow(Math.abs(bX-aX),2)));
+		return (int) (Math.sqrt(Math.pow(Math.abs(bY - aY), 2) + Math.pow(Math.abs(bX - aX), 2)));
 	}
 
 	public Object getObjectAt(int x, int y) {
@@ -256,12 +255,12 @@ public class Map {
 				((AcquirableObject) oldOccupant).acquire();
 			}
 		}
-		map[x][y] = object;
 		if (object != null) {
 			remove(object);
 			object.setX(x);
 			object.setY(y);
 		}
+		map[x][y] = object;
 		return oldOccupant;
 	}
 

@@ -56,13 +56,24 @@ public class PacMan extends MovableObject {
 		getMap().resetMovableObjects();
 	}
 
-	public Ghost onGhost() {
-		for (Ghost ghost : getMap().getGhostList()) {
-			if (getX() == ghost.getX() && getY() == ghost.getY()) {
-				return ghost;
+	public void handleGhost() {
+		Ghost ghost = null;
+		for (Ghost ghostFromMap : getMap().getGhostList()) {
+			if (getX() == ghostFromMap.getX() && getY() == ghostFromMap.getY()) {
+				ghost = ghostFromMap;
 			}
 		}
-		return null;
+		if (ghost != null) {
+			if (ghost.getMode() == GhostMode.FRIGHTENED) {
+				score += 200;
+				ghost.setMode(GhostMode.CHASE);
+				ghost.setOutsideRoom(false);
+				getMap().move(ghost, 13, 14);
+			}
+			else {
+				loseLife();
+			}
+		}
 	}
 
 	public boolean canMoveOnto(Object object) {
@@ -88,24 +99,9 @@ public class PacMan extends MovableObject {
 			return canMoveOnto(adjacentObject);
 		}
 	}
-
-	public void acquireGhost(Ghost ghost) {
-		score += 200;
-		ghost.setMode(GhostMode.CHASE);
-		ghost.setOutsideRoom(false);
-		getMap().move(ghost, 13, 14);
-	}
 	
 	public void move() {
-		Ghost ghost = onGhost();
-		if (ghost != null) {
-			if (ghost.getMode() == GhostMode.FRIGHTENED) {
-				acquireGhost(ghost);
-			}
-			else {
-				loseLife();
-			}
-		}
+		handleGhost();
 		if (canMoveInQueuedDirection()) {
 			setDirection(queuedDirection);
 			queuedDirection = null;
@@ -115,30 +111,7 @@ public class PacMan extends MovableObject {
 			int y = getMap().getAdjacentLocation(this)[1];
 			getMap().move(this, x, y);
 		}
-		if (isOnGhost())
-		{
-			loseLife();
-		}
-	}
-	
-	public boolean isOnGhost()
-	{
-		Ghost[] ghosts = getMap().getGhostList();
-		for (Ghost ghost : ghosts)
-		{
-			if (ghost.getX() == this.getX() && ghost.getY() == this.getY() && ghost.getMode() != GhostMode.FRIGHTENED)
-			{
-				return true;
-			}
-			if (ghost.getX() == this.getX() && ghost.getY() == this.getY() && ghost.getMode() == GhostMode.FRIGHTENED)
-			{
-				score += 200;
-				ghost.setMode(GhostMode.CHASE);
-				ghost.setOutsideRoom(false);
-				getMap().moveGhost(ghost, 13, 14);
-			}
-		}
-		return false;
+		handleGhost();
 	}
 
 }

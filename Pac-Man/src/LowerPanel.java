@@ -18,6 +18,10 @@ public class LowerPanel extends JPanel {
 	}
 
 	public void updateLabels() {
+		if (game.getMap().getPacMan() == null)
+		{
+			return;
+		}
 		livesLabel = new JLabel("<html>"
 			+ "<div style=\"font-family: Courier; text-align: center;\">"
 				+ "<p style=\"font-size: 12px; font-style: italic;\">"

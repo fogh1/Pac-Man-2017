@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.*;
 
 public class UI  {
 
@@ -73,6 +72,10 @@ public class UI  {
 		}
 		gamePanel.repaint();
 		lowerPanel.updateLabels();
+	}
+
+	public void closeFrame() {
+		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 	}
 
 }

@@ -6,12 +6,14 @@ public abstract class Ghost extends MovableObject {
 	private GhostMode currentMode;
 	private boolean isOutsideRoom;
 	private int frightenedTimer;
+	private int scatterTimer;
 
 	public Ghost(int x, int y, Map map, String iconPath) {
 		super(x, y, map, Direction.UP, iconPath);
-		currentMode = GhostMode.CHASE;
+		currentMode = GhostMode.SCATTER;
 		isOutsideRoom = false;
 		frightenedTimer = 0;
+		scatterTimer = 35;
 	}
 
 	public GhostMode getMode() {
@@ -20,6 +22,9 @@ public abstract class Ghost extends MovableObject {
 
 	public void setMode(GhostMode newMode) {
 		currentMode = newMode;
+		if (newMode == GhostMode.SCATTER) {
+			scatterTimer += 10;
+		}
 	}
 
 	public ImageIcon getIcon() {
@@ -34,7 +39,7 @@ public abstract class Ghost extends MovableObject {
 	public boolean isOutsideRoom() {
 		return isOutsideRoom;
 	}
-	
+
 	public void setOutsideRoom(boolean status) {
 		isOutsideRoom = status;
 	}
@@ -55,7 +60,7 @@ public abstract class Ghost extends MovableObject {
 			return false;
 		}
 		else {
-			if ((canMoveInDirection(Direction.UP) || canMoveInDirection(Direction.DOWN)) && (canMoveInDirection(Direction.LEFT) || canMoveInDirection(Direction.RIGHT))) {
+			if ( (canMoveInDirection(Direction.UP) || canMoveInDirection(Direction.DOWN)) && (canMoveInDirection(Direction.LEFT) || canMoveInDirection(Direction.RIGHT))) {
 				return true;
 			}
 			else {
@@ -83,10 +88,10 @@ public abstract class Ghost extends MovableObject {
 		return canMoveInDirection(getDirection());
 	}
 
-	public Direction getDirectionTowardsTarget(MovableObject target) {
+	public Direction getDirectionTowardsLocation(int x, int y) {
 		if (isAtIntersection()) {
-			int xDifference = this.getX() - target.getX();
-			int yDifference = this.getY() - target.getY();
+			int xDifference = this.getX() - x;
+			int yDifference = this.getY() - y;
 			if (Math.abs(yDifference) > Math.abs(xDifference)) {
 				if (yDifference > 0 && canMoveInDirection(Direction.UP)) {
 					return Direction.UP;
@@ -116,7 +121,16 @@ public abstract class Ghost extends MovableObject {
 				}
 			}
 		}
-		return this.getDirection();
+		return getDirection();
+	}
+
+	public Direction getDirectionTowardsTarget(MovableObject target) {
+		if (target != null) {
+			return getDirectionTowardsLocation(target.getX(), target.getY());
+		}
+		else {
+			return getDirection();
+		}
 	}
 
 	public void turn() {
@@ -182,6 +196,63 @@ public abstract class Ghost extends MovableObject {
 					moveForward();
 				}
 			}
+		}
+		else if (isAtCorner()) {
+			turn();
+			if (!moveForward()) {
+				turn();
+				turn();
+				moveForward();
+			}
+		}
+		else {
+			if (!moveForward()) {
+				turn();
+				if (!moveForward()) {
+					turn();
+					moveForward();
+				}
+			}
+		}
+	}
+
+	public void scatterMove(int x, int y) {
+		if (scatterTimer == 0) {
+			setMode(GhostMode.CHASE);
+			return;
+		}
+		else {
+			scatterTimer--;
+		}
+		if (isAtIntersection()) {
+			Direction newDirection = getDirectionTowardsLocation(x, y);
+			setDirection(newDirection);
+			moveForward();
+		}
+		else if (isAtCorner()) {
+			turn();
+			if (!moveForward()) {
+				turn();
+				turn();
+				moveForward();
+			}
+		}
+		else {
+			if (!moveForward()) {
+				turn();
+				if (!moveForward()) {
+					turn();
+					moveForward();
+				}
+			}
+		}
+	}
+
+	public void chaseMove() {
+		if (isAtIntersection()) {
+			Direction newDirection = getDirectionTowardsTarget(getMap().getPacMan());
+			setDirection(newDirection);
+			moveForward();
 		}
 		else if (isAtCorner()) {
 			turn();

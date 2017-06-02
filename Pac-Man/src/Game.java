@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.Timer;
+import javax.swing.*;
 
 public class Game {
 
@@ -22,10 +24,8 @@ public class Game {
 
 	public void createMap() {
 		// starts or restarts the game
-		togglePause(); // pauses game to prevent any grid action during grid
-						// setup
-		map = new Map(); // reconstructs new map for new game, then reassigns
-							// all instance variables pointing to grid objects
+		togglePause(); // pauses game to prevent any grid action during grid setup
+		map = new Map(); // reconstructs new map for new game, then reassigns all instance variables pointing to grid objects
 		pacMan = map.getPacMan();
 		togglePause();
 	}
@@ -47,17 +47,20 @@ public class Game {
 			public void run() {
 				if (!isPaused()) {
 					if (map.getAcquirableObjectCount() <= 0) {
-						// win
-						togglePause(); // temporary
+						togglePause();
+						JOptionPane.showMessageDialog(null, "You Win!");
+						ui.closeFrame();
 					}
-					if (map.getPacMan().getLives() <= 0) {
-						// lose
-						togglePause(); // temporary
-					} else {
-						pacMan.move();
+					else if (map.getPacMan() != null && map.getPacMan().getLives() <= 0) {
+						togglePause();
+						JOptionPane.showMessageDialog(null, "Game Over!");
+						ui.closeFrame();
+					}
+					else {
 						for (Ghost ghost : map.getGhostList()) {
 							ghost.move();
 						}
+						pacMan.move();
 					}
 					ui.repaintPanels();
 				}
