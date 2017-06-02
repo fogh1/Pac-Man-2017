@@ -114,9 +114,9 @@ public class Map {
 		Bashful bashful = getBashful();
 		Pokey pokey = getPokey();
 		moveGhost(shadow, 14, 11);
-		moveGhost(shadow, 12, 14);
-		moveGhost(shadow, 14, 14);
-		moveGhost(shadow, 16, 14);
+		moveGhost(speedy, 12, 14);
+		moveGhost(bashful, 14, 14);
+		moveGhost(pokey, 16, 14);
 		removeGhost(shadow);
 		removeGhost(speedy);
 		removeGhost(bashful);
