@@ -39,11 +39,6 @@ public abstract class Ghost extends MovableObject {
 	public boolean isOutsideRoom() {
 		return isOutsideRoom;
 	}
-	
-	public void resetFrightenedTimer()
-	{
-		frightenedTimer = 0;
-	}
 
 	public void setOutsideRoom(boolean status) {
 		isOutsideRoom = status;
@@ -168,6 +163,10 @@ public abstract class Ghost extends MovableObject {
 		else {
 			return false;
 		}
+	}
+
+	public void resetFrightenedTimer() {
+		frightenedTimer = 0;
 	}
 
 	public void move() {
