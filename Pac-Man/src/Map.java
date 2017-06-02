@@ -121,12 +121,6 @@ public class Map {
 		ghostMap[12][14] = new Bashful(12, 14, this);
 		ghostMap[14][14] = new Speedy(14, 14, this);
 		ghostMap[16][14] = new Pokey(16, 14, this);
-		try {
-			Thread.sleep(1000);
-		}
-		catch (Exception exception) {
-			System.out.println("INTERRUPTEDEXCEPTION : " + exception.getMessage());
-		}
 		pacMan.setDirection(Direction.RIGHT);
 		move(pacMan, 13, 23);
 	}
