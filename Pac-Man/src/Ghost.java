@@ -23,7 +23,7 @@ public abstract class Ghost extends MovableObject {
 	public void setMode(GhostMode newMode) {
 		currentMode = newMode;
 		if (newMode == GhostMode.SCATTER) {
-			scatterTimer += 10;
+			scatterTimer += 20;
 		}
 	}
 
@@ -38,6 +38,11 @@ public abstract class Ghost extends MovableObject {
 
 	public boolean isOutsideRoom() {
 		return isOutsideRoom;
+	}
+	
+	public void resetFrightenedTimer()
+	{
+		frightenedTimer = 0;
 	}
 
 	public void setOutsideRoom(boolean status) {

@@ -67,6 +67,7 @@ public class PacMan extends MovableObject {
 			if (ghost.getMode() == GhostMode.FRIGHTENED) {
 				score += 200;
 				ghost.setMode(GhostMode.CHASE);
+				ghost.resetFrightenedTimer();
 				ghost.setOutsideRoom(false);
 				getMap().move(ghost, 13, 14);
 			}

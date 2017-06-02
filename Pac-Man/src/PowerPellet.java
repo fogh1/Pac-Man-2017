@@ -8,6 +8,7 @@ public class PowerPellet extends AcquirableObject {
 		super.acquire();
 		for (Ghost ghost : getMap().getGhostList()) {
 			ghost.setMode(GhostMode.FRIGHTENED);
+			ghost.resetFrightenedTimer();
 		}
 	}
 
