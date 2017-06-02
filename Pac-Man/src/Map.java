@@ -265,12 +265,12 @@ public class Map {
 	}
 
 	public void moveGhost(Ghost ghost, int x, int y) {
-		ghostMap[x][y] = ghost;
 		if (ghost != null) {
 			removeGhost(ghost);
 			ghost.setX(x);
 			ghost.setY(y);
 		}
+		ghostMap[x][y] = ghost;
 	}
 
 	public AcquirableObject remove(AcquirableObject objectToRemove) {
