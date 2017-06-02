@@ -9,9 +9,8 @@ public class Shadow extends Ghost {
 		if (getMode() == GhostMode.CHASE && isOutsideRoom()) {
 			chaseMove();
 		}
-		else if(getMode() == GhostMode.SCATTER && isOutsideRoom())
-		{
-		scatterMove(5,1);
+		else if (getMode() == GhostMode.SCATTER && isOutsideRoom()) {
+			scatterMove(5, 1);
 		}
 		else {
 			super.move();
@@ -23,7 +22,7 @@ public class Shadow extends Ghost {
 			Direction newDirection = getDirectionTowardsTarget(getMap().getPacMan());
 			setDirection(newDirection);
 			moveForward();
-		} 
+		}
 		else if (isAtCorner()) {
 			turn();
 			if (!moveForward()) {
@@ -31,7 +30,7 @@ public class Shadow extends Ghost {
 				turn();
 				moveForward();
 			}
-		} 
+		}
 		else {
 			if (!moveForward()) {
 				turn();
@@ -39,9 +38,8 @@ public class Shadow extends Ghost {
 					turn();
 					moveForward();
 				}
-
 			}
 		}
-
 	}
+
 }

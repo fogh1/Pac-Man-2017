@@ -8,9 +8,8 @@ public class Bashful extends Ghost {
 		if (getMode() == GhostMode.CHASE && isOutsideRoom()) {
 			chaseMove();
 		}
-		else if(getMode() == GhostMode.SCATTER && isOutsideRoom())
-		{
-		scatterMove(1,30);
+		else if (getMode() == GhostMode.SCATTER && isOutsideRoom()) {
+			scatterMove(1, 30);
 		}
 		else {
 			super.move();
