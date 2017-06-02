@@ -39,7 +39,7 @@ public class Speedy extends Ghost {
 			y = y-4;
 		}
 		if (isAtIntersection()) {
-			Direction newDirection = getDirectionTowardsTarget(x, y); //wants to get to PacMan
+			Direction newDirection = getDirectionTowardsLocation(x, y); //wants to get to PacMan
 			setDirection(newDirection);
 			moveForward();
 		}
