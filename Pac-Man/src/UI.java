@@ -75,7 +75,7 @@ public class UI  {
 	}
 
 	public void showEndOfGamePrompt(String statusMessage) {
-		JOptionPane.showMessageDialog(null, statusMessage);
+		JOptionPane.showMessageDialog(null, statusMessage + " Your score is " + map.getPacMan().getScore() + ".");
 		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 		System.exit(0);
 	}
